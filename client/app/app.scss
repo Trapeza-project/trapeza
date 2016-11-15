@@ -3,6 +3,8 @@ $icon-font-path: '/assets/fonts/bootstrap/';
 $fa-font-path: '/assets/fonts/font-awesome/';
 @import '~font-awesome/scss/font-awesome';
 
+@import '~angular-material/angular-material';
+@import '~jquery-ui/themes/base/all.css';
 // @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,900|Roboto:300,500,700,900);
 
 /**
@@ -14,6 +16,132 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
+}
+
+/**
+ * App-wide Styles
+ */
+
+.bottom-margin{
+  margin-bottom:10%;
+  background-color:#ffffff !important;
+}
+
+.pointercursor{
+  cursor:pointer;
+}
+
+.text-white{
+  color:rgba(245, 245, 245, 1);
+}
+
+.horizontal-center{
+  text-align:center;
+}
+
+.inlineblock {
+  display:inline-block;
+}
+
+.text-orange{
+  color: #ec971f;
+}
+
+.text-color{
+  color:#888;
+}
+
+.weak-border-top{
+  border-top: 1px solid #ddd;
+}
+
+.weak-border-bottom{
+  border-bottom: 1px solid #ddd;
+}
+
+.font-light{
+  font-weight:lighter;
+}
+
+.fontbold{
+  font-weight:bold;
+}
+
+.requestback{
+  margin-left:5%;
+}
+
+.infotext{
+  padding-right:5px;
+}
+
+.glyphicon.glyphicon-hourglass{
+  font-size:25px;
+}
+.glyphicon.glyphicon-ok-circle{
+  font-size:25px;
+  color:green;
+}
+.glyphicon.glyphicon-ban-circle{
+  font-size:25px;
+  color:red;
+}
+
+.glyphicon.glyphicon-edit{
+  font-size:20px;
+  color:#ec971f;
+}
+
+.requesttable{
+  width:100%;
+  margin-bottom:50px;
+}
+
+.requesttr{
+  border-bottom: 1px solid #ddd;
+}
+
+.requesttd{
+  padding:10px;
+}
+
+.tableheadline{
+  font-weight:bold;
+  font-size:17px;
+}
+
+.floatright{
+  float:right;
+}
+
+.bot-margin{
+  margin-bottom:50px;
+}
+
+.btn-margin{
+  margin:50px;
+}
+
+.headline-bg{
+  background: #ec971f;
+  border-radius: 6px 6px 0 0;
+  border: 2px solid #ec971f;
+  color:white;
+}
+
+.pricediv{
+  margin-top:20px;
+  margin-bottom:5px;
+  margin-left:5px;
+  margin-right:5px;
+  border: 1px solid #ec971f;
+  border-radius:5px;
+  color: #ec971f;
+  font-weight:bold;
+}
+
+.paddedmodule{
+  padding:15px;
 }
 
 // Component styles are injected through gulp

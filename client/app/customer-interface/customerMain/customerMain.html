@@ -1,3 +1,98 @@
 <navbar-customer-interface></navbar-customer-interface>
-<div>This is the customerMain view.</div>
+<div id="homemain" class="container">
+  <div>
+    <div class="container" id="mainaction">
+      <div ng-if="!customerMainCtrl.isLoggedIn()" class="container logincontainer">
+        <div class="row centralizerow paddedrow">
+          <h2 class="text-white">Lookup Your Customers</h2>
+          <p class="text-white">
+            We help you to make safer businesses by providing information about your business partner.
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <form class="form" name="form" ng-submit="customerMainCtrl.login(form)" novalidate>
+              <div class="form-group">
+                <input type="username" name="username" class="form-control" placeholder='{{customerMainCtrl.usernameplaceholder}}' ng-model="customerMainCtrl.user.email" required>
+              </div>
+              <div class="form-group">
+                <input type="password" name="password" class="form-control" ng-model="customerMainCtrl.user.password" placeholder='{{customerMainCtrl.passwordplaceholder}}' required>
+              </div>
+              <div class="form-group has-error">
+                <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && customerMainCtrl.submitted">
+                  Please enter your email and password.
+                </p>
+                <p class="help-block" ng-show="form.email.$error.email && customerMainCtrl.submitted">
+                  Please enter a valid email.
+                </p>
+
+                <p class="help-block">{{ customerMainCtrl.errors.login }}</p>
+              </div>
+              <div>
+                <div id="authdiv">
+                  <button class="btn btn-warning btn-lg inlineblock" type="submit">
+                    Login
+                  </button>
+                  <button class="btn btn-warning btn-lg inlineblock" ui-sref="customerSignup">
+                    Sign Up
+                  </button>
+                </div>
+                <p class="horizontal-center">
+                  <a id="forgotpassword" href="https://www.uc.se/">
+                    Forgot password
+                  </a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div ng-if="customerMainCtrl.isLoggedIn()" class="container logincontainer">
+        <div class="row centralizerow paddedrow">
+          <h2 class="text-white">Lookup Your Customers</h2>
+          <p class="text-white">
+            We help you to make safer businesses by providing information about your business partner.
+          </p>
+        </div>
+        <div class="row centralizerow paddedrow">
+          <div class="col-lg-6 col-xs-6 text-right">
+            <a class="btn btn-warning btn-lg" ui-sref="customerLookup">Lookup</a>
+          </div>
+          <div class="col-lg-6 col-xs-6 text-left">
+            <a class="btn btn-warning btn-lg" ui-sref="customerActivity">Activity</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content-section-a">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 col-sm-6">
+        <h2>Lookup Your Customers</h2>
+        <p>Make safe trades by looking up the customer's information.</p>
+      </div>
+      <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 inlineblock">
+        <h2>Start with Lookup now:</h2>
+      </div>
+      <div class="col-lg-6 inlineblock">
+        <ul class="list-inline banner-social-buttons">
+          <li>
+            <a class="btn btn-warning btn-lg" href="https://www.uc.se/">Sign Up</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 <footer-customer-interface></footer-customer-interface>

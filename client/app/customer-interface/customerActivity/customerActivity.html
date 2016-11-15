@@ -1,1 +1,147 @@
-<div>This is the customerActivity view.</div>
+<navbar-customer-interface></navbar-customer-interface>
+<div class="container bottom-margin">
+  <div class="weak-border-bottom topdiv">
+    <h1 class="text-orange">Activities</h1>
+  </div>
+  <div ng-cloak class="activity">
+    <md-content>
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="all">
+          <md-content class="md-padding">
+            <table class="requesttable">
+              <col width="50%">
+              <col width="20%">
+              <col width="15%">
+              <col width="15%">
+              <tr class="requesttr">
+                <td class="tableheadline requesttd">
+                  Info
+                </td>
+                <td class="tableheadline horizontal-center requesttd">
+                  Timestamp
+                </td>
+                <td class="tableheadline horizontal-center requesttd">
+                  Access
+                </td>
+                <td class="tableheadline horizontal-center requesttd">
+                  Approved
+                </td>
+              </tr>
+              <tr ng-repeat="request in customerActivityCtrl.requests" class="requesttr" ng-click="customerActivityCtrl.viewRequest(request.requestid)">
+                <td class="requesttd">
+                  <p class="fontbold">{{request.name}}</p>
+                  <p ng-repeat="data in request.info" class="inlineblock infotext text-color">{{data}}</p>
+                </td>
+                <td class="horizontal-center requesttd text-color">
+                  <p>{{request.timestamp}}</p>
+                </td>
+                <td class="horizontal-center requesttd">
+                  <span ng-show="customerActivityCtrl.pendingrequest(request)" class="glyphicon glyphicon-hourglass"></span>
+                  <span ng-show="customerActivityCtrl.approvedrequest(request)" class="glyphicon glyphicon-ok-circle"></span>
+                  <span ng-show="customerActivityCtrl.deniedrequest(request)" class="glyphicon glyphicon-ban-circle"></span>
+                </td>
+                <td class="horizontal-center requesttd">
+                  <span ng-show="customerActivityCtrl.pendingcompanyrequest(request)" class="glyphicon glyphicon-hourglass"></span>
+                  <span ng-show="customerActivityCtrl.approvedcompanyrequest(request)" class="glyphicon glyphicon-ok-circle"></span>
+                  <span ng-show="customerActivityCtrl.deniedcompanyrequest(request)" class="glyphicon glyphicon-ban-circle"></span>
+                </td>
+              </tr>
+            </table>
+          </md-content>
+        </md-tab>
+        <md-tab label="pending">
+          <md-content class="md-padding">
+            <table class="requesttable">
+              <col width="50%">
+              <col width="20%">
+              <col width="15%">
+              <col width="15%">
+              <tr class="requesttr">
+                <td class="tableheadline requesttd">
+                  Info
+                </td>
+                <td class="tableheadline horizontal-center requesttd">
+                  Timestamp
+                </td>
+                <td class="tableheadline horizontal-center requesttd">
+                  Access
+                </td>
+                <td class="tableheadline horizontal-center requesttd">
+                  Approved
+                </td>
+              </tr>
+              <tr ng-repeat="request in customerActivityCtrl.pending" class="requesttr" ng-click="customerActivityCtrl.viewRequest(request.requestid)">
+                <td class="requesttd">
+                  <p class="fontbold">{{request.name}}</p>
+                  <p ng-repeat="data in request.info" class="inlineblock infotext text-color">{{data}}</p>
+                </td>
+                <td class="horizontal-center requesttd">
+                  <p class="text-color">{{request.timestamp}}</p>
+                </td>
+                <td class="horizontal-center requesttd">
+                  <span ng-show="customerActivityCtrl.pendingrequest(request)" class="glyphicon glyphicon-hourglass"></span>
+                  <span ng-show="customerActivityCtrl.approvedrequest(request)" class="glyphicon glyphicon-ok-circle"></span>
+                  <span ng-show="customerActivityCtrl.deniedrequest(request)" class="glyphicon glyphicon-ban-circle"></span>
+                </td>
+                <td class="horizontal-center requesttd">
+                  <span ng-show="customerActivityCtrl.pendingcompanyrequest(request)" class="glyphicon glyphicon-hourglass"></span>
+                  <span ng-show="customerActivityCtrl.approvedcompanyrequest(request)" class="glyphicon glyphicon-ok-circle"></span>
+                  <span ng-show="customerActivityCtrl.deniedcompanyrequest(request)" class="glyphicon glyphicon-ban-circle"></span>
+                </td>
+              </tr>
+            </table>
+          </md-content>
+        </md-tab>
+        <md-tab label="answered">
+          <md-content class="md-padding">
+            <table class="requesttable">
+              <col width="50%">
+              <col width="20%">
+              <col width="15%">
+              <col width="15%">
+              <tr class="requesttr">
+                <td class="tableheadline requesttd">
+                  Info
+                </td>
+                <td class="tableheadline horizontal-center requesttd">
+                  Timestamp
+                </td>
+                <td class="tableheadline horizontal-center requesttd">
+                  Access
+                </td>
+                <td class="tableheadline horizontal-center requesttd">
+                  Approved
+                </td>
+              </tr>
+              <tr ng-repeat="request in customerActivityCtrl.answered" class="requesttr" ng-click="customerActivityCtrl.viewRequest(request.requestid)">
+                <td class="requesttd">
+                  <p class="fontbold">{{request.name}}</p>
+                  <p ng-repeat="data in request.info" class="inlineblock infotext text-color">{{data}}</p>
+                </td>
+                <td class="horizontal-center requesttd">
+                  <p class="text-color">{{request.timestamp}}</p>
+                </td>
+                <td class="horizontal-center requesttd">
+                  <span ng-show="customerActivityCtrl.pendingrequest(request)" class="glyphicon glyphicon-hourglass"></span>
+                  <span ng-show="customerActivityCtrl.approvedrequest(request)" class="glyphicon glyphicon-ok-circle"></span>
+                  <span ng-show="customerActivityCtrl.deniedrequest(request)" class="glyphicon glyphicon-ban-circle"></span>
+                </td>
+                <td class="horizontal-center requesttd">
+                  <span ng-show="customerActivityCtrl.pendingcompanyrequest(request)" class="glyphicon glyphicon-hourglass"></span>
+                  <span ng-show="customerActivityCtrl.approvedcompanyrequest(request)" class="glyphicon glyphicon-ok-circle"></span>
+                  <span ng-show="customerActivityCtrl.deniedcompanyrequest(request)" class="glyphicon glyphicon-ban-circle"></span>
+                </td>
+              </tr>
+            </table>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+  </div>
+</div>
+<div class="absolutelookup-btn-div">
+  <button class="lookup-btn" ui-sref="customerLookup"">
+  New Lookup
+  </button>
+</div>
+<footer-customer-interface></footer-customer-interface>

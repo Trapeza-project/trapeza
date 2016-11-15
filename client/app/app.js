@@ -1,10 +1,11 @@
 'use strict';
 
 import angular from 'angular';
-// import ngAnimate from 'angular-animate';
+import ngAnimate from 'angular-animate';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
+import ngMaterial from 'angular-material';
 import 'angular-socket-io';
 
 import uiRouter from 'angular-ui-router';
@@ -48,7 +49,7 @@ import customerInterfaceAccount from './customer-interface/account';
 
 import './app.scss';
 
-angular.module('trapezaApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter, uiBootstrap, _Auth,
+angular.module('trapezaApp', [ngCookies, ngResource, ngSanitize, ngMaterial, 'btford.socket-io', uiRouter, uiBootstrap, _Auth,
   userInterfaceAccount,
   userInterfaceAdmin,
   userInterfaceStart,
