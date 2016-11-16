@@ -33,7 +33,7 @@ var all = {
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'trapeza-secret'
+    session: 'customer-interface-secret'
   },
 
   // MongoDB connection options

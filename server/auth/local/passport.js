@@ -1,8 +1,8 @@
 import passport from 'passport';
 import {Strategy as LocalStrategy} from 'passport-local';
 
-function localAuthenticate(User, email, password, done) {
-  User.find({
+function localAuthenticate(CustomerUser, email, password, done) {
+  CustomerUser.find({
     where: {
       email: email.toLowerCase()
     }
@@ -27,11 +27,11 @@ function localAuthenticate(User, email, password, done) {
     .catch(err => done(err));
 }
 
-export function setup(User/*, config*/) {
+export function setup(CustomerUser/*, config*/) {
   passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password' // this is the virtual field on the model
   }, function(email, password, done) {
-    return localAuthenticate(User, email, password, done);
+    return localAuthenticate(CustomerUser, email, password, done);
   }));
 }

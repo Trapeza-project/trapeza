@@ -9,8 +9,14 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
+  app.use('/api/moduleSettings', require('./api/moduleSetting'));
+  app.use('/api/admins', require('./api/admin'));
+  app.use('/api/datas', require('./api/data'));
+  app.use('/api/infotypes', require('./api/infotype'));
+  app.use('/api/actors', require('./api/actor'));
+  app.use('/api/requests', require('./api/request'));
   app.use('/api/things', require('./api/thing'));
-  app.use('/api/users', require('./api/user'));
+  app.use('/api/customerusers', require('./api/customeruser'));
 
   app.use('/auth', require('./auth').default);
 

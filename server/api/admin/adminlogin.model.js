@@ -7,7 +7,7 @@ var validatePresenceOf = function(value) {
 };
 
 export default function(sequelize, DataTypes) {
-  var User = sequelize.define('User', {
+  var AdminUser = sequelize.define('Adminlogin', {
 
     _id: {
       type: DataTypes.INTEGER,
@@ -217,5 +217,5 @@ export default function(sequelize, DataTypes) {
     }
   });
 
-  return User;
+  return AdminUser;
 }

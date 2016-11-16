@@ -6,7 +6,9 @@
 'use strict';
 import sqldb from '../sqldb';
 var Thing = sqldb.Thing;
-var User = sqldb.User;
+var User = sqldb.CustomerUser;
+var ModuleSettings = sqldb.ModuleSetting;
+var Infotype = sqldb.Infotype;
 
 Thing.sync()
   .then(() =>
@@ -50,15 +52,72 @@ User.sync()
       provider: 'local',
       name: 'Test User',
       email: 'test@example.com',
-      password: 'test'
+      password: 'test',
+	  accessid:1
     }, {
       provider: 'local',
       role: 'admin',
       name: 'Admin',
       email: 'admin@example.com',
-      password: 'admin'
+      password: 'admin',
+	  accessid:1
     }])
     .then(() => {
       console.log('finished populating users');
+    });
+  });
+  
+ModuleSettings.sync()
+.then(() => ModuleSettings.destroy({ where: {} }))
+.then(() => {
+ModuleSettings.bulkCreate([{
+  creatorid:0,
+  modulename:"Small",
+  description:"Includes the basic information to the lookup.",
+  infoids:'[1]',
+  active: true,
+  UCHandle: true
+}, {
+  creatorid:0,
+  modulename:"Medium",
+  description:"Includes the basic and personal information to the lookup.",
+  infoids:'[1,2]',
+  active: true,
+  UCHandle: true
+}, {
+  creatorid:0,
+  modulename:"Large",
+  description:"Includes detailed information to the lookup.",
+  infoids:'[1,2,3]',
+  active: true,
+  UCHandle: true
+}])
+.then(() => {
+  console.log('finished populating modules');
+});
+});
+
+
+Infotype.sync()
+  .then(() => Infotype.destroy({ where: {} }))
+  .then(() => {
+    Infotype.bulkCreate([{
+      infoid: 1,
+      infoname: 'Income',
+      infotype: 'Economic',
+      price: 5
+    }, {
+      infoid: 2,
+      infoname: 'Address',
+      infotype: 'Basic',
+      price: 10
+    },{
+      infoid: 3,
+      infoname: 'Degree',
+      infotype: 'Educational',
+      price: 10
+    }])
+    .then(() => {
+      console.log('finished populating infotypes');
     });
   });
