@@ -6,6 +6,8 @@ const uiRouter = require('angular-ui-router');
 import routes from './adminUserSearch.routes';
 
 export class AdminUserSearchComponent {
+
+
   /*@ngInject*/
   constructor() {
     this.message = 'Hello';

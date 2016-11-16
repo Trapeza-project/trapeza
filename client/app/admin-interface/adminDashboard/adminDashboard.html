@@ -1,3 +1,29 @@
-<navbar-admin-interface></navbar-admin-interface>
-<div>This is the dashboard view.</div>
-<footer-admin-interface></footer-admin-interface>
+<!--page wrapper-->
+<div id="page-wrapper" class="open" ng-cloak>
+    <navbar-admin-interface></navbar-admin-interface>
+    <!--main content-->
+    <div id="content-wrapper">
+        <div class="page-content">
+            <!-- Header Bar -->
+            <div class="row header">
+                <div class="col-xs-12">
+                    <header-admin-interface></header-admin-interface>
+                    <div class="meta">
+                        <div class="title">
+                            UC
+                        </div>
+                        <div class="breadcrumb-links">
+                            Home / Dashboard
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end header bar-->
+            <div>This is the dashboard view.</div>
+        </div>
+    </div>
+    <!--end main content-->
+
+    <footer-admin-interface></footer-admin-interface>
+
+</div>
