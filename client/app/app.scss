@@ -146,16 +146,21 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 
 // Component styles are injected through gulp
 /* inject:scss */
+@import 'admin-interface/admin/admin';
 @import 'admin-interface/adminDashboard/adminDashboard';
 @import 'admin-interface/adminUserSearch/adminUserSearch';
+@import 'customer-interface/admin/admin';
 @import 'customer-interface/customerActivity/customerActivity';
 @import 'customer-interface/customerActor/customerActor';
 @import 'customer-interface/customerLookup/customerLookup';
+@import 'customer-interface/customerLookupSettings/customerLookupSettings';
 @import 'customer-interface/customerMain/customerMain';
 @import 'customer-interface/customerRequest/customerRequest';
 @import 'user-interface/admin/admin';
+@import 'user-interface/userStartPage/userStartPage';
 @import '../components/footerAdminInterface/footerAdminInterface';
-@import '../components/footerUserInferface/footerUserInterface';
 @import '../components/footerCustomerInterface/footerCustomerInterface';
+@import '../components/footerUserInferface/footerUserInterface';
+@import '../components/isteven-multi-select/isteven-multi-select';
 @import '../components/modal/modal';
 /* endinject */

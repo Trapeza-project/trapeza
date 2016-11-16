@@ -43,9 +43,16 @@ import navbarCustomerInterface from '../components/navbarCustomerInterface/navba
 import footerCustomerInterface from '../components/footerCustomerInterface/footerCustomerInterface.component';
 import customerInterfaceMain from './customer-interface/customerMain/customerMain.component';
 import customerInterfaceLookup from './customer-interface/customerLookup/customerLookup.component';
+import customerInterfaceLookupSettings from './customer-interface/customerLookupSettings/customerLookupSettings.component';
 import customerInterfaceActivity from './customer-interface/customerActivity/customerActivity.component';
+import customerInterfaceRequest from './customer-interface/customerRequest/customerRequest.component';
+import customerInterfaceActor from './customer-interface/customerActor/customerActor.component';
 import customerInterfaceAdmin from './customer-interface/admin';
 import customerInterfaceAccount from './customer-interface/account';
+
+import customerLookupService from '../components/lookupService/lookupService.service';
+import customerModalService from '../components/modalService/modalService.service';
+import customerMultiSelect from '../components/isteven-multi-select/isteven-multi-select.directive';
 
 import './app.scss';
 
@@ -60,8 +67,14 @@ angular.module('trapezaApp', [ngCookies, ngResource, ngSanitize, ngMaterial, 'bt
   customerInterfaceMain,
   customerInterfaceLookup,
   customerInterfaceActivity,
+  customerInterfaceLookupSettings,
+  customerInterfaceRequest,
+  customerInterfaceActor,
   customerInterfaceAccount,
   customerInterfaceAdmin,
+  customerLookupService,
+  customerModalService,
+  customerMultiSelect,
   navbarUserInterface,
   navbarAdminInterface,
   navbarCustomerInterface,

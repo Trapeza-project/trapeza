@@ -1,1 +1,96 @@
-<div>This is the customerRequest view.</div>
+<div id="requestdiv">
+  <div>
+    <button class="btn btn-warning btn-lg btn-login requestback" ui-sref="customerActivity">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      Back
+    </button>
+  </div>
+  <div class="container">
+    <div id="overviewinforequest">
+      <h2 class="weak-border-bottom text-orange">{{customerRequestCtrl.requestdata.name}} ({{customerRequestCtrl.requestdata.personid}})</h2>
+      <table class="requesttable">
+        <col width="50%">
+        <col width="50%">
+        <tr class="requesttr">
+          <td >
+            <h3>Request Purpose</h3>
+            <p class="inlineblock text-color">{{customerRequestCtrl.requestdata.purpose}}</p>
+          </td>
+          <td>
+            <h3>Request Time</h3>
+            <p class="inlineblock text-color">{{customerRequestCtrl.requestdata.timestamp}}</p>
+          </td>
+        </tr>
+        <tr class="requesttr">
+          <td>
+            <h3>Request Access</h3>
+            <div>
+              <span ng-show="customerRequestCtrl.pendingrequest()" class="glyphicon glyphicon-hourglass"></span>
+              <span ng-show="customerRequestCtrl.approvedrequest()" class="glyphicon glyphicon-ok-circle"></span>
+              <span ng-show="customerRequestCtrl.deniedrequest()" class="glyphicon glyphicon-ban-circle"></span>
+            </div>
+          </td>
+          <td>
+            <h3>Request Approved</h3>
+            <div>
+              <span ng-show="customerRequestCtrl.pendingcompanyrequest()" class="glyphicon glyphicon-hourglass"></span>
+              <span ng-show="customerRequestCtrl.approvedcompanyrequest()" class="glyphicon glyphicon-ok-circle"></span>
+              <span ng-show="customerRequestCtrl.deniedcompanyrequest()" class="glyphicon glyphicon-ban-circle"></span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div ng-if="customerRequestCtrl.isAdmin()">
+      <h3>Requested Information</h3>
+      <div id="reqinfodata" ng-bind-html="customerRequestCtrl.requesthtml">
+      </div>
+    </div>
+    <div class="requesttable" ng-if="customerRequestCtrl.isAdmin()">
+      <h3>Previous Lookups</h3>
+      <table class="requesttable">
+        <col width="25%">
+        <col width="25%">
+        <col width="25%">
+        <col width="25%">
+        <tr class="requesttr">
+          <td class="tableheadline requesttd">
+            Actor
+          </td>
+          <td class="tableheadline horizontal-center requesttd">
+            Information
+          </td>
+          <td class="tableheadline horizontal-center requesttd">
+            Timestamp
+          </td>
+          <td class="tableheadline floatright requesttd">
+            Access
+          </td>
+        </tr>
+        <tr ng-repeat="lookup in customerRequestCtrl.history" class="requesttr">
+          <td class="requesttd">
+            <a class="pointercursor" ng-click="customerRequestCtrl.openActor(lookup.actor.id)">{{lookup.actor.name}}</a>
+          </td>
+          <td class="horizontal-center requesttd text-color">
+            <p ng-repeat="data in lookup.info" class="inlineblock infotext">{{data}}</p>
+          </td>
+          <td class="horizontal-center requesttd text-color">
+            {{lookup.timestamp}}
+          </td>
+          <td class="floatright requesttd">
+            <span ng-show="customerRequestCtrl.approvedlookup(lookup)" class="glyphicon glyphicon-ok-circle"></span>
+            <span ng-show="customerRequestCtrl.deniedlookup(lookup)" class="glyphicon glyphicon-ban-circle"></span>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div ng-if="customerRequestCtrl.displayButton()" class="horizontal-center bot-margin">
+      <button class="btn btn-success btn-lg btn-margin" ng-click="customerRequestCtrl.approveRequest()">
+        Approve
+      </button>
+      <button class="btn btn-danger btn-lg btn-margin" ng-click="customerRequestCtrl.denyRequest()">
+        Deny
+      </button>
+    </div>
+  </div>
+</div>

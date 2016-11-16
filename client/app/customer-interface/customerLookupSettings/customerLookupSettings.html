@@ -1,0 +1,122 @@
+<navbar-customer-interface></navbar-customer-interface>
+<div class="container">
+  <div class="settingsbox">
+    <div class="headline-bg">
+      <h2 class="no-margin">UC Settings</h2>
+    </div>
+    <p class="text-color">Settings...</p>
+  </div>
+  <div class="settingsbox">
+    <div class="headline-bg">
+      <h2 class="no-margin">Lookup Modules Settings</h2>
+    </div>
+    <div class="paddedmodule">
+      <div class="lookupmodule" ng-repeat="lookup in customerLookupSettingsCtrl.lookups">
+        <div>
+          <div>
+            <md-switch ng-model="lookup.active" class="md-warn inlineblock vertical-center">
+              <p class="text-color" ng-if="lookup.active">Enabled</p>
+              <p class="text-color" ng-if="!lookup.active">Disabled</p>
+            </md-switch>
+            <span ng-if="lookup.customized" ng-click="customerLookupSettingsCtrl.editModule(lookup)" class="glyphicon glyphicon-edit inlineblock floatright vertical-center"></span>
+          </div>
+          <md-switch ng-model="lookup.UCHandle" class="md-warn inlineblock vertical-center" ng-change="changeUCStatus(lookup)">
+            <p class="text-color" ng-if="lookup.UCHandle">UC judge the request</p>
+            <p class="text-color" ng-if="!lookup.UCHandle">We judge the request</p>
+          </md-switch>
+          <div ng-if="!customerLookupSettingsCtrl.isEditModule(lookup)">
+            <h3 class="text-orange">{{lookup.name}}</h3>
+            <p class="text-color">{{lookup.description}}</p>
+            <p class="text-orange weak-border-top" ng-repeat="info in lookup.info">{{info.name}}</p>
+            <div class="pricediv">
+              <p class="inlineblock">{{customerLookupSettingsCtrl.getPrice(lookup)}} SEK</p>
+              <p class="inlineblock text-color font-light"> per request</p>
+            </div>
+          </div>
+        </div>
+        <div ng-if="customerLookupSettingsCtrl.isEditModule(lookup)" class="paddedmodule">
+          <form class="form" name="editform">
+            <label class="requestlabel text-orange">Edit Lookup</label>
+            <div class="form-group">
+              <input type="text" name="editingname" class="form-control" placeholder='Name' ng-model="customerLookupSettingsCtrl.editingname" required>
+            </div>
+						<textarea class="form-control" ng-model="customerLookupSettingsCtrl.editingdescription" placeholder="{{customerLookupSettingsCtrl.descriptionplaceholder}}">
+						</textarea>
+            <div>
+              <div class="weak-border-bottom">
+                <h4 class="text-orange">Chosen Data</h4>
+                <p class="text-color" ng-if="customerLookupSettingsCtrl.emptyEditingData()">None</p>
+                <p class="text-color weak-border-top" ng-repeat="data in customerLookupSettingsCtrl.editingChosendata">{{data.name}}</p>
+              </div>
+              <div class="weak-border-bottom">
+                <h4 class="text-orange">Calculated Price</h4>
+                <p class="text-color">{{customerLookupSettingsCtrl.calculatePrice(customerLookupSettingsCtrl.editingChosendata)}} SEK</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <h4 class="text-orange">Data to request</h4>
+              <div class="dataselect">
+                <isteven-multi-select
+                  input-model="customerLookupSettingsCtrl.editDatatypes"
+                  output-model="customerLookupSettingsCtrl.editingChosendata"
+                  button-label="name"
+                  item-label="name"
+                  tick-property="ticked"
+                  group-property="msGroup">
+                </isteven-multi-select>
+                <!--<select chosen multiple class='form-control' data-placeholder-text-multiple="'Choose required data'" ng-model="editingChosenData" ng-options="data.name for data in customerLookupSettingsCtrl.datatypes" ng-change="customerLookupSettingsCtrl.updateEditingData(editingChosenData)" >
+                                </select>-->
+              </div>
+            </div>
+            <button class="btn btn-success btn-md" ng-click="customerLookupSettingsCtrl.changeModule(lookup)">
+              Confirm
+            </button>
+            <button ng-click="customerLookupSettingsCtrl.deleteModule(lookup)" class="btn btn-danger btn-md">
+              Delete
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="lookupmodule paddedmodule">
+        <form class="form" name="editform">
+          <label class="requestlabel text-orange">Customize Lookup</label>
+          <div class="form-group">
+            <input type="text" name="name" class="form-control" placeholder='{{customerLookupSettingsCtrl.modulename}}' ng-model="customerLookupSettingsCtrl.name" required>
+          </div>
+					<textarea class="form-control" ng-model="customerLookupSettingsCtrl.description" placeholder="{{customerLookupSettingsCtrl.descriptionplaceholder}}">
+					</textarea>
+          <div>
+            <div class="weak-border-bottom">
+              <h4 class="text-orange">Chosen Data</h4>
+              <p class="text-color" ng-if="customerLookupSettingsCtrl.emptyData()">None</p>
+              <p class="text-color weak-border-top" ng-repeat="data in customerLookupSettingsCtrl.chosendata">{{data.name}}</p>
+            </div>
+            <div class="weak-border-bottom">
+              <h4 class="text-orange">Calculated Price</h4>
+              <p class="text-color">{{customerLookupSettingsCtrl.calculatePrice(customerLookupSettingsCtrl.chosendata)}} SEK</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <h4 class="text-orange">Data to request</h4>
+            <div class="dataselect">
+              <isteven-multi-select
+                input-model="customerLookupSettingsCtrl.datatypes"
+                output-model="customerLookupSettingsCtrl.chosendata"
+                button-label="name"
+                item-label="name"
+                tick-property="ticked"
+                group-property="msGroup">
+              </isteven-multi-select>
+              <!--<select chosen multiple class='form-control' data-placeholder-text-multiple="'Choose required data'" ng-model="chosenData" ng-options="data.name for data in customerLookupSettingsCtrl.datatypes" ng-change="customerLookupSettingsCtrl.updateData(chosenData)" >
+                            </select>-->
+            </div>
+          </div>
+          <button ng-click="customerLookupSettingsCtrl.addModule()" class="btn btn-warning btn-lg" type="submit">
+            Add
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<footer-customer-interface></footer-customer-interface>
