@@ -34,6 +34,7 @@ import userInterfaceAccount from './user-interface/account';
 import adminInterfaceDashboard from './admin-interface/adminDashboard/adminDashboard.component';
 import adminInterfaceUserSearch from './admin-interface/adminUserSearch/adminUserSearch.component';
 import navbarAdminInterface from '../components/navbarAdminInterface/navbarAdminInterface.component';
+import headerAdminInterface from '../components/headerAdminInterface/headerAdminInterface.component';
 import footerAdminInterface from '../components/footerAdminInterface/footerAdminInterface.component';
 import adminInterfaceAdmin from './admin-interface/admin';
 import adminInterfaceAccount from './admin-interface/account';
@@ -77,6 +78,7 @@ angular.module('trapezaApp', [ngCookies, ngResource, ngSanitize, ngMaterial, 'bt
   customerMultiSelect,
   navbarUserInterface,
   navbarAdminInterface,
+  headerAdminInterface,
   navbarCustomerInterface,
   footerAdminInterface,
   footerUserInterface,

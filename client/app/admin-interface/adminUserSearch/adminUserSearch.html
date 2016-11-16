@@ -1,39 +1,59 @@
-<navbar-admin-interface></navbar-admin-interface>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <label for="custom-search-input">Search by security number</label>
-      <div id="custom-search-input">
-        <div class="input-group col-md-12">
-          <input id="search-input-field" type="text" class="form-control input-lg" placeholder="YYYYMMDDXXXX" ng-model="adminUserSearchCtrl.searchText" ng-keypress="adminUserSearchCtrl.validate($event)"/>
+<!--page wrapper-->
+<div id="page-wrapper" class="open" ng-cloak>
+  <navbar-admin-interface></navbar-admin-interface>
+  <!--main content-->
+  <div id="content-wrapper">
+    <div class="page-content">
+      <!-- Header Bar -->
+      <div class="row header">
+        <div class="col-xs-12">
+          <header-admin-interface></header-admin-interface>
+          <div class="meta">
+            <div class="title">
+              UC
+            </div>
+            <div class="breadcrumb-links">
+              Home / User search
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end header bar-->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="custom-search-input">Search by security number</label>
+            <div id="custom-search-input">
+              <div class="input-group col-md-12">
+                <input id="search-input-field" type="text" class="form-control input-lg" placeholder="YYYYMMDDXXXX" ng-model="adminUserSearchCtrl.searchText" ng-keypress="adminUserSearchCtrl.validate($event)"/>
             <span class="input-group-btn">
                 <button class="btn btn-info btn-lg" type="button" ng-click="adminUserSearchCtrl.search()">
                   <i class="glyphicon glyphicon-search"></i>
                 </button>
             </span>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="row" ng-if="adminUserSearchCtrl.showResult">
-    <uib-tabset class="tabs-custom" active="active">
-      <uib-tab index="0" heading="Overview">
-        <div class="row" ng-repeat="(key, value) in adminUserSearchCtrl.overviewInfo">
-          <div class="col-xs-3">{{key}} </div>
-          <div class="col-xs-9">{{value}}</div>
-        </div>
-      </uib-tab>
-      <uib-tab index="1" heading="Activity">Test 2</uib-tab>
-      <uib-tab index="2" heading="Check up history">Test 2</uib-tab>
-      <uib-tab index="3" heading="Financial information">Test 2</uib-tab>
-      <uib-tab index="4" heading="Education information">Test 2</uib-tab>
-    </uib-tabset>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <b>Latest activity</b>
-      </div>
-      <div class="panel-body">
-        <ul class="list-group">
+        <div class="row" ng-if="adminUserSearchCtrl.showResult">
+          <uib-tabset class="tabs-custom" active="active">
+            <uib-tab index="0" heading="Overview">
+              <div class="row" ng-repeat="(key, value) in adminUserSearchCtrl.overviewInfo">
+                <div class="col-xs-3">{{key}} </div>
+                <div class="col-xs-9">{{value}}</div>
+              </div>
+            </uib-tab>
+            <uib-tab index="1" heading="Activity">Test 2</uib-tab>
+            <uib-tab index="2" heading="Check up history">Test 2</uib-tab>
+            <uib-tab index="3" heading="Financial information">Test 2</uib-tab>
+            <uib-tab index="4" heading="Education information">Test 2</uib-tab>
+          </uib-tabset>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <b>Latest activity</b>
+            </div>
+            <div class="panel-body">
+              <ul class="list-group">
           <span ng-repeat="item in adminUserSearchCtrl.activity">
             <li ng-class="{'list-group-item list-group-item-info': item.type == 'info',
             'list-group-item list-group-item-danger': item.type == 'error',
@@ -41,9 +61,14 @@
               <b>{{item.timestamp | date:'short' }}</b> {{item.info}}
             </li>
           </span>
-        </ul>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <!--end main content-->
+
+  <footer-admin-interface></footer-admin-interface>
 </div>
-<footer-admin-interface></footer-admin-interface>

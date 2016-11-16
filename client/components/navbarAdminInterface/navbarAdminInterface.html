@@ -1,29 +1,42 @@
-<div class="navbar navbar-default navbar-static-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle" type="button" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="/" class="navbar-brand">trapeza</a>
-    </div>
-    <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-      <ul class="nav navbar-nav">
-        <li ng-repeat="item in $ctrl.menu" ui-sref-active="active">
-            <a ui-sref="{{item.state}}">{{item.title}}</a>
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+    <ul class="sidebar">
+        <li class="sidebar-main">
+            <a ng-click="$ctrl.toggleSidebar()">
+                UC Admin
+                <span class="menu-icon fa fa-bars"></span>
+            </a>
         </li>
-        <li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="adminSignup">Sign up</a></li>
-        <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="adminLogin">Login</a></li>
-        <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p> </li>
-        <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="adminSettings"><span class="glyphicon glyphicon-cog"></span></a></li>
-        <li ng-show="$ctrl.isLoggedIn()"><a ui-sref="adminLogout">Logout</a></li>
-      </ul>
+        <li class="sidebar-title"><span>NAVIGATION</span></li>
+        <li ui-sref-active="active" class="sidebar-list">
+            <a ui-sref="{{$ctrl.menu[0].state}}">{{$ctrl.menu[0].title}} <span class="menu-icon fa fa-tachometer"></span></a>
+        </li>
+        <li ui-sref-active="active" class="sidebar-list">
+            <a ui-sref="{{$ctrl.menu[1].state}}">{{$ctrl.menu[1].title}} <span class="menu-icon fa fa-search"></span></a>
+        </li>
+        <!--<li ui-sref-active="active" class="sidebar-list">-->
+        <!--<a href="" ui-sref="{{item.state}}"> Dashboard <span class="menu-icon fa fa-tachometer"></span></a>-->
+        <!--</li>-->
+        <!--<li ui-sref-active="active" class="sidebar-list">-->
+        <!--<a href="" ui-sref="{{item.state}}"> Tables <span class="menu-icon fa fa-table"></span></a>-->
+        <!--</li>-->
+    </ul>
+    <div class="sidebar-footer">
+        <div class="col-xs-4">
+            <a href="https://github.com/beeman/bootstrap-admin-angular" target="_blank">
+                Github
+            </a>
+        </div>
+        <div class="col-xs-4">
+            <a href="https://github.com/beeman/bootstrap-admin-angular/blob/master/README.md" target="_blank">
+                About
+            </a>
+        </div>
+        <div class="col-xs-4">
+            <a href="https://github.com/beeman/bootstrap-admin-angular/issues">
+                Support
+            </a>
+        </div>
     </div>
-  </div>
 </div>
+<!-- End Sidebar -->
