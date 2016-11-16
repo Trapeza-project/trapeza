@@ -12,47 +12,29 @@ export class CustomerActivityComponent {
   answered = [];
 
   /*@ngInject*/
-  constructor($location, lookupService) {
+  constructor($http, $location, lookupService) {
     this.$location = $location;
     this.lookupService = lookupService;
-    this.requests = [{
-      name: "Kalle Karlsson",
-      info: ["Income", "Address"],
-      timestamp: "01/01/2016",
-      access: "pending",
-      companystatus: "pending"
-    }, {
-      name: "Stina Andersson",
-      info: ["Income", "Address"],
-      timestamp: "01/01/2016",
-      access: "approved",
-      companystatus: "approved"
-    }, {
-      name: "Eva Svensson",
-      info: ["Income", "Address"],
-      timestamp: "01/01/2016",
-      access: "denied",
-      companystatus: "approved"
-    }, {
-      name: "Eva Andersson",
-      info: ["Income", "Address"],
-      timestamp: "01/01/2016",
-      access: "approved",
-      companystatus: "denied"
-    }, {
-      name: "Eva Andersson",
-      info: ["Income", "Address"],
-      timestamp: "01/01/2016",
-      access: "approved",
-      companystatus: "pending"
-    }];
-    for (var i = 0; i < this.requests.length; i++) {
-      if (this.requests[i].access == "pending") {
-        this.pending.push(this.requests[i]);
-      } else {
-        this.answered.push(this.requests[i]);
+    var accessid = lookupService.getAccessor();
+    this.$http = $http;
+    this.$http({
+      url: '/api/requests/accessor',
+      method: "GET",
+      params: {accessor: accessid}
+    }).then(response => {
+      if(response.status==200){
+        console.log(response.data);
+        this.requests = response.data;
+        //this.requests = [{name:"Kalle Karlsson", info:["Income","Address"], timestamp:"01/01/2016", access:"pending", companystatus:"pending"},{name:"Stina Andersson", info:["Income","Address"], timestamp:"01/01/2016", access:"approved", companystatus:"approved"}, {name:"Eva Svensson", info:["Income","Address"], timestamp:"01/01/2016", access:"denied", companystatus:"approved"},{name:"Eva Andersson", info:["Income","Address"], timestamp:"01/01/2016", access:"approved", companystatus:"denied"},{name:"Eva Andersson", info:["Income","Address"], timestamp:"01/01/2016", access:"approved", companystatus:"pending"}];
+        for(var i = 0; i < this.requests.length; i++){
+          if(this.requests[i].access == "pending"){
+            this.pending.push(this.requests[i]);
+          }else{
+            this.answered.push(this.requests[i]);
+          }
+        }
       }
-    }
+    });
   }
   pendingrequest(request){
     if(request.access=="pending"){

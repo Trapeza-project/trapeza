@@ -137,10 +137,12 @@ export class CustomerLookupSettingsComponent {
     for(var i = 0; i < this.chosendata.length; i++){
       module.info.push(this.chosendata[i]);
     }
-    module.id=this.lookupService.nextID();
-    this.lookupService.addModule(module);
+    var vm = this;
+    var newLookups = function(newlookups){
+      vm.lookups = newlookups;
+    }
+    this.lookupService.addModule(module, newLookups);
     this.chosendata = [];
-    //this.chosenData = [];
     this.name = "";
     this.description = "";
     this.price = 0;
