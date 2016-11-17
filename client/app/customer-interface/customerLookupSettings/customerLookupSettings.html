@@ -14,13 +14,13 @@
       <div class="lookupmodule" ng-repeat="lookup in customerLookupSettingsCtrl.lookups">
         <div>
           <div>
-            <md-switch ng-model="lookup.active" class="md-warn inlineblock vertical-center">
+            <md-switch ng-model="lookup.active" class="md-warn inlineblock vertical-center" ng-change="customerLookupSettingsCtrl.changeStatus(lookup)">
               <p class="text-color" ng-if="lookup.active">Enabled</p>
               <p class="text-color" ng-if="!lookup.active">Disabled</p>
             </md-switch>
             <span ng-if="lookup.customized" ng-click="customerLookupSettingsCtrl.editModule(lookup)" class="glyphicon glyphicon-edit inlineblock floatright vertical-center"></span>
           </div>
-          <md-switch ng-model="lookup.UCHandle" class="md-warn inlineblock vertical-center" ng-change="changeUCStatus(lookup)">
+          <md-switch ng-model="lookup.UCHandle" class="md-warn inlineblock vertical-center" ng-change="customerLookupSettingsCtrl.changeStatus(lookup)">
             <p class="text-color" ng-if="lookup.UCHandle">UC judge the request</p>
             <p class="text-color" ng-if="!lookup.UCHandle">We judge the request</p>
           </md-switch>
@@ -111,7 +111,7 @@
                             </select>-->
             </div>
           </div>
-          <button ng-click="customerLookupSettingsCtrl.addModule()" class="btn btn-warning btn-lg" type="submit">
+          <button ng-click="customerLookupSettingsCtrl.addModule()" class="btn btn-warning btn-lg">
             Add
           </button>
         </form>

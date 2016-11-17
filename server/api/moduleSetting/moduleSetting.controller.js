@@ -75,11 +75,11 @@ export function index(req, res) {
 // Gets ModuleSetting for a single user from the DB
 export function show(req, res) {
   var modules = [];
-  return ModuleSetting.findAll(/*{
+  return ModuleSetting.findAll({
     where: {
 	  $or: [{creatorid: req.params.id}, {creatorid: 0}]
     }
-  }*/).mapSeries(function(module){
+  }).mapSeries(function(module){
 		var dataValues = module.dataValues;
 		var tempModule = {};
 		tempModule.id = dataValues.moduleid;
@@ -165,20 +165,19 @@ export function upsert(req, res) {
 
 // Updates an existing ModuleSetting in the DB
 export function patch(req, res) {
-var tempModule = {};
+ var tempModule = {};
 	tempModule.info=req.body.info;
 	tempModule.active = req.body.active;
 	tempModule.name=req.body.name;
 	tempModule.description = req.body.description;
 	tempModule.UCHandle = req.body.UCHandle;
-	tempModule.customized = true;
 	tempModule.id = req.body.id;
 	var infoids  = [];
 	for(var i = 0; i < req.body.info.length; i++){
 		infoids.push(req.body.info[i].id);
 	}
-	ModuleSetting.find({ where: { moduleid: id } })
-  .on('success', function (module) {
+	ModuleSetting.find({ where: { moduleid: tempModule.id } })
+  .then(function (module) {
     // Check if record exists in db
     if (module) {
       module.updateAttributes({
@@ -192,14 +191,14 @@ var tempModule = {};
 	})
     }
   })
-		
 }
 
 // Deletes a ModuleSetting from the DB
 export function destroy(req, res) {
+	console.log(req.params.id);
   return ModuleSetting.find({
     where: {
-      moduleid: req.params.moduleid
+      moduleid: req.params.id
     }
   })
     .then(handleEntityNotFound(res))

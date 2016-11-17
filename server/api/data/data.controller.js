@@ -162,18 +162,22 @@ export function createdata(req, res) {
 export function getdata(req, res) {
   var id = req.params.requestid;
   
-  // Check if it is okay
-  var permitted = true;
-  
   PreviousRequest.find({
 	  where:{
 		  requestid:id
 	  }
-	}).then(function(res){
-		if(permitted){
-			respondWithResult(res);
+	}).then(function(result){
+		if(result==null){
+			res.json({html:"<div class='weak-border-bottom'></div>"});
 		}else{
-			res.json({allow:permitted});
+			var dataValues = result.dataValues;
+			if(dataValues.allow == true){
+				var data = {};
+				data.html = dataValues.data;
+				res.json(data);
+			}else{
+				res.json({html:"<div class='weak-border-bottom'></div>"});
+			}
 		}
 	})
     .catch(handleError(res));

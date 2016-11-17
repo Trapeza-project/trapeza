@@ -11,7 +11,7 @@ export class CustomerRequestComponent {
   history = [];
   requesthtml="";
   /*@ngInject*/
-  constructor($http, $location, lookupService, modalService, Auth) {
+  constructor($timeout, $scope, $http, $location, lookupService, modalService, Auth) {
     'ngInject';
 
     function temp(){
@@ -24,16 +24,30 @@ export class CustomerRequestComponent {
     this.lookupService = lookupService;
     this.modalService = modalService;
     this.requestid = lookupService.getCurrentRequestID();
-
     this.$http({
-      url: '/api/requests/id',
-      method: "GET",
-      params: {id: this.requestid}
+      url: '/api/requests/'+this.requestid,
+      method: "GET"
     }).then(response => {
       if(response.status==200){
         this.requestdata = response.data.basic;
+        this.$http({
+          url: '/api/requests/'+this.requestdata.personid+'/10',
+          method: "GET"
+        }).then(response => {
+          if(response.status==200){
+            this.history = response.data.history;
+          }
+        });
+      }
+    });
+
+
+    this.$http({
+      url: '/api/datas/request/'+this.requestid,
+      method: "GET"
+    }).then(response => {
+      if(response.status==200){
         this.requesthtml = response.data.html;
-        this.history = response.data.history;
       }
     });
   }
@@ -41,21 +55,21 @@ export class CustomerRequestComponent {
   }
 
   pendingrequest(){
-    if(this.requestdata.access=="pending"){
+    if(this.requestdata.pending==true){
       return true;
     }else{
       return false;
     }
   }
   approvedrequest(){
-    if(this.requestdata.access=="approved"){
+    if(this.requestdata.allow==true && this.requestdata.pending==false){
       return true;
     }else{
       return false;
     }
   }
   deniedrequest(){
-    if(this.requestdata.access=="denied"){
+    if(this.requestdata.allow==false && this.requestdata.pending==false){
       return true;
     }else{
       return false;
@@ -63,36 +77,21 @@ export class CustomerRequestComponent {
   }
 
   pendingcompanyrequest(){
-    if(this.requestdata.companystatus=="pending" && this.requestdata.access != "denied"){
+    if(this.requestdata.companypending==true){
       return true;
     }else{
       return false;
     }
   }
   approvedcompanyrequest(){
-    if(this.requestdata.companystatus=="approved" && this.requestdata.access != "denied"){
+    if(this.requestdata.companyallow==true && this.requestdata.companypending==false){
       return true;
     }else{
       return false;
     }
   }
   deniedcompanyrequest(){
-    if(this.requestdata.companystatus=="denied" || this.requestdata.access == "denied"){
-      return true;
-    }else{
-      return false;
-    }
-  }
-
-  approvedLookup(lookup){
-    if(lookup.access=="approved"){
-      return true;
-    }else{
-      return false;
-    }
-  }
-  deniedLookup(lookup){
-    if(lookup.access== "denied"){
+    if((this.requestdata.companyallow==false && this.requestdata.companypending==false) || (this.requestdata.allow == false && this.requestdata.pending ==false)){
       return true;
     }else{
       return false;
@@ -100,7 +99,7 @@ export class CustomerRequestComponent {
   }
 
   displayButton(){
-    if(this.isAdmin() && this.requestdata.companystatus=="pending" && !this.requestdata.UCHandle){
+    if(this.isAdmin() && this.requestdata.companypending==true && !this.requestdata.UCHandle && this.requestdata.allow==true){
       return true;
     }else{
       return false;
@@ -117,7 +116,19 @@ export class CustomerRequestComponent {
     var vm = this;
     this.modalService.showModal({}, modalOptions)
       .then(function (result) {
-        vm.requestdata.companystatus="approved";
+        var data = {};
+        data.requestid = vm.requestid;
+        data.companyallow=true;
+        vm.$http.post('/api/requests/companyanswer', data)
+          .then(response => {
+            console.log(response);
+            if(response.status==200){
+              if(response.data.approve==true){
+                vm.requestdata.companyallow=true;
+                vm.requestdata.companypending=false;
+              }
+            }
+          });
       });
   }
   denyRequest(){
@@ -130,7 +141,19 @@ export class CustomerRequestComponent {
     var vm = this;
     this.modalService.showModal({}, modalOptions)
       .then(function (result) {
-        vm.requestdata.companystatus="denied";
+        var data = {};
+        data.requestid = vm.requestid;
+        data.companyallow=false;
+        vm.$http.post('/api/requests/companyanswer', data)
+          .then(response => {
+            console.log(response);
+            if(response.status==200){
+              if(response.data.approve==true){
+                vm.requestdata.companyallow=false;
+                vm.requestdata.companypending=false;
+              }
+            }
+          });
       });
 
   }

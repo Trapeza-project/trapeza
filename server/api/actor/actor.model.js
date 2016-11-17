@@ -10,6 +10,7 @@ export default function(sequelize, DataTypes) {
     name: DataTypes.STRING,
     basicinfo: DataTypes.STRING,
 	description: DataTypes.STRING,
-	branch: DataTypes.STRING
+	branch: DataTypes.STRING,
+	score: DataTypes.DOUBLE
   });
 }

@@ -18,7 +18,7 @@ export class CustomerActivityComponent {
     var accessid = lookupService.getAccessor();
     this.$http = $http;
     this.$http({
-      url: '/api/requests/accessor',
+      url: '/api/requests/accessor/'+accessid,
       method: "GET",
       params: {accessor: accessid}
     }).then(response => {
@@ -27,7 +27,7 @@ export class CustomerActivityComponent {
         this.requests = response.data;
         //this.requests = [{name:"Kalle Karlsson", info:["Income","Address"], timestamp:"01/01/2016", access:"pending", companystatus:"pending"},{name:"Stina Andersson", info:["Income","Address"], timestamp:"01/01/2016", access:"approved", companystatus:"approved"}, {name:"Eva Svensson", info:["Income","Address"], timestamp:"01/01/2016", access:"denied", companystatus:"approved"},{name:"Eva Andersson", info:["Income","Address"], timestamp:"01/01/2016", access:"approved", companystatus:"denied"},{name:"Eva Andersson", info:["Income","Address"], timestamp:"01/01/2016", access:"approved", companystatus:"pending"}];
         for(var i = 0; i < this.requests.length; i++){
-          if(this.requests[i].access == "pending"){
+          if(this.requests[i].pending == true){
             this.pending.push(this.requests[i]);
           }else{
             this.answered.push(this.requests[i]);
@@ -37,21 +37,21 @@ export class CustomerActivityComponent {
     });
   }
   pendingrequest(request){
-    if(request.access=="pending"){
+    if(request.pending == true){
       return true;
     }else{
       return false;
     }
   }
   approvedrequest(request){
-    if(request.access=="approved"){
+    if(request.allow == true && request.pending==false){
       return true;
     }else{
       return false;
     }
   }
   deniedrequest(request){
-    if(request.access=="denied"){
+    if(request.allow==false && request.pending==false){
       return true;
     }else{
       return false;
@@ -59,21 +59,21 @@ export class CustomerActivityComponent {
   }
 
   pendingcompanyrequest(request){
-    if(request.companystatus=="pending" && request.access != "denied"){
+    if(request.companypending==true){
       return true;
     }else{
       return false;
     }
   }
   approvedcompanyrequest(request){
-    if(request.companystatus=="approved" && request.access != "denied"){
+    if(request.companyallow==true && request.companypending==false){
       return true;
     }else{
       return false;
     }
   }
   deniedcompanyrequest(request){
-    if(request.companystatus=="denied" || request.access == "denied"){
+    if((request.companyallow==false && request.companypending==false) || (request.allow == false && request.pending ==false)){
       return true;
     }else{
       return false;

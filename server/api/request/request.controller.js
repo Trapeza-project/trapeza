@@ -15,9 +15,10 @@ import {RequestLog} from '../../sqldb';
 import {PreviousRequest} from '../../sqldb';
 import {PendingRequest} from '../../sqldb';
 import {BasicData} from '../../sqldb';
-import {ModuleSettings} from '../../sqldb';
-import {InfoType} from '../../sqldb';
+import {ModuleSetting} from '../../sqldb';
+import {Infotype} from '../../sqldb';
 import {Actor} from '../../sqldb';
+import Sequelize from 'sequelize';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -106,15 +107,62 @@ return 	RequestLog.findAll({
 
 // Gets all the requests made by the customer
 export function getcustomerrequests(req, res) {
+	var customerReq = [];
 return 	RequestLog.findAll({
     where: {
       accessid: req.params.accessor
     },
 	order: '"timestamp" DESC'
-  })
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  }).mapSeries(function(request){
+		var dataValues = request.dataValues;
+		var tempRequest = {};
+		tempRequest.requestid = dataValues.requestid;
+		tempRequest.allow = dataValues.allow;
+		tempRequest.companyallow = dataValues.companyallow;
+		tempRequest.companypending = dataValues.companypending;
+		tempRequest.pending = dataValues.pending;
+		tempRequest.personid = dataValues.personid;
+		var date = new Date(dataValues.timestamp);
+		tempRequest.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate() + " " + date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); 
+
+	  var infoids = JSON.parse(dataValues.infoids);
+	  var tempids = [];
+	  var promises = [];
+	  promises.push(BasicData.find({
+		  where: {
+			  personid: tempRequest.personid
+		  }
+	  }).then(function(basData){
+		  if(basData != null){
+			  var bas = basData.dataValues;
+			  tempRequest.name = bas.firstname + " " + bas.lastname;
+		  }else{
+			  tempRequest.name = "NOT FOUND";
+		  }
+	  })
+	  )
+	  
+	  infoids.forEach(function(id){
+			promises.push(Infotype.find({
+				where: {
+					infoid : id
+				}
+			}).then(function(info){
+				if(info == null){
+					return;
+				}
+				var infoValues = info.dataValues;
+				tempids.push(infoValues.infoname);
+			}))
+		})
+		
+		return Sequelize.Promise.all(promises).then(function(){
+				tempRequest.info = tempids;
+				customerReq.push(tempRequest);
+		})  
+  }).then(function(){
+		   res.json(customerReq);
+		})
 
 
 }
@@ -130,23 +178,40 @@ export function show(req, res) {
 			requestid: req.params.requestid
 		}
 	}).then(function(result){
+		if(result==null){
+			return;
+		}
+		var dataValues = result.dataValues;
 		BasicData.find({
 		where:{
-			personid:result.personid 
+			personid:dataValues.personid 
 		}
 		})
 		.then(function(dat){
-			
-			ModuleSettings.find({
+			if(dat==null){
+				return;
+			}
+			ModuleSetting.find({
 				where:{
-					moduleid:result.moduleid
+					moduleid:dataValues.moduleid
 				}
 			}).then(function(module){
 				var data = {};
 				var basic = {};
-				basic.name = dat.firstname + " " + dat.lastname;
-				basic.personid=dat.personid;
-				basic.UCHandle = module.UCHandle;
+				if(module==null){
+					basic.UCHandle = false;
+				}else{
+					basic.UCHandle = module.dataValues.UCHandle;
+				}
+				basic.name = dat.dataValues.firstname + " " + dat.dataValues.lastname;
+				basic.personid=dat.dataValues.personid;
+				var date = new Date(dataValues.timestamp);
+				basic.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate() + " " + date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); 
+				basic.purpose = dataValues.purpose;
+				basic.allow = dataValues.allow;
+				basic.companyallow = dataValues.companyallow;
+				basic.companypending = dataValues.companypending;
+				basic.pending = dataValues.pending;
 				data.basic = basic;
 				res.json(data);
 			})
@@ -155,7 +220,7 @@ export function show(req, res) {
 }
 
 export function latestuserrequest(req, res) {
-	var chainer = new Sequelize.Utils.QueryChainer;
+	//var history = [{actor:{name:"Media Markt", id:"3"}, info:["Address"], timestamp:"1/1/2015", access:"approved"}, {actor:{name:"Elgiganten", id:"4"}, info:["Address", "Income"], timestamp:"1/1/2015", access:"denied"}, {actor:{name:"Media Markt", id:"3"}, info:["Address", "Income"], timestamp:"1/1/2015", access:"approved"}];
 	var history = [];
 	return RequestLog.findAll({
 		   where: {
@@ -163,63 +228,79 @@ export function latestuserrequest(req, res) {
 			},
 		  limit:req.params.amount,
 		  order: '"timestamp" DESC'
-		}).then(function(result){
-			for(var i = 0; i<result.length; i++){
-				var data = {};
-				data.timestamp = result[i].timestamp;
-				data.access = result[i].allow;
-				data.info = [];
-				var infoids = JSON.parse(result[i].infoids);
-				for(var j = 0; j < infoids.length; j++){
-					var f = InfoType.find({
-						where:{
-							infoid:infoids[j]
-						}
-					}).then(function(infotype){
-						data.info.push(infotype.infoname);
-					})
-					chainer.add(f);
-				}
-				var func = Actor.find({
+		}).mapSeries(function(request){
+			var dataValues = request.dataValues;
+			var data = {};
+			var date = new Date(dataValues.timestamp);
+			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate(); 
+			data.access = dataValues.allow;
+			
+			var tempids = [];
+			var promises = [];
+			var infoids = JSON.parse(dataValues.infoids);
+			
+			infoids.forEach(function(id){
+				promises.push(Infotype.find({
+					where: {
+						infoid : id
+					}
+				}).then(function(info){
+					if(info == null){
+						return;
+					}
+					var infoValues = info.dataValues;
+					tempids.push(infoValues.infoname);
+				}))
+			})
+			promises.push(Actor.find({
 					where:{
-						id:result[i].accessid
+						id:dataValues.accessid
 					}
 				}).then(function(actor){
 					var tempActor = {};
-					tempActor.id=actor.id;
-					tempActor.name=actor.name;
+					tempActor.id=actor.dataValues.id;
+					tempActor.name=actor.dataValues.name;
 					data.actor = tempActor;
+				}));
+		
+			return Sequelize.Promise.all(promises).then(function(){
+					data.info = tempids;
 					history.push(data);
-				})				
-			}
-		})
-	chainer.runSerially()
-	.success(function(){
+			}) 
+			
+		}).then(function(){
 			var data = {};
 			data.history = history;
 			res.json(data);
-	})
-	.error(function(err){
-		console.log("Error");
 	})
 }
 
 // Creates a new Request in the DB
 export function create(req, res) {
 	var newRequest = RequestLog.build();
-	newRequest.setDataValue('moduleid', req.body.moduleid);
-	newRequest.setDataValue('personid', req.body.id);
-	newRequest.setDataValue('accessid', req.body.accessor);
-	newRequest.setDataValue('purpose', req.body.purpose);
-	newRequest.setDataValue('infoids', JSON.stringify(req.body.info));
-	newRequest.setDataValue('pending', true);
-	newRequest.setDataValue('allow', false);
-	newRequest.setDataValue('companypending', true);
-	newRequest.setDataValue('companyallow', false);
-	newRequest.setDataValue('price', req.body.price);
-	console.log(newRequest);
-  return newRequest.save()
-	.then(function(request) {
+	return ModuleSetting.find({
+		where:{
+			moduleid: req.body.moduleid,
+			UCHandle: true
+		}
+	}).then(function(mod){
+		if(mod==null){
+			newRequest.setDataValue('companypending', true);
+			newRequest.setDataValue('companyallow', false);
+		}else{
+			newRequest.setDataValue('companypending', false);
+			newRequest.setDataValue('companyallow', true);
+		}
+		newRequest.setDataValue('moduleid', req.body.moduleid);
+		newRequest.setDataValue('personid', req.body.id);
+		newRequest.setDataValue('accessid', req.body.accessor);
+		newRequest.setDataValue('purpose', req.body.purpose);
+		newRequest.setDataValue('infoids', JSON.stringify(req.body.info));
+		newRequest.setDataValue('pending', true);
+		newRequest.setDataValue('allow', false);
+		newRequest.setDataValue('price', req.body.price);
+		return newRequest.save();
+	}).then(function(request) {
 	  var pendingRequest = PendingRequest.build();
 		pendingRequest.setDataValue('personid', req.body.id);
 		pendingRequest.setDataValue('accessid', req.body.accessor);
@@ -228,26 +309,48 @@ export function create(req, res) {
 		return pendingRequest.save()
 		.then(function(pending){
 			res.json({ requestid:pending.requestid });
-		}).catch(console.log("BAD"));
-	})
-	.catch(console.log("BAD"));
+		});
+	});
 }
 
-// Answers a request
-export function answerrequest(req, res) {
+// Answer a customer request
+export function answercustomerrequest(req, res) {
 	var id = req.body.requestid;
-	var approve = req.body.answer;
-	RequestLog.find({
+	var allow = req.body.companyallow;
+return RequestLog.find({
 			where:{
 				requestid:id
 			}
-		}).on('success', function (request) {
+		}).then(function (request) {
+			// Check if record exists in db, and update
+			if (request) {
+				request.updateAttributes({
+					companypending: false,
+					companyallow: allow
+				}).then(function(){
+					return res.json({approve:true});
+			})
+			}else{
+				res.json({approve:false});
+			}
+		})
+}
+
+// Answers a user request
+export function answeruserrequest(req, res) {
+	var id = req.body.requestid;
+	var approve = req.body.answer;
+	return RequestLog.find({
+			where:{
+				requestid:id
+			}
+		}).then(function (request) {
 			// Check if record exists in db, and update
 			if (request) {
 				request.updateAttributes({
 					pending: false,
 					allow: approve
-				}).success(function(){
+				}).then(function(){
 					// Remove from pendingrequests
 					
 					PendingRequest.destroy({
