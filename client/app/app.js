@@ -22,6 +22,7 @@ import _Auth from '../components/auth/auth.module';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
+import navbar from '../components/navbar/navbar.directive';
 
 // User interface
 import navbarUserInterface from '../components/navbarUserInterface/navbarUserInterface.component';
@@ -85,14 +86,38 @@ angular.module('trapezaApp', [ngCookies, ngResource, ngSanitize, ngMaterial, 'bt
   footerCustomerInterface,
   constants,
   socket,
-  util
+  util,
+  navbar
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
     'ngInject';
     // Redirect to login if route requires auth and you're not logged in
 
+    $rootScope.userInterface = false;
+    $rootScope.customerInterface = false;
+    $rootScope.adminInterface = false;
+
+    var user = new RegExp("/user/");
+    var admin = new RegExp("/admin/");
+    var customer = new RegExp("/customer/");
+
     $rootScope.$on('$stateChangeStart', function(event, next) {
+      if(user.test(window.location.pathname)) {
+        $rootScope.userInterface = true;
+        $rootScope.customerInterface = false;
+        $rootScope.adminInterface = false;
+      }
+      if(customer.test(window.location.pathname)) {
+        $rootScope.userInterface = false;
+        $rootScope.customerInterface = true;
+        $rootScope.adminInterface = false;
+      }
+      if(admin.test(window.location.pathname)) {
+        $rootScope.userInterface = false;
+        $rootScope.customerInterface = false;
+        $rootScope.adminInterface = true;
+      }
       Auth.isLoggedIn(function(loggedIn) {
         if(next.authenticate && !loggedIn) {
           $location.path('/admin/login');
@@ -100,7 +125,6 @@ angular.module('trapezaApp', [ngCookies, ngResource, ngSanitize, ngMaterial, 'bt
       });
     });
   });
-
 angular.element(document)
   .ready(() => {
     angular.bootstrap(document, ['trapezaApp'], {

@@ -82,7 +82,7 @@ export class CustomerActivityComponent {
 
   viewRequest(requestid){
     this.lookupService.setCurrentRequestID(requestid);
-    this.$location.url('/request');
+    this.$location.url('/customer/request');
   }
 }
 
