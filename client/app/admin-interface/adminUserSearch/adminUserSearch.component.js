@@ -10,6 +10,7 @@ export class AdminUserSearchComponent {
   showResult = false;
   overviewInfo = {};
   activity = {};
+  noResult = false;
   /*@ngInject*/
   constructor($http, $scope, socket) {
     this.$http = $http;
@@ -40,6 +41,7 @@ export class AdminUserSearchComponent {
     this.$http.get('/api/persons/' + this.searchText)
       .then(response => {
         console.log(response.data);
+        this.noResult = false;
         this.overviewInfo = {
           'Name': response.data.name,
           'Security number': response.data.securityNumber,
@@ -48,8 +50,11 @@ export class AdminUserSearchComponent {
         };
         this.activity = JSON.parse(response.data.activity);
         console.log(this.activity);
+        this.showResult = true;
+      }, error => {
+        console.log('error lookup person', error);
+        this.noResult = true;
       });
-    this.showResult = true;
   }
 }
 
