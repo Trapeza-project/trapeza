@@ -3,7 +3,7 @@
 export default function(sequelize, DataTypes) {
   return sequelize.define('Datalog', {
 	personid: DataTypes.INTEGER,
-	infoid: DataTypes.INTEGER,
+	infoids: DataTypes.STRING,
 	timestamp: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
 	provider: DataTypes.STRING,
 	selfupload: DataTypes.BOOLEAN,

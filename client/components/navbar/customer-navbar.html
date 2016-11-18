@@ -1,0 +1,31 @@
+<div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">Trapeza</a>
+    </div>
+    <div uib-collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="item in menu" ui-sref-active="active">
+          <a ui-sref="{{item.state}}">{{item.title}}</a>
+        </li>
+        <li ng-show="isAdmin()" ui-sref-active="active"><a ui-sref="customerLookupSettings">Admin Area</a></li>
+        <li ng-show="isAdmin()" ui-sref-active="active"><a ui-sref="customerAdmin">Admin</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="isLoggedIn()" ui-sref-active="active"><a ui-sref="customerSignup">Sign up</a></li>
+        <li ng-hide="isLoggedIn()" ui-sref-active="active"><a ui-sref="customerLogin">Login</a></li>
+        <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
+        <li ng-show="isAdmin()" ui-sref-active="active"><a ui-sref="customerLookupSettings">Lookup Settings</a></li>
+        <li ng-show="isLoggedIn()" ui-sref-active="active"><a ui-sref="customerSettings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="isLoggedIn()"><a ui-sref="customerLogout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

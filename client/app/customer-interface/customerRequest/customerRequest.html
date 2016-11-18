@@ -78,8 +78,8 @@
             {{lookup.timestamp}}
           </td>
           <td class="floatright requesttd">
-            <span ng-show="customerRequestCtrl.approvedlookup(lookup)" class="glyphicon glyphicon-ok-circle"></span>
-            <span ng-show="customerRequestCtrl.deniedlookup(lookup)" class="glyphicon glyphicon-ban-circle"></span>
+            <span ng-if="lookup.access == true" class="glyphicon glyphicon-ok-circle"></span>
+            <span ng-if="lookup.access == false" class="glyphicon glyphicon-ban-circle"></span>
           </td>
         </tr>
       </table>
