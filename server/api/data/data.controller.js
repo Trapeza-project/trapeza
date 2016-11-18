@@ -77,6 +77,11 @@ export function index(req, res) {
 }
 
 // Get the amount latest
+export function getuserdata(req, res) {
+
+}
+
+// Get the amount latest
 export function getuserlog(req, res) {
 	return Datalog.findAll({
 	   where: {

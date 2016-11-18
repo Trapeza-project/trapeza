@@ -6,9 +6,10 @@ var controller = require('./data.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
-router.get('/:id', controller.getuserlog);
+router.get('/data/:id', controller.getuserdata);
+router.get('/user/:id', controller.getuserlog);
 router.get('/request/:requestid', controller.getdata);
-router.get('/:amount', controller.getlatest);
+router.get('/all/:amount', controller.getlatest);
 router.get('/:amount/:id', controller.getuserlatest);
 router.post('/', controller.createdata);
 router.put('/:id', controller.upsert);
