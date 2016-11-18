@@ -10,8 +10,11 @@ var User = sqldb.CustomerUser;
 var ModuleSettings = sqldb.ModuleSetting;
 var Infotype = sqldb.Infotype;
 var BasicData = sqldb.BasicData;
+var FinancialData = sqldb.FinancialData;
+var EducationalData = sqldb.EducationalData;
 var Actor = sqldb.Actor;
 var PreviousRequest = sqldb.PreviousRequest;
+var Datalog = sqldb.Datalog;
 
 Thing.sync()
   .then(() =>
@@ -152,6 +155,42 @@ BasicData.sync()
     });
   });
   
+FinancialData.sync()
+  .then(() => FinancialData.destroy({ where: {} }))
+  .then(() => {
+    FinancialData.bulkCreate([{
+      personid: 111111111111,
+	  income: 30000
+    }, {
+      personid: 222222222222,
+	  income: 20000
+    }, {
+      personid: 333333333333,
+	  income: 10000
+    }])
+    .then(() => {
+      console.log('finished populating financial data');
+    });
+  });
+  
+EducationalData.sync()
+  .then(() => EducationalData.destroy({ where: {} }))
+  .then(() => {
+    EducationalData.bulkCreate([{
+      personid: 111111111111,
+	  degree: "PhD in Computer Science"
+    }, {
+      personid: 222222222222,
+	  degree: "PhD in Industrial Economics"
+    }, {
+      personid: 333333333333,
+	  degree: "Master in Computer Science"
+    }])
+    .then(() => {
+      console.log('finished populating educational data');
+    });
+  });
+  
 Actor.sync()
   .then(() => Actor.destroy({ where: {} }))
   .then(() => {
@@ -189,5 +228,35 @@ PreviousRequest.sync()
     }])
     .then(() => {
       console.log('finished populating previous requests');
+    });
+  });
+  
+  Datalog.sync()
+  .then(() => Datalog.destroy({ where: {} }))
+  .then(() => {
+    Datalog.bulkCreate([{
+		personid: 111111111111,
+		infoids: '["Income"]',
+		timestamp: new Date(2016, 11, 15, 10, 10, 10),
+		provider: "Skatteverket",
+		selfupload: false,
+		validation: "http://www.skatteverket.se/"
+    }, {
+		personid: 111111111111,
+		infoids: '["Income", "Address"]',
+		timestamp: new Date(2016, 11, 16, 10, 10, 10),
+		provider: "Skatteverket",
+		selfupload: false,
+		validation: "http://www.skatteverket.se/"
+    }, {
+		personid: 222222222222,
+		infoids: '["Income", "Degree"]',
+		timestamp: new Date(2016, 11, 16, 15, 10, 10),
+		provider: "Kronofogden",
+		selfupload: false,
+		validation: "http://www.kronofogden.se/"
+    }])
+    .then(() => {
+      console.log('finished populating datalog');
     });
   });

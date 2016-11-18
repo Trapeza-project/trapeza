@@ -18,6 +18,7 @@ import {BasicData} from '../../sqldb';
 import {Tablemapper} from '../../sqldb';
 import {RequestLog} from '../../sqldb';
 import {PreviousRequest} from '../../sqldb';
+import Sequelize from 'sequelize';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -76,9 +77,60 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
-// Get the amount latest
+// Get the user data
 export function getuserdata(req, res) {
-
+	var id = req.params.id;
+	var data = {};
+	var promises=[];
+	
+	promises.push(
+		BasicData.find({
+		  where: {
+			  personid: id
+		  }
+	  }).then(function(basData){
+		  if(basData != null){
+			  data.basic = basData.dataValues;
+			  
+		  }else{
+			  data.basic={};
+		  }
+	  })
+	);
+	
+	promises.push(
+		FinancialData.find({
+		  where: {
+			  personid: id
+		  }
+	  }).then(function(finanData){
+		  if(finanData != null){
+			  data.financial = finanData.dataValues;
+			  
+		  }else{
+			  data.financial={};
+		  }
+	  })
+	);
+	
+	promises.push(
+		EducationalData.find({
+		  where: {
+			  personid: id
+		  }
+	  }).then(function(eduData){
+		  if(eduData != null){
+			  data.educational = eduData.dataValues;
+			  
+		  }else{
+			  data.educational={};
+		  }
+	  })
+	);
+	
+	return Sequelize.Promise.all(promises).then(function(){
+			res.json(data);
+	}) 
 }
 
 // Get the amount latest
@@ -120,6 +172,7 @@ export function getuserlatest(req, res) {
 export function createdata(req, res) {
   var table;
 
+  // This most certainly does not work, not tested tho. We will not use it anyways
   Tablemapper.find({
     where: {
       infoid: req.body.infoid
