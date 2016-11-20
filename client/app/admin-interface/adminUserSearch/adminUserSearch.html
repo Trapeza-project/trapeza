@@ -36,16 +36,34 @@
           </div>
         </div>
 
-        <div class="row" ng-if="!adminUserSearchCtrl.showResult">
+        <div class="row" ng-if="adminUserSearchCtrl.showResult">
           <div ng-cloak class="activity">
             <md-content>
               <md-tabs md-dynamic-height md-border-bottom>
                 <md-tab label="Overview">
                   <md-content class="md-padding">
-                    <div class="row" ng-repeat="(key, value) in adminUserSearchCtrl.overviewInfo">
-                      <div class="col-xs-3">{{key}} </div>
-                      <div class="col-xs-9">{{value}}</div>
-                    </div>
+                    <table class="table table-striped">
+                      <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Data</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>Security number</td>
+                        <td>{{adminUserSearchCtrl.basicInfo.personid}}</td>
+                      </tr>
+                      <tr>
+                        <td>Name</td>
+                        <td>{{adminUserSearchCtrl.basicInfo.firstname}} {{adminUserSearchCtrl.basicInfo.lastname}}</td>
+                      </tr>
+                      <tr>
+                        <td>Adress</td>
+                        <td>{{adminUserSearchCtrl.basicInfo.address}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
                   </md-content>
                 </md-tab>
                 <md-tab label="Activity">
@@ -55,17 +73,71 @@
                 </md-tab>
                 <md-tab label="Check up history">
                   <md-content class="md-padding">
-                    <p>This is the check up historyw</p>
+                    <table class="table table-striped">
+                      <thead>
+                      <tr>
+                        <th>Time</th>
+                        <th>User allow</th>
+                        <th>Company allows</th>
+                        <th>Company pending</th>
+                        <th>Purpose</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="item in adminUserSearchCtrl.checkupHistory">
+                        <td>{{item.timestamp | date:'medium' }}</td>
+                        <td>
+                          <span class="label label-success" ng-if="item.userallow">Yes <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></span>
+                          <span class="label label-danger" ng-if="!item.userallow">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
+                        </td>
+                        <td>
+                          <span class="label label-success" ng-if="item.companyallow">Yes <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></span>
+                          <span class="label label-danger" ng-if="!item.companyallow">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
+                        </td>
+                        <td>
+                          <span class="label label-success" ng-if="item.companypending">Yes <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></span>
+                          <span class="label label-danger" ng-if="!item.companypending">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
+                        </td>
+                        <td>{{item.purpose}} </td>
+                      </tr>
+                      </tbody>
+                    </table>
                   </md-content>
                 </md-tab>
                 <md-tab label="Financial information">
                   <md-content class="md-padding">
-                    <p>This is the check up financial</p>
+                    <table class="table table-striped">
+                      <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Data</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>Income</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.income}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
                   </md-content>
                 </md-tab>
                 <md-tab label="Educational information">
                   <md-content class="md-padding">
-                    <p>This is the check up education</p>
+                    <table class="table table-striped">
+                      <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Data</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>Degree</td>
+                        <td>{{adminUserSearchCtrl.educationalInfo.degree}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
                   </md-content>
                 </md-tab>
               </md-tabs>
@@ -76,15 +148,27 @@
               <b>Latest activity</b>
             </div>
             <div class="panel-body">
-              <ul class="list-group">
-                  <span ng-repeat="item in adminUserSearchCtrl.activity">
-                      <li ng-class="{'list-group-item list-group-item-info': item.type == 'info',
-                                     'list-group-item list-group-item-danger': item.type == 'error',
-                                     'list-group-item list-group-item-warning': item.type == 'warning'} ">
-                        <b>{{item.timestamp | date:'short' }}</b> {{item.info}}
-                      </li>
-                  </span>
-              </ul>
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Provider</th>
+                  <th>Data changed</th>
+                  <th>Uploaded by private person</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in adminUserSearchCtrl.latestActivity">
+                  <td>{{item.timestamp | date:'medium' }}</td>
+                  <td>{{item.provider}}</td>
+                  <td><span ng-repeat="data in item.infoids" class="label label-info" style="margin: 2px;">{{data}}</span></td>
+                  <td>
+                    <span class="label label-success" ng-if="item.selfupload">Yes <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></span>
+                    <span class="label label-danger" ng-if="!item.selfupload">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -97,5 +181,4 @@
   </div>
   <!--end main content-->
 
- <footer-admin-interface></footer-admin-interface>
  </div>
