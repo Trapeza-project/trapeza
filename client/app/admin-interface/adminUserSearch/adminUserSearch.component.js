@@ -1,6 +1,6 @@
 'use strict';
 const angular = require('angular');
-
+const $ = require('jquery');
 const uiRouter = require('angular-ui-router');
 
 import routes from './adminUserSearch.routes';
@@ -8,8 +8,11 @@ import routes from './adminUserSearch.routes';
 export class AdminUserSearchComponent {
   searchText = "";
   showResult = false;
-  overviewInfo = {};
-  activity = {};
+  basicInfo = {};
+  educationalInfo = {};
+  financialInfo = {};
+  latestActivity = [];
+  checkupHistory = [];
   noResult = false;
   /*@ngInject*/
   constructor($http, $scope, socket) {
@@ -38,21 +41,51 @@ export class AdminUserSearchComponent {
       this.showResult = false;
       return;
     }
-    this.$http.get('/api/persons/' + this.searchText)
+    //Get basic data
+    this.$http.get('/api/datas/data/' + this.searchText)
       .then(response => {
-        console.log(response.data);
-        this.noResult = false;
-        this.overviewInfo = {
-          'Name': response.data.name,
-          'Security number': response.data.securityNumber,
-          'Address': response.data.address,
-          'Age': response.data.age
-        };
-        this.activity = JSON.parse(response.data.activity);
-        console.log(this.activity);
-        this.showResult = true;
+        console.log('basic data', response.data);
+        if($.isEmptyObject(response.data.basic)) {
+          this.noResult = true;
+          this.showResult = false;
+          return;
+        }
+        else {
+          this.basicInfo = response.data.basic;
+          this.educationalInfo = response.data.educational;
+          this.financialInfo = response.data.financial;
+          this.showResult = true;
+          this.noResult = false;
+        }
+
       }, error => {
         console.log('error lookup person', error);
+        this.noResult = true;
+      });
+    //Get latest activity
+    this.$http.get('/api/datas/user/' + this.searchText)
+      .then(response => {
+        this.latestActivity = response.data;
+        for(var i = 0; i < this.latestActivity.length; i++) {
+          this.latestActivity[i].infoids = JSON.parse(this.latestActivity[i].infoids);
+        }
+        console.log('latest activity', this.latestActivity);
+        this.showResult = true;
+        this.noResult = false;
+      }, error => {
+        console.log('error getting latest activity', error);
+        this.noResult = true;
+      });
+
+    //Get checkup histoty
+    this.$http.get('/api/requests/person/' + this.searchText)
+      .then(response => {
+        console.log('check up history', response.data);
+        this.checkupHistory = response.data;
+        this.showResult = true;
+        this.noResult = false;
+      }, error => {
+        console.log('error getting check up history', error);
         this.noResult = true;
       });
   }
