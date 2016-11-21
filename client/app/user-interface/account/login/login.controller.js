@@ -28,7 +28,7 @@ export default class UserLoginController {
       })
         .then(() => {
           // Logged in, redirect to home
-          this.$state.go('userStartPage');
+          this.$state.go('userLoginStart');
         })
         .catch(err => {
           this.errors.login = err.message;

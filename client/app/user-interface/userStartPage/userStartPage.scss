@@ -218,38 +218,3 @@ fieldset[disabled] .btn-primary.active {
   background-color: #ec971f;
   border-color: #ec971f;
 }
-.btn-primary .badge {
-  color: #ec971f;
-  background-color: white;
-}
-.btn {
-  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-  border: none;
-  border-radius: 300px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-.btn-xl {
-  padding: 15px 30px;
-}
-::-moz-selection {
-  color: white;
-  text-shadow: none;
-  background: #222222;
-}
-::selection {
-  color: white;
-  text-shadow: none;
-  background: #222222;
-}
-img::selection {
-  color: white;
-  background: transparent;
-}
-img::-moz-selection {
-  color: white;
-  background: transparent;
-}
-body {
-  webkit-tap-highlight-color: #222222;
-}
