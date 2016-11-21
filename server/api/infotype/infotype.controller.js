@@ -64,29 +64,8 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Infotypes
-export function index(req, res) {
-	/*var datatypes = [];
-	var allCat = {name:"<strong>All Information</strong>", msGroup:true};
-	var financialCat = {name:"<strong>Financial</strong>", msGroup:true};
-	var income = {name:"Income", id:1, price:5, ticked:false};
-	var endFinancialCat = {msGroup:false};
-	var educationalCat = {name:"<strong>Educational</strong>", msGroup:true};
-	var degree = {name:"Degrees", id:4, price:10, ticked:false};
-	var endEducationalCat = {msGroup:false};
-	var endAllCat = {msGroup:false};
-	datatypes.push(allCat);
-	datatypes.push(financialCat);
-	datatypes.push(income);
-	datatypes.push(endFinancialCat);
-	datatypes.push(educationalCat);
-	datatypes.push(degree);
-	datatypes.push(endEducationalCat);
-	datatypes.push(endAllCat);
-	var data ={};
-	data.datatypes = datatypes;
-	res.json(data);*/
-	
+// Gets a list of Infotypes, used in customer
+export function customerindex(req, res) {
 	var datatypes = [];
 	var allCat = {name:"<strong>All Information</strong>", msGroup:true};
 	datatypes.push(allCat);
@@ -119,6 +98,45 @@ export function index(req, res) {
 	})
     .then(function () {
 		datatypes.push({msGroup:false});
+		var data = {};
+		data.datatypes = datatypes;
+		res.json(data);
+    })
+}
+
+
+// Gets a list of Infotypes, used in user
+export function userindex(req, res) {
+	var datatypes = [];
+	Infotype.aggregate('infotype', 'DISTINCT', { plain: false })
+    .mapSeries(function (row) { 
+		var category = row.DISTINCT;
+		var data = {};
+		data.category = category;
+		var promises = [];
+		var infolist = [];
+		promises.push(Infotype.findAll({
+				where:{
+					infotype: category
+				}
+			}).then(function(result){
+					for(var i=0; i < result.length;i++){
+						var resData = result[i].dataValues;
+						var info = {};
+						info.name = resData.infoname;
+						info.id = resData.infoid;
+						info.price = resData.price;
+						infolist.push(info);
+					}
+					data.info = infolist;
+					datatypes.push(data);
+				}
+			))
+			return Sequelize.Promise.all(promises).then(function(){
+				promises = [];
+			});
+	})
+    .then(function () {
 		var data = {};
 		data.datatypes = datatypes;
 		res.json(data);

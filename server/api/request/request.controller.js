@@ -76,33 +76,225 @@ export function index(req, res) {
 }
 
 // Gets the pending requests for a person
-export function getpendingrequests(req, res) {
-return 	PendingRequest.findAll({
-    where: {
-      personid: req.params.personid
-    },
-	order: '"timestamp" DESC'
-  })
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+export function getpreviousrequests(req, res) {
+	var history = [];
+	return RequestLog.findAll({
+		where: {
+			personid: req.params.id,
+			pending: false
+		},
+		order: '"timestamp" DESC'
+	}).mapSeries(function(request){
+			var dataValues = request.dataValues;
+			var data = dataValues;
+			var date = new Date(dataValues.timestamp);
+			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate(); 
+			var tempids = [];
+			var promises = [];
+			var infoids = JSON.parse(dataValues.infoids);
+			
+			infoids.forEach(function(id){
+				promises.push(Infotype.find({
+					where: {
+						infoid : id
+					}
+				}).then(function(info){
+					if(info == null){
+						return;
+					}
+					var infoValues = info.dataValues;
+					tempids.push(infoValues.infoname);
+				}))
+			})
+			promises.push(Actor.find({
+					where:{
+						id:dataValues.accessid
+					}
+				}).then(function(actor){
+					var tempActor = {};
+					tempActor.id=actor.dataValues.id;
+					tempActor.name=actor.dataValues.name;
+					data.actor = tempActor;
+				}));
+				
+			promises.push(PreviousRequest.find({
+					where:{
+						requestid:dataValues.requestid
+					}
+				}).then(function(prevReq){
+					data.data = prevReq.data;
+				}));
+		
+			return Sequelize.Promise.all(promises).then(function(){
+					data.info = tempids;
+					history.push(data);
+			}) 
+	}).then(function(){
+			var data = {};
+			data.history = history;
+			res.json(data);
+	})
 
+}
+
+// Gets the pending requests for a person
+export function getpendingrequests(req, res) {
+	var history = [];
+	return PendingRequest.findAll({
+		   where: {
+			 personid: req.params.id
+			},
+		  order: '"timestamp" DESC'
+		}).mapSeries(function(request){
+			var dataValues = request.dataValues;
+			var data = dataValues;
+			var date = new Date(dataValues.timestamp);
+			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate(); 
+			
+			var tempids = [];
+			var promises = [];
+			var infoids = JSON.parse(dataValues.infoids);
+			
+			infoids.forEach(function(id){
+				promises.push(Infotype.find({
+					where: {
+						infoid : id
+					}
+				}).then(function(info){
+					if(info == null){
+						return;
+					}
+					var infoValues = info.dataValues;
+					tempids.push(infoValues.infoname);
+				}))
+			})
+			promises.push(Actor.find({
+					where:{
+						id:dataValues.accessid
+					}
+				}).then(function(actor){
+					var tempActor = {};
+					tempActor.id=actor.dataValues.id;
+					tempActor.name=actor.dataValues.name;
+					data.actor = tempActor;
+				}));
+		
+			return Sequelize.Promise.all(promises).then(function(){
+					data.info = tempids;
+					history.push(data);
+			}) 
+			
+		}).then(function(){
+			var data = {};
+			data.history = history;
+			res.json(data);
+	})
+
+}
+
+// Gets all the requests 
+export function getallrequests(req, res) {
+	var history = [];
+	return RequestLog.findAll({
+		  order: '"timestamp" DESC'
+		}).mapSeries(function(request){
+			console.log(request);
+			var dataValues = request.dataValues;
+			var data = dataValues;
+			var date = new Date(dataValues.timestamp);
+			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate(); 
+			
+			var tempids = [];
+			var promises = [];
+			var infoids = JSON.parse(dataValues.infoids);
+			
+			infoids.forEach(function(id){
+				promises.push(Infotype.find({
+					where: {
+						infoid : id
+					}
+				}).then(function(info){
+					if(info == null){
+						return;
+					}
+					var infoValues = info.dataValues;
+					tempids.push(infoValues.infoname);
+				}))
+			})
+			promises.push(Actor.find({
+					where:{
+						id:dataValues.accessid
+					}
+				}).then(function(actor){
+					var tempActor = {};
+					tempActor.id=actor.dataValues.id;
+					tempActor.name=actor.dataValues.name;
+					data.actor = tempActor;
+				}));
+		
+			return Sequelize.Promise.all(promises).then(function(){
+					data.info = tempids;
+					history.push(data);
+			}) 
+		}).then(function(){
+			var data = {};
+			data.history = history;
+			res.json(data);
+	})
 }
 
 
 // Gets all the requests for a person
-export function getallrequests(req, res) {
-return 	RequestLog.findAll({
-    where: {
-      personid: req.params.person
-    },
-	order: '"timestamp" DESC'
-  })
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-
-
+export function getallpersonrequests(req, res) {
+	var history = [];
+	return RequestLog.findAll({
+		   where: {
+			 personid: req.params.id
+			},
+		  order: '"timestamp" DESC'
+		}).mapSeries(function(request){
+			var dataValues = request.dataValues;
+			var data = dataValues;
+			var date = new Date(dataValues.timestamp);
+			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate(); 
+			
+			var tempids = [];
+			var promises = [];
+			var infoids = JSON.parse(dataValues.infoids);
+			
+			infoids.forEach(function(id){
+				promises.push(Infotype.find({
+					where: {
+						infoid : id
+					}
+				}).then(function(info){
+					if(info == null){
+						return;
+					}
+					var infoValues = info.dataValues;
+					tempids.push(infoValues.infoname);
+				}))
+			})
+			promises.push(Actor.find({
+					where:{
+						id:dataValues.accessid
+					}
+				}).then(function(actor){
+					var tempActor = {};
+					tempActor.id=actor.dataValues.id;
+					tempActor.name=actor.dataValues.name;
+					data.actor = tempActor;
+				}));
+		
+			return Sequelize.Promise.all(promises).then(function(){
+					data.info = tempids;
+					history.push(data);
+			}) 
+		}).then(function(){
+			var data = {};
+			data.history = history;
+			res.json(data);
+	})
 }
 
 // Gets all the requests made by the customer
@@ -346,7 +538,13 @@ export function answeruserrequest(req, res) {
 			}
 		}).then(function (request) {
 			// Check if record exists in db, and update
+			var infoids = "";
+			var companyapprove = false;
+			var companypending = false;
 			if (request) {
+				infoids = request.dataValues.infoids;
+				companyapprove = request.dataValues.companyallow;
+				companypending = request.dataValues.companypending;
 				request.updateAttributes({
 					pending: false,
 					allow: approve
@@ -357,16 +555,16 @@ export function answeruserrequest(req, res) {
 						where:{
 							requestid: id
 						}
-					}).then(function(request){
+					}).then(function(){
 							// Add to previousrequest
 							var prevRequest = PreviousRequest.build();
 							prevRequest.setDataValue('requestid', id);
-							prevRequest.setDataValue('infoids', request.infoids);
+							prevRequest.setDataValue('infoids', infoids);
 							prevRequest.setDataValue('timetolive', 10);
 							prevRequest.setDataValue('allow', approve);
-							prevRequest.setDataValue('companyapprove', false);
-							prevRequest.setDataValue('companypending', false);
-							prevRequest.setDataValue('data', "<div></div>");
+							prevRequest.setDataValue('companyapprove', companyapprove);
+							prevRequest.setDataValue('companypending', companypending);
+							prevRequest.setDataValue('data', "<div class='weak-border-bottom'><h4 class='textborderbottom'>Personal</h4><p class='fontbold'>Address</p><p>Sveavägen 12</p><p class='fontbold inlineblock'>Latest change: </p><p class='inlineblock'>1/1/2015</p><h4 class='textborderbottom'>Economical</h4><p class='fontbold'>Income</p><p>50 000 SEK/month</p><p class='fontbold inlineblock'>Latest change: </p><p class='inlineblock'>1/1/2015</p></div>");
 							return prevRequest.save()
 							.then(function(prev){
 							res.json({ requestid:prev.requestid });
@@ -376,8 +574,6 @@ export function answeruserrequest(req, res) {
 			}
 		})
 }
-
-
 
 // Upserts the given Request in the DB at the specified ID
 export function upsert(req, res) {

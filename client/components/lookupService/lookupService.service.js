@@ -18,11 +18,22 @@ export function lookupService($http, Auth) {
     method: "GET"
   }).then(response => {
     if(response.status==200){
-      console.log(response);
       vm.modules = response.data;
       vm.notifyObservers();
     }
   });
+  
+ /* TESTCODE FOR API
+ var dat ={requestid:3, answer:true};
+ this.$http({
+    url: '/api/requests/useranswer',
+    method: "POST",
+	data : dat
+  }).then(response => {
+    if(response.status==200){
+      console.log(response);
+    }
+  });*/
 
   var observerCallbacks = [];
 

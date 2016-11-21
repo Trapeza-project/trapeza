@@ -219,7 +219,7 @@ export function createdata(req, res) {
 
 export function getdata(req, res) {
   var id = req.params.requestid;
-  
+  //<div class='weak-border-bottom'><h4 class='textborderbottom'>Personal</h4><p class='fontbold'>Address</p><p>Sveavägen 12</p><p class='fontbold inlineblock'>Latest change: </p><p class='inlineblock'>1/1/2015</p><h4 class='textborderbottom'>Economical</h4><p class='fontbold'>Income</p><p>50 000 SEK/month</p><p class='fontbold inlineblock'>Latest change: </p><p class='inlineblock'>1/1/2015</p></div>
   PreviousRequest.find({
 	  where:{
 		  requestid:id
