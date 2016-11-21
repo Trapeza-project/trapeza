@@ -5,8 +5,14 @@ import angular from 'angular';
 
 export class NavbarComponent {
   menu = [{
-    title: 'Start',
-    state: 'userStartPage'
+    title: 'Pending Requests',
+    state: 'userPendingRequests'
+  }, {
+    title: 'Permission Settings',
+    state: 'userPermissionSettings'
+  },{
+    title: 'History',
+    state: 'userHistory'
   }];
 
   isCollapsed = true;

@@ -30,7 +30,6 @@ import footerUserInterface from '../components/footerUserInferface/footerUserInt
 import userInterfaceAdmin from './user-interface/admin';
 import userInterfaceStart from './user-interface/userStartPage/userStartPage.component';
 import userInterfaceAccount from './user-interface/account';
-import userInterfaceLoginStart from './user-interface/userLoginStart/userLoginStart.component';
 
 // Admin interface
 import adminInterfaceDashboard from './admin-interface/adminDashboard/adminDashboard.component';
@@ -63,7 +62,6 @@ angular.module('trapezaApp', [ngCookies, ngResource, ngSanitize, ngMaterial, 'bt
   userInterfaceAccount,
   userInterfaceAdmin,
   userInterfaceStart,
-  userInterfaceLoginStart,
   adminInterfaceDashboard,
   adminInterfaceUserSearch,
   adminInterfaceAdmin,

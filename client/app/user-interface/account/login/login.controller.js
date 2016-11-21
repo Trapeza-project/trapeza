@@ -28,7 +28,7 @@ export default class UserLoginController {
       })
         .then(() => {
           // Logged in, redirect to home
-          this.$state.go('userLoginStart');
+          this.$state.go('userPendingRequests');
         })
         .catch(err => {
           this.errors.login = err.message;

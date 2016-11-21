@@ -33,5 +33,26 @@ export default function routes($stateProvider) {
       controller: 'UserSettingsController',
       controllerAs: 'vm',
       authenticate: true
+    })
+    .state('userPendingRequests', {
+      url: '/user/pendingRequests',
+      template: require('./pendingRequests/pendingRequests.html'),
+      controller: 'UserPendingRequestsController',
+      controllerAs: 'vm',
+      authenticate: true
+    })
+    .state('userPermissionSettings', {
+      url: '/user/permissionSettings',
+      template: require('./permissionSettings/permissionSettings.html'),
+      controller: 'UserPermissionSettingsController',
+      controllerAs: 'vm',
+      authenticate: true
+    })
+    .state('userHistory', {
+      url: '/user/history',
+      template: require('./history/history.html'),
+      controller: 'UserHistoryController',
+      controllerAs: 'vm',
+      authenticate: true
     });
 }
