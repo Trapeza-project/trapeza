@@ -6,8 +6,10 @@ var controller = require('./request.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
-router.get('/personpending/:personid', controller.getpendingrequests);
-router.get('/person/:person', controller.getallrequests);
+router.get('/personprevious/:id', controller.getpreviousrequests);
+router.get('/personpending/:id', controller.getpendingrequests);
+router.get('/person/:id', controller.getallpersonrequests);
+router.get('/all/', controller.getallrequests);
 router.get('/accessor/:accessor', controller.getcustomerrequests);
 router.get('/:requestid', controller.show);
 router.get('/:id/:amount', controller.latestuserrequest);
