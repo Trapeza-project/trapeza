@@ -68,7 +68,27 @@
                 </md-tab>
                 <md-tab label="Activity">
                   <md-content class="md-padding">
-                    <p>This is the activity</p>
+                    <table class="table table-striped">
+                      <thead>
+                      <tr>
+                        <th>Time</th>
+                        <th>Provider</th>
+                        <th>Data changed</th>
+                        <th>Uploaded by private person</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="item in adminUserSearchCtrl.latestActivity">
+                        <td>{{item.timestamp | date:'medium' }}</td>
+                        <td>{{item.provider}}</td>
+                        <td><span ng-repeat="data in item.infoids" class="label label-info" style="margin: 2px;">{{data}}</span></td>
+                        <td>
+                          <span class="label label-success" ng-if="item.selfupload">Yes <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></span>
+                          <span class="label label-danger" ng-if="!item.selfupload">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
                   </md-content>
                 </md-tab>
                 <md-tab label="Check up history">
@@ -87,15 +107,15 @@
                       <tr ng-repeat="item in adminUserSearchCtrl.checkupHistory">
                         <td>{{item.timestamp | date:'medium' }}</td>
                         <td>
-                          <span class="label label-success" ng-if="item.userallow">Yes <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></span>
+                          <span class="label label-success" ng-if="item.userallow">Yes <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
                           <span class="label label-danger" ng-if="!item.userallow">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
                         </td>
                         <td>
-                          <span class="label label-success" ng-if="item.companyallow">Yes <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></span>
+                          <span class="label label-success" ng-if="item.companyallow">Yes <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
                           <span class="label label-danger" ng-if="!item.companyallow">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
                         </td>
                         <td>
-                          <span class="label label-success" ng-if="item.companypending">Yes <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></span>
+                          <span class="label label-success" ng-if="item.companypending">Yes <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
                           <span class="label label-danger" ng-if="!item.companypending">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
                         </td>
                         <td>{{item.purpose}} </td>
