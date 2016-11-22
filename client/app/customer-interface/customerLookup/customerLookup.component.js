@@ -22,11 +22,8 @@ export class CustomerLookupComponent {
 
   /*@ngInject*/
   constructor($http, $scope, $location, lookupService, Auth) {
-    function temp(){
-      return true;
-    }
     this.lookupService = lookupService;
-    this.isAdmin = temp;
+    this.isAdmin = Auth.isAdminSync();
     //this.isAdmin = Auth.isAdminSync;
     this.$http = $http;
     this.$location = $location;
@@ -107,7 +104,7 @@ export class CustomerLookupComponent {
   }
 
   showMore(){
-    if(this.isAdmin() && !this.advancedOption){
+    if(this.isAdmin && !this.advancedOption){
       return true;
     }else{
       return false;
@@ -115,7 +112,7 @@ export class CustomerLookupComponent {
   }
 
   showLess(){
-    if(this.isAdmin() && this.advancedOption){
+    if(this.isAdmin && this.advancedOption){
       return true;
     }else{
       return false;
