@@ -27,11 +27,7 @@
         </div>
         <label class="requestlabel">Personal identity number</label>
         <div class="form-group" id="personnumberinput">
-          <input type="username" name="personnumber" class="form-control" placeholder='{{lookupCtrl.personnumber}}' ng-disabled="(!customerLookupCtrl.isModuleActive())&&customerLookupCtrl.chosenInfo.length==0" ng-model="id" ng-change="customerLookupCtrl.updateID(id)" maxlength="12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
-        </div>
-        <div ng-if="!lookupCtrl.UCHandling"class="form-group">
-          <label class="requestlabel">Purpose</label>
-
+          <input type="username" name="personnumber" class="form-control" placeholder='{{customerLookupCtrl.personnumber}}' ng-disabled="(!customerLookupCtrl.isModuleActive())&&customerLookupCtrl.chosenInfo.length==0" ng-model="id" ng-change="customerLookupCtrl.updateID(id)" maxlength="12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
         </div>
         <div ng-if="!customerLookupCtrl.UCHandling"class="form-group">
           <label class="requestlabel">Purpose</label>
