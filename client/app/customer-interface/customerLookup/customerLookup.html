@@ -27,33 +27,31 @@
         </div>
         <label class="requestlabel">Personal identity number</label>
         <div class="form-group" id="personnumberinput">
-          <input type="username" name="personnumber" class="form-control" placeholder='{{lookupCtrl.personnumber}}' ng-disabled="(!customerLookupCtrl.isModuleActive())&&customerLookupCtrl.chosenInfo.length==0" ng-model="id" ng-change="customerLookupCtrl.updateID(id)" maxlength="12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
-        </div>
-        <div ng-if="!lookupCtrl.UCHandling"class="form-group">
-          <label class="requestlabel">Purpose</label>
-
+          <input type="username" name="personnumber" class="form-control" placeholder='{{customerLookupCtrl.personnumber}}' ng-disabled="(!customerLookupCtrl.isModuleActive())&&customerLookupCtrl.chosenInfo.length==0" ng-model="id" ng-change="customerLookupCtrl.updateID(id)" maxlength="12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
         </div>
         <div ng-if="!customerLookupCtrl.UCHandling"class="form-group">
           <label class="requestlabel">Purpose</label>
           <input type="text" name="purpose" class="form-control" placeholder='{{customerLookupCtrl.purposestring}}' ng-model="purpose" ng-change="customerLookupCtrl.updatePurpose(purpose)" required>
         </div>
-        <a class="pointercursor" ng-if="customerLookupCtrl.showMore()" ng-click="customerLookupCtrl.setAdvancedOption(true)">More</a>
-        <a class="pointercursor" ng-if="customerLookupCtrl.showLess()" ng-click="customerLookupCtrl.setAdvancedOption(false)">Less</a>
-        <div ng-if="customerLookupCtrl.advancedOption" class="form-group lookupselect">
-          <label class="requestlabel">Data to request</label>
-          <div class="dataselect">
-            <isteven-multi-select
-              input-model="customerLookupCtrl.datatypes"
-              output-model="customerLookupCtrl.chosenInfo"
-              button-label="name"
-              item-label="name"
-              tick-property="ticked"
-              group-property="msGroup">
-            </isteven-multi-select>
-            <!--<select chosen multiple class='form-control' data-placeholder-text-multiple="'Choose required data'" ng-model="chosenData" ng-options="data.name for data in customerLookupCtrl.datatypes" ng-change="customerLookupCtrl.updateData(chosenData)" >
-                        </select>-->
+        <div ng-if="customerLookupCtrl.isAdmin">
+          <a class="pointercursor" ng-if="customerLookupCtrl.showMore()" ng-click="customerLookupCtrl.setAdvancedOption(true)">More</a>
+          <a class="pointercursor" ng-if="customerLookupCtrl.showLess()" ng-click="customerLookupCtrl.setAdvancedOption(false)">Less</a>
+          <div ng-if="customerLookupCtrl.advancedOption" class="form-group lookupselect">
+            <label class="requestlabel">Data to request</label>
+            <div class="dataselect">
+              <isteven-multi-select
+                input-model="customerLookupCtrl.datatypes"
+                output-model="customerLookupCtrl.chosenInfo"
+                button-label="name"
+                item-label="name"
+                tick-property="ticked"
+                group-property="msGroup">
+              </isteven-multi-select>
+              <!--<select chosen multiple class='form-control' data-placeholder-text-multiple="'Choose required data'" ng-model="chosenData" ng-options="data.name for data in customerLookupCtrl.datatypes" ng-change="customerLookupCtrl.updateData(chosenData)" >
+                          </select>-->
+            </div>
+            <div class="pricediv">{{customerLookupCtrl.getPrice(customerLookupCtrl.chosenInfo)}} SEK</div>
           </div>
-          <div class="pricediv">{{customerLookupCtrl.getPrice(customerLookupCtrl.chosenInfo)}} SEK</div>
         </div>
         <div class="paddedmodule">
           <div class="form-group has-error">
