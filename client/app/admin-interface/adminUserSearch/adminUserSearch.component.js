@@ -81,7 +81,7 @@ export class AdminUserSearchComponent {
     this.$http.get('/api/requests/person/' + this.searchText)
       .then(response => {
         console.log('check up history', response.data);
-        this.checkupHistory = response.data;
+        this.checkupHistory = response.data.history;
         this.showResult = true;
         this.noResult = false;
       }, error => {

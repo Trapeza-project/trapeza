@@ -97,6 +97,7 @@
                       <thead>
                       <tr>
                         <th>Time</th>
+                        <th>Company name</th>
                         <th>User allow</th>
                         <th>Company allows</th>
                         <th>Company pending</th>
@@ -106,6 +107,7 @@
                       <tbody>
                       <tr ng-repeat="item in adminUserSearchCtrl.checkupHistory">
                         <td>{{item.timestamp | date:'medium' }}</td>
+                        <td>{{item.actor.name}}</td>
                         <td>
                           <span class="label label-success" ng-if="item.userallow">Yes <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
                           <span class="label label-danger" ng-if="!item.userallow">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
