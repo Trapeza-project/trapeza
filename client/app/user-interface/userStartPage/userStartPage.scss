@@ -135,58 +135,46 @@ header .header-content .header-content-inner p {
   CUSTON BTN VALUES
 ************************/
 
-.btn {
+.startpagebutton {
     padding: 14px 24px;
     border: 1px solid transparent;
     border-radius: 4px !important;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
 }
 
-.btn:focus, .btn:active:focus, .btn.active:focus {
+.startpagebutton:focus, .startpagebutton:active:focus {
     outline: 0 none;
 }
 
-.btn-lg {
-  font-size: 18px;
-  line-height: 1.33;
-  border-radius: 6px;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #428bca;
-  border-color: #357ebd;
-}
-
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.open .dropdown-toggle.btn-primary {
+.startpagebutton:hover,
+.startpagebutton:focus,
+.startpagebutton:active,
+.startpagebutton.active {
   color: #fff;
   background-color: #3276b1;
   border-color: #285e8e;
 }
 
-/***********************
-  OUTLINE BUTTONS
-************************/
-
-.btn.outline {
+.startpagebutton.outline {
     background: none;
     padding: 12px 22px;
-}
-.btn-primary.outline {
     border: 2px solid #ec971f;
     color: #ec971f;
 }
-.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
+
+.startpagebutton.outline:hover, .startpagebutton.outline:focus, .startpagebutton.outline:active, .startpagebutton.outline.active {
     color: #33a6cc;
     border-color: #33a6cc;
 }
-.btn-primary.outline:active, .btn-primary.outline.active {
+.startpagebutton.outline:active, .startpagebutton.outline.active {
     border-color: #007299;
     color: #007299;
     box-shadow: none;

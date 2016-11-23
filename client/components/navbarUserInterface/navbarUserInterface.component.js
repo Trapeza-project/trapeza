@@ -5,11 +5,11 @@ import angular from 'angular';
 
 export class NavbarComponent {
   menu = [{
-    title: 'Pending Requests',
-    state: 'userPendingRequests'
-  }, {
     title: 'Permission Settings',
     state: 'userPermissionSettings'
+  }, {
+    title: 'Pending Requests',
+    state: 'userPendingRequests'
   },{
     title: 'History',
     state: 'userHistory'
