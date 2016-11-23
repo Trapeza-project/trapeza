@@ -8,28 +8,38 @@ import routes from './adminDashboard.routes';
 export class AdminDashboardComponent {
 
 
-      /*@ngInject*/
-    constructor($http) {
-        this.message = 'Hello';
-        this.$http = $http;
-        this.$http.get('/api/datas/')
-            .then(response => {
-            console.log(response.data);
-        this.datas = response.data;
-        })
+    numberOfRequest = 5;
+    //numberOfCheckups = 10;
 
-        this.checkdatas = [{
-            personid: '123123123',
-            requester: 'abc',
-            timestamp: '123',
-            allowed: 'yes',
-            data: 'data'
-        }]
+    latestCheckups = null;
+    latestUpdates = null;
+
+    /*@ngInject*/
+    constructor($http) {
+        this.$http = $http;
+
+        this.getLatestCheckups();
+        this.getLatestUpdates();
     }
 
 
     $onInit(){}
 
+    getLatestCheckups() {
+      this.$http.get('/api/requests/all')
+        .then(response => {
+          console.log(response.data.history);
+          this.latestCheckups = response.data.history;
+        });
+    }
+
+    getLatestUpdates() {
+      this.$http.get('/api/datas/all/' + this.numberOfRequest)
+        .then(response => {
+          console.log(response.data);
+          this.latestUpdates = response.data;
+        });
+    }
 
 }
 

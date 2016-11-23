@@ -24,16 +24,83 @@
             <div class="page">
                 <div class="row">
                     <div class="col-md-12">
-
-                        <div class="alert alert-danger">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
                             <strong>Important!</strong> Log out before you leave your seat.
                         </div>
-
                     </div>
                 </div>
+
+              <div class="row">
+                <div class="col-lg-4 col-md-6">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <div class="row">
+                        <div class="col-xs-3">
+                          <i class="fa fa-tachometer fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                          <div class="huge">{{adminDashboardCtrl.latestCheckups.length}}</div>
+                          <div>Total number of checkups</div>
+                        </div>
+                      </div>
+                    </div>
+                    <a href="#">
+                      <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <div class="panel panel-success">
+                    <div class="panel-heading">
+                      <div class="row">
+                        <div class="col-xs-3">
+                          <i class="fa fa-tasks fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                          <div class="huge">{{adminDashboardCtrl.latestUpdates.length}}</div>
+                          <div>Total number of updates</div>
+                        </div>
+                      </div>
+                    </div>
+                    <a href="#">
+                      <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <div class="panel panel-danger">
+                    <div class="panel-heading">
+                      <div class="row">
+                        <div class="col-xs-3">
+                          <i class="fa fa-exclamation-circle fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                          <div class="huge">5</div>
+                          <div>Number of errors</div>
+                        </div>
+                      </div>
+                    </div>
+                    <a href="#">
+                      <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
                 <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <i class="fa fa-tasks"></i> Latest Updates
@@ -44,21 +111,17 @@
                                 <tr>
                                     <th>Personal Number <div class="table-group-btn-wrap"><a class="glyphicon glyphicon-triangle-top table-group-btn"></a><a class="glyphicon glyphicon-triangle-bottom table-group-btn"></a></div></th>
                                     <th>Provider <div class="table-group-btn-wrap"><a class="glyphicon glyphicon-triangle-top table-group-btn"></a><a class="glyphicon glyphicon-triangle-bottom table-group-btn"></a></div></th>
-                                    <th>Time <div class="table-group-btn-wrap"><a class="glyphicon glyphicon-triangle-top table-group-btn"></a><a class="glyphicon glyphicon-triangle-bottom table-group-btn"></a></div></th>
-                                    <th>Validation <div class="table-group-btn-wrap"><a class="glyphicon glyphicon-triangle-top table-group-btn"></a><a class="glyphicon glyphicon-triangle-bottom table-group-btn"></a></div></th>
+                                    <th>Date <div class="table-group-btn-wrap"><a class="glyphicon glyphicon-triangle-top table-group-btn"></a><a class="glyphicon glyphicon-triangle-bottom table-group-btn"></a></div></th>
                                     <th>Self upload <div class="table-group-btn-wrap"><a class="glyphicon glyphicon-triangle-top table-group-btn"></a><a class="glyphicon glyphicon-triangle-bottom table-group-btn"></a></div></th>
-                                    <th>Status <div class="table-group-btn-wrap"><a class="glyphicon glyphicon-triangle-top table-group-btn"></a><a class="glyphicon glyphicon-triangle-bottom table-group-btn"></a></div></th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                <tr ng-repeat="data in adminDashboardCtrl.datas" >
+                                <tr ng-repeat="data in adminDashboardCtrl.latestUpdates" >
                                     <td>{{data.personid}}</td>
-                                    <td>{{data.provider}}</td>
-                                    <td>{{data.timestamp}}</td>
-                                    <td>{{data.validation}}</td>
+                                    <td><a ng-href="{{data.validation}}">{{data.provider}}</a></td>
+                                    <td>{{data.timestamp | date:'dd/mm/yyyy'}}</td>
                                     <td>{{data.selfupload}}</td>
-                                    <td><span class="text-success"><i class="fa fa-check"></i></span></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -79,7 +142,7 @@
                             <!--end of numerical page-->
                         </div>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-6 col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <i class="fa fa-tasks"></i> Latest Checkups
@@ -91,15 +154,23 @@
                                     <td>Personal Number</td>
                                     <td>Requester</td>
                                     <td>Time</td>
-                                    <td>Allowed</td>
+                                    <td>Allowed by User</td>
+                                    <td>Allowed by CO</td>
                                     <td>Data</td>
                                 </tr>
-                                <tr ng-repeat="data in adminDashboardCtrl.checkdatas" >
+                                <tr ng-repeat="data in adminDashboardCtrl.latestCheckups" >
                                     <td>{{data.personid}}</td>
-                                    <td>{{data.requester}}</td>
+                                    <td>{{data.actor.name}}</td>
                                     <td>{{data.timestamp}}</td>
-                                    <td>{{data.allowed}}</td>
-                                    <td><a href="#>">{{data.data}}</a></td>
+                                    <td>
+                                      <span class="label label-success" ng-if="item.allow">Yes <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
+                                      <span class="label label-danger" ng-if="!item.allow">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
+                                    </td>
+                                    <td>
+                                      <span class="label label-success" ng-if="item.companyallow">Yes <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
+                                      <span class="label label-danger" ng-if="!item.companyallow">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
+                                    </td>
+                                    <td><span ng-repeat="info in data.info" class="label label-info" style="margin: 2px;">{{info}}</span></td>
                                 </tr>
                                 </tbody>
                             </table>

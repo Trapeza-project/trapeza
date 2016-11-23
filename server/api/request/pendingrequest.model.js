@@ -10,6 +10,6 @@ export default function(sequelize, DataTypes) {
 	accessid: DataTypes.INTEGER,
 	personid: DataTypes.INTEGER,
 	infoids: DataTypes.STRING,
-	timestamp: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+	timestamp: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
   });
 }
