@@ -144,6 +144,12 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   padding:15px;
 }
 
+.checkBoxContainer{
+	max-height: 300px; 
+	overflow-y: scroll !important;
+	overflow-x: hidden !important;
+}
+
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'admin-interface/admin/admin';
