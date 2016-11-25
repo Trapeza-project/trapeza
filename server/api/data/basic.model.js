@@ -5,6 +5,7 @@ export default function(sequelize, DataTypes) {
 	personid: DataTypes.INTEGER,
 	firstname: DataTypes.STRING,
 	lastname: DataTypes.STRING,
-	address: DataTypes.STRING
+	address: DataTypes.STRING,
+	birthdate: DataTypes.STRING
   });
 };

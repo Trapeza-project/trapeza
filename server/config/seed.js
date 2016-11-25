@@ -78,22 +78,67 @@ Infotype.sync()
       infoid: 1,
       infoname: 'Income',
       infotype: 'Economic',
-      price: 5
+      price: 10
     }, {
       infoid: 2,
       infoname: 'Address',
       infotype: 'Basic',
-      price: 10
+      price: 2
     },{
       infoid: 3,
       infoname: 'Degree',
       infotype: 'Educational',
-      price: 10
+      price: 5
     },{
       infoid: 4,
       infoname: 'Name',
       infotype: 'Basic',
-      price: 20
+      price: 0
+    },{
+      infoid: 5,
+      infoname: 'Birthdate',
+      infotype: 'Basic',
+      price: 1
+    },{
+      infoid: 6,
+      infoname: 'Allowance',
+      infotype: 'Financial',
+      price: 5
+    },{
+      infoid: 7,
+      infoname: 'Taxable Income',
+      infotype: 'Financial',
+      price: 5
+    },{
+      infoid: 8,
+      infoname: 'Interest Income',
+      infotype: 'Financial',
+      price: 5
+    },{
+      infoid: 9,
+      infoname: 'Pension Contribution',
+      infotype: 'Financial',
+      price: 5
+    },{
+      infoid: 10,
+      infoname: 'Benefits',
+      infotype: 'Financial',
+      price: 5
+    },{
+      infoid: 11,
+      infoname: 'Occupational',
+      infotype: 'Financial',
+      price: 5
+    },{
+      infoid: 12,
+      infoname: 'Business',
+      infotype: 'Financial',
+      price: 5
+    },{
+      infoid: 13,
+      infoname: 'Property Tax',
+      infotype: 'Financial',
+      price: 5
     }])
     .then(() => {
       console.log('finished populating infotypes');
@@ -107,17 +152,20 @@ BasicData.sync()
       personid: 197001011234,
       firstname: "Kalle",
       lastname: "Svensson",
-      address: "Sveavägen 14"
+      address: "Sveavägen 14",
+	  birthdate:"1970-01-01"
     }, {
       personid: 222222222222,
       firstname: "Anna",
       lastname: "Karlsson",
-      address: "Sveavägen 17"
+      address: "Sveavägen 17",
+	  birthdate:"1979-01-01"
     }, {
       personid: 333333333333,
       firstname: "Lisa",
       lastname: "Andersson",
-      address: "Sveavägen 20"
+      address: "Sveavägen 20",
+	  birthdate:"1982-01-01"
     }])
     .then(() => {
       console.log('finished populating basic data');
@@ -129,13 +177,37 @@ FinancialData.sync()
   .then(() => {
     FinancialData.bulkCreate([{
       personid: 197001011234,
-	    income: 30000
+	    income: 30000,
+		allowance: 10000,
+		taxableIncome: 10000,
+		interestIncome: 5000,
+		pensionContribution: 3500,
+		benefits: 2000,
+		occupational: 2000,
+		business: 15000,
+		propertytax: 8000
     }, {
       personid: 222222222222,
-	    income: 20000
+	    income: 20000,
+		allowance: 2000,
+		taxableIncome: 2000,
+		interestIncome: 5500,
+		pensionContribution: 3500,
+		benefits: 2000,
+		occupational: 2000,
+		business: 0,
+		propertytax: 8000
     }, {
       personid: 333333333333,
-	    income: 10000
+	    income: 10000,
+		allowance: 1000,
+		taxableIncome: 3000,
+		interestIncome: 100000,
+		pensionContribution: 2000,
+		benefits: 15000,
+		occupational: 2000,
+		business: 2000,
+		propertytax: 8000
     }])
     .then(() => {
       console.log('finished populating financial data');
@@ -147,13 +219,19 @@ EducationalData.sync()
   .then(() => {
     EducationalData.bulkCreate([{
       personid: 197001011234,
-	    degree: "PhD in Computer Science"
+	    degree: "PhD in Computer Science",
+		school: "KTH",
+		schoolrep: 5
     }, {
       personid: 222222222222,
-	    degree: "PhD in Industrial Economics"
+	    degree: "PhD in Industrial Economics",
+		school: "Chalmers",
+		schoolrep: 3
     }, {
       personid: 333333333333,
-	    degree: "Master in Computer Science"
+	    degree: "Master in Computer Science",
+		school: "Chalmers",
+		schoolrep: 3
     }])
     .then(() => {
       console.log('finished populating educational data');
