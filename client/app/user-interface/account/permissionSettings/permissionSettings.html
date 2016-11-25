@@ -1,55 +1,120 @@
-<div class="container">
+<div class="container-fluid permissionSettingsContainer">
   <div class="row">
-    <div class="col-sm-7">
+
+
+    <div class="col-sm-6 col-sm-offset-1 permissionSettingsCol">
       <h1>Permission settings</h1>
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>Data</th>
-          <th>Allow all
-            <div class="radio">
-              <label><input type="radio" name="selectall"></label>
-            </div>
-          </th>
-          <th>
-            Ask for permission
-            <div class="radio">
-              <label><input type="radio" name="selectall"></label>
-            </div>
-          </th>
-          <th>
-            Trusted only
-            <div class="radio">
-              <label><input type="radio" name="selectall"></label>
-            </div>
-          </th>
-        </tr>
-        </thead>
+      <hr />
+      <label for="dataTable">Name of some data</label>
+      <table name="dataTable" class="table table-striped table-responsive">
+        <thead></thead>
         <tbody>
-        <tr>
-          <td>Dataddoeodk</td>
-          <td>
-            <div class="radio">
-              <label><input type="radio" name="optradio"></label>
+          <tr>
+            <div class="funkyradio">
+            <td>
+              <div class="funkyradio">
+                <div class="funkyradio-success">
+                  <input type="radio" name="radio" id="radio1" />
+                  <label for="radio1">Allow all</label>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="funkyradio">
+                <div class="funkyradio-warning">
+                  <input type="radio" name="radio" id="radio2" />
+                  <label for="radio2">Allow trusted</label>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="funkyradio">
+                <div class="funkyradio-danger">
+                  <input type="radio" name="radio" id="radio3" checked/>
+                  <label for="radio3" checked>Always ask</label>
+                </div>
+              </div>
+            </td>
             </div>
-          </td>
-          <td>
-            <div class="radio">
-              <label><input type="radio" name="optradio"></label>
+          </tr>
+        </tbody>
+      </table>
+      <label for="dataTable2">Name of some other data</label>
+      <table name="dataTable2" class="table table-striped table-responsive">
+        <thead></thead>
+        <tbody>
+          <tr>
+            <div class="funkyradio">
+            <td>
+              <div class="funkyradio">
+                <div class="funkyradio-success">
+                  <input type="radio" name="radio2" id="radio4" />
+                  <label for="radio4">Allow all</label>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="funkyradio">
+                <div class="funkyradio-warning">
+                  <input type="radio" name="radio2" id="radio5" />
+                  <label for="radio5">Allow trusted</label>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="funkyradio">
+                <div class="funkyradio-danger">
+                  <input type="radio" name="radio2" id="radio6" checked/>
+                  <label for="radio6" checked>Always ask</label>
+                </div>
+              </div>
+            </td>
             </div>
-          </td>
-          <td>
-            <div class="radio">
-              <label><input type="radio" name="optradio"></label>
-            </div>
-          </td>
-        </tr>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-primary btn-md pull-right">Save</button>
+        </div>
+      </div>
+  	</div>
+
+
+    <div class="col-sm-2 col-sm-offset-2 table-sm table-bordered permissionSettingsCol">
+      <h2>Trusted</h2>
+      <hr />
+      <div id="trustSearch" class="input-group stylish-input-group">
+        <input type="text" class="form-control"  placeholder="Search" >
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-search"></span>
+        </span>
+      </div>
+      <table class="table table-striped table-responsive ">
+        <tbody>
+          <tr>
+            <td><p class="tableText">Media Markt</p></td>
+            <td>
+                <a class="btn"><i class="fa fa-times"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><p class="tableText">Elgiganten</p></td>
+            <td>
+                <a class="btn"><i class="fa fa-times"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><p class="tableText">CDON</p></td>
+            <td>
+                <a class="btn"><i class="fa fa-times"></i></a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
-    <div class="col-sm-3 col-sm-offset-1">
-      <h2>Trusted</h2>
 
-    </div>
+
+    <div class="col-sm-1"></div>
   </div>
 </div>
