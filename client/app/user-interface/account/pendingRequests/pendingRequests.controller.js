@@ -3,6 +3,8 @@
 export default class UserPendingRequestsController {
 
   personid = '111111111111';
+  pendingRequests = [];
+  singleShowInfo = {};
   toggleCompanyInfo = false;
   /*@ngInject*/
   constructor($http) {
@@ -13,8 +15,18 @@ export default class UserPendingRequestsController {
   getPendingRequests() {
     this.$http.get('/api/requests/personpending/' + this.personid)
       .then(response => {
-        console.log(response.data);
+        console.log(response.data.history);
+        this.pendingRequests = response.data.history;
       });
+  }
+
+  getSingleRequestInfo(index) {
+    console.log(index);
+
+    this.singleShowInfo = this.pendingRequests[index];
+    console.log(this.singleShowInfo);
+    this.toggleInfo();
+
   }
 
   toggleInfo() {

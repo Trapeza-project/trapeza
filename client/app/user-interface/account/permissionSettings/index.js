@@ -1,7 +1,7 @@
 'use strict';
 
 import angular from 'angular';
-import UserPermissionSettingsController from './permissionSettings.controller';
+import UserPermissionSettingsController from './permissonSettings.controller';
 
 export default angular.module('trapezaApp.userPermissionSettings', [])
   .controller('UserPermissionSettingsController', UserPermissionSettingsController)
