@@ -13,35 +13,49 @@
 
 .permissionSettingsContainer {
     text-align: center;
-    background-color: #999999;
     padding-bottom: 5em;
     padding-top: 2em;
 }
 
 .permissionSettingsCol {
-    background-color: #eff0f2;
+    background-color: white;
     padding-bottom: 2em;
     padding-top: 2em;
     border-radius: 10px;
 }
 
-thead {
-    label input[type="radio"] ~ i.fa.fa-circle-o{
-      color: #515151;    display: inline;
-    }
-    label input[type="radio"] ~ i.fa.fa-dot-circle-o{
-      display: none;
-    }
-    label input[type="radio"]:checked ~ i.fa.fa-circle-o{
-      display: none;
-    }
-    label input[type="radio"]:checked ~ i.fa.fa-dot-circle-o{
-      color: #515151;    display: inline;
-    }
+th {
+  padding-top: 15px !important;
+  font-size: 20px;
+  color: #515151;
+}
+
+thead .allow-all {
+  background-color: #7cf983;
+}
+
+thead .allow-trusted {
+  background-color: #fff45b;
+}
+
+thead .always-ask {
+  background-color: #ef6464;
+}
+
+.allow-all {
+  background-color: #dff0d8;
+}
+
+.allow-trusted {
+  background-color: #fcf8e3;
+}
+
+.always-ask {
+  background-color: #f2dede;
 }
 
 label input[type="radio"] ~ i.fa.fa-circle-o{
-  color: #ec971f;    display: inline;
+  color: #7c7c7c;    display: inline;
 }
 label input[type="radio"] ~ i.fa.fa-dot-circle-o{
   display: none;

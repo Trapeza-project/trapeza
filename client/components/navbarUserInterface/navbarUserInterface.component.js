@@ -5,14 +5,14 @@ import angular from 'angular';
 
 export class NavbarComponent {
   menu = [{
-    title: 'Permission Settings',
-    state: 'userPermissionSettings'
-  }, {
     title: 'Pending Requests',
     state: 'userPendingRequests'
-  },{
+  }, {
     title: 'History',
     state: 'userHistory'
+  },{
+    title: 'Permission Settings',
+    state: 'userPermissionSettings'
   }];
 
   isCollapsed = true;
