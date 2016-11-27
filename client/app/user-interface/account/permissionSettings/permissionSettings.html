@@ -5,84 +5,176 @@
     <div class="col-sm-6 col-sm-offset-1 permissionSettingsCol">
       <h1>Permission settings</h1>
       <hr />
-      <label for="dataTable">Name of some data</label>
-      <table name="dataTable" class="table table-striped table-responsive">
-        <thead></thead>
-        <tbody>
-          <tr>
-            <div class="funkyradio">
-            <td>
-              <div class="funkyradio">
-                <div class="funkyradio-success">
-                  <input type="radio" name="radio" id="radio1" />
-                  <label for="radio1">Allow all</label>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="funkyradio">
-                <div class="funkyradio-warning">
-                  <input type="radio" name="radio" id="radio2" />
-                  <label for="radio2">Allow trusted</label>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="funkyradio">
-                <div class="funkyradio-danger">
-                  <input type="radio" name="radio" id="radio3" checked/>
-                  <label for="radio3" checked>Always ask</label>
-                </div>
-              </div>
-            </td>
+      <table class="table table-striped table-responsive">
+        <thead>
+          <th></th>
+          <td>
+            <label>Allow all</label><br />
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn">
+                <input type="radio" name="all_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+              </label>
             </div>
+          </td>
+          <td>
+            <label>Allow trusted</label><br />
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn">
+                <input type="radio" name="all_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+              </label>
+            </div>
+          </td>
+          <td>
+            <label>Always ask</label><br />
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn">
+                <input type="radio" name="all_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+              </label>
+            </div>
+          </td>
+        </thead>
+        <tbody>
+          <!--<tr>
+            <div class="switch-field btn-group btn-group-justified">
+              <div class="switch-title"><h4>Financial data</h4></div>
+              <input type="radio" id="switch_1_left" class="switch_left" name="switch_1" value="yes" checked/>
+              <label class="switch_left_label" for="switch_1_left">Allow all</label>
+              <input type="radio" id="switch_1_center" class="switch_center" name="switch_1" value="maybe" />
+              <label class="switch_center_label" for="switch_1_center">Allow trusted</label>
+              <input type="radio" id="switch_1_right" class="switch_right" name="switch_1" value="no" />
+              <label class="switch_right_label" for="switch_1_right">Always ask</label>
+            </div>
+          </tr>-->
+          <tr>
+            <th><label>Financial data</label></th>
+            <td>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn">
+                  <input type="radio" name="financial_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+                </label>
+              </div>
+            </td>
+            <td>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn">
+                  <input type="radio" name="financial_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+                </label>
+              </div>
+            </td>
+            <td>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn">
+                  <input type="radio" name="financial_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+                </label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><label>Criminal record</label></th>
+            <td>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn">
+                  <input type="radio" name="criminal_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+                </label>
+              </div>
+            </td>
+            <td>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn">
+                  <input type="radio" name="criminal_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+                </label>
+              </div>
+            </td>
+            <td>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn">
+                  <input type="radio" name="criminal_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+                </label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><label>Medical record</label></th>
+            <td>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn">
+                  <input type="radio" name="medical_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+                </label>
+              </div>
+            </td>
+            <td>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn">
+                  <input type="radio" name="medical_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+                </label>
+              </div>
+            </td>
+            <td>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn">
+                  <input type="radio" name="medical_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+                </label>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
-      <label for="dataTable2">Name of some other data</label>
-      <table name="dataTable2" class="table table-striped table-responsive">
-        <thead></thead>
-        <tbody>
-          <tr>
-            <div class="funkyradio">
-            <td>
-              <div class="funkyradio">
-                <div class="funkyradio-success">
-                  <input type="radio" name="radio2" id="radio4" />
-                  <label for="radio4">Allow all</label>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="funkyradio">
-                <div class="funkyradio-warning">
-                  <input type="radio" name="radio2" id="radio5" />
-                  <label for="radio5">Allow trusted</label>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="funkyradio">
-                <div class="funkyradio-danger">
-                  <input type="radio" name="radio2" id="radio6" checked/>
-                  <label for="radio6" checked>Always ask</label>
-                </div>
-              </div>
-            </td>
-            </div>
-          </tr>
-        </tbody>
-      </table>
+      <hr />
       <div class="row">
-        <div class="col-md-12">
-          <button class="btn btn-primary btn-md pull-right">Save</button>
+        <div class="col-sm-2 col-sm-offset-5">
+          <i class="center-block fa fa-question-circle-o fa-3x" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="col-sm-5"></div>
+      <div class="row">
+        <div class="col-sm-12">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-success">
+              <p style="text-align: left;"><strong>Allow all</strong> - Everyone who asks for the data from you will receive it automatically.</p>
+            </li>
+            <li class="list-group-item list-group-item-warning">
+              <p style="text-align: left;"><strong>Allow trusted</strong> - Everyone on your list of trusted companies will receive the data automatically. You manage each case from non-trusted companies manually.</p>
+            </li>
+            <li class="list-group-item list-group-item-danger">
+              <p style="text-align: left;"><strong>Always ask</strong> - You manage each request of the data manually, no one receives it automatically.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-12">
+          <a class="btn btn-warning btn-md pull-right">Save</a>
         </div>
       </div>
   	</div>
 
 
-    <div class="col-sm-2 col-sm-offset-2 table-sm table-bordered permissionSettingsCol">
+    <div class="col-sm-3 col-sm-offset-1 table-sm table-bordered permissionSettingsCol">
       <h2>Trusted</h2>
+      <hr />
+      <table class="table table-striped table-responsive ">
+        <tbody>
+          <tr>
+            <td><p class="tableText">Media Markt</p></td>
+            <td>
+                <a class="btn"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><p class="tableText">Elgiganten</p></td>
+            <td>
+                <a class="btn"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><p class="tableText">CDON</p></td>
+            <td>
+                <a class="btn"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <hr />
       <div id="trustSearch" class="input-group stylish-input-group">
         <input type="text" class="form-control"  placeholder="Search" >
@@ -90,28 +182,7 @@
           <span class="glyphicon glyphicon-search"></span>
         </span>
       </div>
-      <table class="table table-striped table-responsive ">
-        <tbody>
-          <tr>
-            <td><p class="tableText">Media Markt</p></td>
-            <td>
-                <a class="btn"><i class="fa fa-times"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td><p class="tableText">Elgiganten</p></td>
-            <td>
-                <a class="btn"><i class="fa fa-times"></i></a>
-            </td>
-          </tr>
-          <tr>
-            <td><p class="tableText">CDON</p></td>
-            <td>
-                <a class="btn"><i class="fa fa-times"></i></a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <a class="btn btn-block btn-warning">Add</a>
     </div>
 
 
