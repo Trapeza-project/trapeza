@@ -1,3 +1,46 @@
-<div class="container">
-  <p>This is pending requests</p>
+<div class="container bg-white">
+  <div class="row" ng-if="!vm.toggleCompanyInfo">
+  <h1>Pending requests</h1>
+    <div class="col-sm-4">
+      <div class="card" ng-click="vm.toggleInfo()">
+        <div class="card-content">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4><b>Media Markt</b></h4>
+            </div>
+            <div class="col-sm-6 text-right">
+              <h4>2016-01-01</h4>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer"">
+          <a href="#">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="company-info" ng-if="vm.toggleCompanyInfo">
+    <div class="row">
+      <div class="col-sm-12 text-right">
+        <a href="#" ng-click="vm.toggleInfo()" class="btn btn-primary text-right">X</a>
+      </div>
+    </div>
+    <div class="row">
+      <h1>Media Markt</h1>
+    </div>
+    <div class="row">
+      <a href="#">Info about media markt</a>
+    </div>
+    <div class="row">
+      <p><input type="checkbox"> Add to trusted</p>
+    </div>
+    <div class="row">
+      <div class="col-sm-1 col-sm-2">
+        <button class="btn btn-success">Allow</button>
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-danger">Deny</button>
+      </div>
+    </div>
+  </div>
 </div>
