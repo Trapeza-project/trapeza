@@ -144,6 +144,12 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   padding:15px;
 }
 
+.checkBoxContainer{
+	max-height: 300px; 
+	overflow-y: scroll !important;
+	overflow-x: hidden !important;
+}
+
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'admin-interface/admin/admin';
@@ -156,6 +162,8 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 @import 'customer-interface/customerLookupSettings/customerLookupSettings';
 @import 'customer-interface/customerMain/customerMain';
 @import 'customer-interface/customerRequest/customerRequest';
+@import 'user-interface/account/pendingRequests/pendingRequests';
+@import 'user-interface/account/permissionSettings/permissionSettings';
 @import 'user-interface/admin/admin';
 @import 'user-interface/userStartPage/userStartPage';
 @import '../components/bootstrap-dashboard-ui/content';
