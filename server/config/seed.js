@@ -44,7 +44,7 @@ ModuleSettings.sync()
     moduleid:1,
     creatorid:0,
     modulename:"Small",
-    description:"Includes the basic information to the lookup.",
+    description:"Price range: <10K",
     infoids:'[1]',
     active: true,
     UCHandle: true
@@ -52,7 +52,7 @@ ModuleSettings.sync()
     moduleid:2,
     creatorid:0,
     modulename:"Medium",
-    description:"Includes the basic and personal information to the lookup.",
+    description:"Price range: 10K - 50K",
     infoids:'[1,2]',
     active: true,
     UCHandle: true
@@ -60,7 +60,7 @@ ModuleSettings.sync()
     moduleid:3,
     creatorid:0,
     modulename:"Large",
-    description:"Includes detailed information to the lookup.",
+    description:"Price range: 50K - 100K, if >100k, please report the manager",
     infoids:'[1,2,3]',
     active: true,
     UCHandle: true

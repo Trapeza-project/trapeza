@@ -34,8 +34,8 @@
           <input type="text" name="purpose" class="form-control" placeholder='{{customerLookupCtrl.purposestring}}' ng-model="purpose" ng-change="customerLookupCtrl.updatePurpose(purpose)" required>
         </div>
         <div ng-if="customerLookupCtrl.isAdmin">
-          <a class="pointercursor" ng-if="customerLookupCtrl.showMore()" ng-click="customerLookupCtrl.setAdvancedOption(true)">More</a>
-          <a class="pointercursor" ng-if="customerLookupCtrl.showLess()" ng-click="customerLookupCtrl.setAdvancedOption(false)">Less</a>
+          <a class="pointercursor" ng-if="customerLookupCtrl.showMore()" ng-click="customerLookupCtrl.setAdvancedOption(true)">Show Customized Lookup</a>
+          <a class="pointercursor" ng-if="customerLookupCtrl.showLess()" ng-click="customerLookupCtrl.setAdvancedOption(false)">Hide Customized Lookup</a>
           <div ng-if="customerLookupCtrl.advancedOption" class="form-group lookupselect">
             <label class="requestlabel">Data to request</label>
             <div class="dataselect">

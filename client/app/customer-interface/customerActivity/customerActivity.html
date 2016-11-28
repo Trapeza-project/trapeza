@@ -1,6 +1,6 @@
 <div class="container bottom-margin">
   <div class="weak-border-bottom topdiv">
-    <h1 class="text-orange">Activities</h1>
+    <h1 class="text-orange">Lookup History</h1>
   </div>
   <div ng-cloak class="activity">
     <md-content>
@@ -17,13 +17,13 @@
                   Info
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Timestamp
+                  Time
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Access
+                  Customer approved
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Approved
+                   Request sent
                 </td>
               </tr>
               <tr ng-repeat="request in customerActivityCtrl.requests" class="requesttr" ng-click="customerActivityCtrl.viewRequest(request.requestid)">
@@ -60,13 +60,13 @@
                   Info
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Timestamp
+                  Time
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Access
+                  Customer approved
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Approved
+                  Request sent
                 </td>
               </tr>
               <tr ng-repeat="request in customerActivityCtrl.pending" class="requesttr" ng-click="customerActivityCtrl.viewRequest(request.requestid)">
@@ -103,13 +103,13 @@
                   Info
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Timestamp
+                  Time
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Access
+                  Customer approved
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Approved
+                  Request sent
                 </td>
               </tr>
               <tr ng-repeat="request in customerActivityCtrl.answered" class="requesttr" ng-click="customerActivityCtrl.viewRequest(request.requestid)">

@@ -11,7 +11,7 @@ export class NavbarComponent {
     title: 'Lookup',
     state: 'customerLookup'
   }, {
-    title: 'Activity',
+    title: 'Lookup History',
     state: 'customerActivity'
   }];
 
