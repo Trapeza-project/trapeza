@@ -1,6 +1,6 @@
 <div class="container bg-white">
   <div class="row" ng-if="!vm.toggleCompanyInfo">
-  <h1>Pending requests</h1>
+    <h1>Pending requests</h1>
     <div class="col-sm-4" ng-repeat="request in vm.pendingRequests">
       <div class="card" ng-click="vm.getSingleRequestInfo($index)">
         <div class="card-content">
