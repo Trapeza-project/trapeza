@@ -1,18 +1,70 @@
 .settingsbox{
+  background-color: #fcfcfc;
   border: 1px solid #ec971f;
   border-radius: 6px;
-  margin:30px;
+  text-align: center;
 }
 
 .lookupmodule{
+  background-color: #fcfcfc;
   border:2px solid;
-  border-color:#e5e5e5;
+  border-color:#ec971f;
   border-radius:4px;
   text-align:center;
   box-shadow:0 0 0 2px rgba(73,144,226,0);
   display:inline-block;
-  margin:5px;
   padding:5px;
-  width:250px;
-  vertical-align:top;
+  height: 26em;
+  overflow: auto;
+}
+
+.pricebox {
+  border:1px solid;
+  border-color:#ec971f;
+  border-radius:4px;
+  text-align:center;
+}
+
+.checkbox label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
+}
+
+.checkbox .cr .cr-icon {
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 50%;
+    left: 20%;
+}
+
+.checkbox label input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon {
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+}
+
+.checkbox label input[type="checkbox"]:disabled + .cr {
+    opacity: .5;
 }
