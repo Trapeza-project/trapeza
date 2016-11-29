@@ -8,14 +8,22 @@
     <div id="paddedlookup">
       <form class="form" name="form">
         <div id="quick">
-          <div class="quickLookup" ng-repeat="module in customerLookupCtrl.modules">
-            <div class="quickLookupModule" ng-click="customerLookupCtrl.toggleModule(module)">
-              <div class="weak-border-bottom">
-                <h3 class="text-orange">{{module.name}}</h3>
-                <p class="text-color">{{module.description}}</p>
-                <p class="text-orange weak-border-top" ng-repeat="info in module.info">{{info.name}}</p>
-              </div>
-            </div>
+          <div class="quickLookup" ng-repeat="module in customerLookupCtrl.modules">			
+			<div ng-if="!customerLookupCtrl.isActiveModule(module)" class="quickLookupModule" ng-click="customerLookupCtrl.toggleModule(module)">
+				<div class="weak-border-bottom">
+					<h3 class="text-orange">{{module.name}}</h3>
+					<p class="text-color">{{module.description}}</p>
+					<p class="text-orange weak-border-top" ng-repeat="info in module.info">{{info.name}}</p>
+				</div>
+			</div>
+			<div ng-if="customerLookupCtrl.isActiveModule(module)" class="quickLookupModule btn-module-active" ng-click="customerLookupCtrl.toggleModule(module)">
+				<div class="weak-border-bottom">
+					<h3 class="text-orange">{{module.name}}</h3>
+					<p class="text-color">{{module.description}}</p>
+					<p class="text-orange weak-border-top" ng-repeat="info in module.info">{{info.name}}</p>
+				</div>
+			</div>
+			
           </div>
         </div>
         <label class="requestlabel">Personal identity number</label>

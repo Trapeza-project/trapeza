@@ -75,7 +75,7 @@ export function index(req, res) {
 
 }
 
-// Gets the pending requests for a person
+// Gets the previous requests for a person
 export function getpreviousrequests(req, res) {
 	var history = [];
 	return RequestLog.findAll({
@@ -122,7 +122,7 @@ export function getpreviousrequests(req, res) {
 						requestid:dataValues.requestid
 					}
 				}).then(function(prevReq){
-					data.data = prevReq.data;
+					data.data = prevReq.dataValues.data;
 				}));
 
 			return Sequelize.Promise.all(promises).then(function(){

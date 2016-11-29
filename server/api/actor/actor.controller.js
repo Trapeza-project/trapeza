@@ -87,6 +87,7 @@ export function show(req, res) {
 	  data.description = dataValues.description;
 	  data.branch = JSON.parse(dataValues.branch);
 	  data.score = dataValues.score;
+	  data.responsible = dataValues.responsible;
 	  res.json(data);
 	 });
 }

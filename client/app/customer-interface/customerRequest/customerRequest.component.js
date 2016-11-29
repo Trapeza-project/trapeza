@@ -158,7 +158,7 @@ export class CustomerRequestComponent {
 
   openActor = function(id){
     this.lookupService.setActiveActorID(id);
-    this.$state.go('userCompanyInfo');
+    this.$state.go('customerCompanyInfo');
   }
 }
 

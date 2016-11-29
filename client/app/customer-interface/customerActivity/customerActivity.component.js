@@ -59,21 +59,22 @@ export class CustomerActivityComponent {
   }
 
   pendingcompanyrequest(request){
-    if(request.companypending==true){
+    if(request.companypending==true || request.pending==true){
       return true;
     }else{
       return false;
     }
   }
   approvedcompanyrequest(request){
-    if(request.companyallow==true && request.companypending==false){
+    if(request.companyallow==true && request.companypending==false && request.pending==false){
       return true;
     }else{
       return false;
     }
   }
+  
   deniedcompanyrequest(request){
-    if((request.companyallow==false && request.companypending==false) || (request.allow == false && request.pending ==false)){
+    if(((request.companyallow==false && request.companypending==false) || (request.allow == false)) && request.pending==false){
       return true;
     }else{
       return false;

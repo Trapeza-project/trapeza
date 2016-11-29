@@ -156,9 +156,8 @@ export class CustomerLookupSettingsComponent {
     return price;
   }
   
-  getSub(info){
+  getSub(info, alternative){
 	  var array = [];
-	  var alternative = 5;
 	  var alternatives = Math.min(info.length, alternative);
 	  
 	  for(var i = 0; i < alternatives; i++){
