@@ -185,6 +185,9 @@ export class CustomerLookupSettingsComponent {
     for(var i = 0; i < info.length;i++){
       price = price + info[i].price;
     }
+    if(lookup.UCHandle) {
+      price += 7;
+    }
     return price;
   }
 
