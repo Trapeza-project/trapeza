@@ -62,4 +62,20 @@ export default class UserRequestsController {
         this.historyRequests = response.data.history;
       });
   }
+
+  handleRequest(id, answer) {
+    this.$http({
+      method: 'POST',
+      url: '/api/requests/useranswer',
+      data: {
+        requestid: id,
+        answer: answer
+      }
+    }).then(response => {
+      console.log(response.data);
+    }, error => {
+
+    });
+    this.toggleInfo();
+  }
 }

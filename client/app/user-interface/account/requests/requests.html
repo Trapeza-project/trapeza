@@ -83,10 +83,10 @@
     </div>
     <div class="row">
       <div class="col-sm-1 col-sm-offset-4">
-        <button class="btn btn-success btn-lg">Allow</button>
+        <button class="btn btn-success btn-lg" ng-click="vm.handleRequest(vm.singleShowInfo.requestid, true)">Allow</button>
       </div>
       <div class="col-sm-1 col-sm-offset-1">
-        <button class="btn btn-danger btn-lg">Deny</button>
+        <button class="btn btn-danger btn-lg" ng-click="vm.handleRequest(vm.singleShowInfo.requestid, false)">Deny</button>
       </div>
     </div>
   </div>
