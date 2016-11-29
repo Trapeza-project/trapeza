@@ -10,6 +10,11 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 /**
  * App-wide Styles
  */
+ 
+ 
+body {
+	height:initial;
+} 
 
 .browserupgrade {
   margin: 0.2em 0;

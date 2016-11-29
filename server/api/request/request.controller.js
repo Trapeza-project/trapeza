@@ -329,7 +329,7 @@ return 	RequestLog.findAll({
 			  var bas = basData.dataValues;
 			  tempRequest.name = bas.firstname + " " + bas.lastname;
 		  }else{
-			  tempRequest.name = "NOT FOUND";
+			  tempRequest.name = "Kalle Kallesson";
 		  }
 	  })
 	  )
