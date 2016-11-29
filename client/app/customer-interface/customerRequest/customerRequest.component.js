@@ -160,7 +160,7 @@ export class CustomerRequestComponent {
 
   openActor = function(id){
     this.lookupService.setActiveActorID(id);
-    this.$location.url('/actor');
+    this.$location.url('/customer/actor');
   }
 }
 
