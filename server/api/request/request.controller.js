@@ -88,11 +88,11 @@ export function getpreviousrequests(req, res) {
 			var dataValues = request.dataValues;
 			var data = dataValues;
 			var date = new Date(dataValues.timestamp);
-			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate(); 
+			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
 			var tempids = [];
 			var promises = [];
 			var infoids = JSON.parse(dataValues.infoids);
-			
+
 			infoids.forEach(function(id){
 				promises.push(Infotype.find({
 					where: {
@@ -116,7 +116,7 @@ export function getpreviousrequests(req, res) {
 					tempActor.name=actor.dataValues.name;
 					data.actor = tempActor;
 				}));
-				
+
 			promises.push(PreviousRequest.find({
 					where:{
 						requestid:dataValues.requestid
@@ -124,11 +124,11 @@ export function getpreviousrequests(req, res) {
 				}).then(function(prevReq){
 					data.data = prevReq.data;
 				}));
-		
+
 			return Sequelize.Promise.all(promises).then(function(){
 					data.info = tempids;
 					history.push(data);
-			}) 
+			})
 	}).then(function(){
 			var data = {};
 			data.history = history;
@@ -149,12 +149,12 @@ export function getpendingrequests(req, res) {
 			var dataValues = request.dataValues;
 			var data = dataValues;
 			var date = new Date(dataValues.timestamp);
-			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate(); 
-			
+			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
+
 			var tempids = [];
 			var promises = [];
 			var infoids = JSON.parse(dataValues.infoids);
-			
+
 			infoids.forEach(function(id){
 				promises.push(Infotype.find({
 					where: {
@@ -178,12 +178,12 @@ export function getpendingrequests(req, res) {
 					tempActor.name=actor.dataValues.name;
 					data.actor = tempActor;
 				}));
-		
+
 			return Sequelize.Promise.all(promises).then(function(){
 					data.info = tempids;
 					history.push(data);
-			}) 
-			
+			})
+
 		}).then(function(){
 			var data = {};
 			data.history = history;
@@ -192,7 +192,7 @@ export function getpendingrequests(req, res) {
 
 }
 
-// Gets all the requests 
+// Gets all the requests
 export function getallrequests(req, res) {
 	var history = [];
 	return RequestLog.findAll({
@@ -202,12 +202,12 @@ export function getallrequests(req, res) {
 			var dataValues = request.dataValues;
 			var data = dataValues;
 			var date = new Date(dataValues.timestamp);
-			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate(); 
-			
+			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
+
 			var tempids = [];
 			var promises = [];
 			var infoids = JSON.parse(dataValues.infoids);
-			
+
 			infoids.forEach(function(id){
 				promises.push(Infotype.find({
 					where: {
@@ -231,11 +231,11 @@ export function getallrequests(req, res) {
 					tempActor.name=actor.dataValues.name;
 					data.actor = tempActor;
 				}));
-		
+
 			return Sequelize.Promise.all(promises).then(function(){
 					data.info = tempids;
 					history.push(data);
-			}) 
+			})
 		}).then(function(){
 			var data = {};
 			data.history = history;
@@ -256,12 +256,12 @@ export function getallpersonrequests(req, res) {
 			var dataValues = request.dataValues;
 			var data = dataValues;
 			var date = new Date(dataValues.timestamp);
-			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate(); 
-			
+			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
+
 			var tempids = [];
 			var promises = [];
 			var infoids = JSON.parse(dataValues.infoids);
-			
+
 			infoids.forEach(function(id){
 				promises.push(Infotype.find({
 					where: {
@@ -285,11 +285,11 @@ export function getallpersonrequests(req, res) {
 					tempActor.name=actor.dataValues.name;
 					data.actor = tempActor;
 				}));
-		
+
 			return Sequelize.Promise.all(promises).then(function(){
 					data.info = tempids;
 					history.push(data);
-			}) 
+			})
 		}).then(function(){
 			var data = {};
 			data.history = history;
@@ -315,7 +315,7 @@ return 	RequestLog.findAll({
 		tempRequest.pending = dataValues.pending;
 		tempRequest.personid = dataValues.personid;
 		var date = new Date(dataValues.timestamp);
-		tempRequest.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate() + " " + date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); 
+		tempRequest.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate() + " " + date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
 
 	  var infoids = JSON.parse(dataValues.infoids);
 	  var tempids = [];
@@ -333,7 +333,7 @@ return 	RequestLog.findAll({
 		  }
 	  })
 	  )
-	  
+
 	  infoids.forEach(function(id){
 			promises.push(Infotype.find({
 				where: {
@@ -347,11 +347,11 @@ return 	RequestLog.findAll({
 				tempids.push(infoValues.infoname);
 			}))
 		})
-		
+
 		return Sequelize.Promise.all(promises).then(function(){
 				tempRequest.info = tempids;
 				customerReq.push(tempRequest);
-		})  
+		})
   }).then(function(){
 		   res.json(customerReq);
 		})
@@ -376,7 +376,7 @@ export function show(req, res) {
 		var dataValues = result.dataValues;
 		BasicData.find({
 		where:{
-			personid:dataValues.personid 
+			personid:dataValues.personid
 		}
 		})
 		.then(function(dat){
@@ -398,7 +398,7 @@ export function show(req, res) {
 				basic.name = dat.dataValues.firstname + " " + dat.dataValues.lastname;
 				basic.personid=dat.dataValues.personid;
 				var date = new Date(dataValues.timestamp);
-				basic.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate() + " " + date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); 
+				basic.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate() + " " + date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
 				basic.purpose = dataValues.purpose;
 				basic.allow = dataValues.allow;
 				basic.companyallow = dataValues.companyallow;
@@ -424,13 +424,13 @@ export function latestuserrequest(req, res) {
 			var dataValues = request.dataValues;
 			var data = {};
 			var date = new Date(dataValues.timestamp);
-			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate(); 
+			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
 			data.access = dataValues.allow;
-			
+
 			var tempids = [];
 			var promises = [];
 			var infoids = JSON.parse(dataValues.infoids);
-			
+
 			infoids.forEach(function(id){
 				promises.push(Infotype.find({
 					where: {
@@ -454,12 +454,12 @@ export function latestuserrequest(req, res) {
 					tempActor.name=actor.dataValues.name;
 					data.actor = tempActor;
 				}));
-		
+
 			return Sequelize.Promise.all(promises).then(function(){
 					data.info = tempids;
 					history.push(data);
-			}) 
-			
+			})
+
 		}).then(function(){
 			var data = {};
 			data.history = history;
@@ -550,7 +550,7 @@ export function answeruserrequest(req, res) {
 					allow: approve
 				}).then(function(){
 					// Remove from pendingrequests
-					
+
 					PendingRequest.destroy({
 						where:{
 							requestid: id

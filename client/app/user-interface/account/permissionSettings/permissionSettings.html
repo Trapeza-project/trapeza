@@ -3,7 +3,31 @@
 
 
     <div class="col-sm-6 col-sm-offset-1 permissionSettingsCol">
-      <h1>Permission settings</h1>
+
+      <div class="row">
+        <div class="col-sm-8">
+          <h1>Permission settings </h1>
+        </div>
+        <div class="col-sm-4 text-right">
+          <i class="fa fa-question-circle-o fa-2x" aria-hidden="true" ng-click="vm.toggleHelp()"></i>
+        </div>
+      </div>
+
+      <div class="row" ng-show="vm.showHelp">
+        <div class="col-sm-12 text-right">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-success">
+              <p style="text-align: left;"><strong>Allow all</strong> - Everyone who asks for the data from you will receive it automatically.</p>
+            </li>
+            <li class="list-group-item list-group-item-warning">
+              <p style="text-align: left;"><strong>Allow trusted</strong> - Everyone on your list of trusted companies will receive the data automatically. You manage each case from non-trusted companies manually.</p>
+            </li>
+            <li class="list-group-item list-group-item-danger">
+              <p style="text-align: left;"><strong>Always ask</strong> - You manage each request of the data manually, no one receives it automatically.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
       <hr />
       <table class="table table-responsive table-bordered">
         <thead>
@@ -65,53 +89,30 @@
           <a class="btn btn-warning btn-lg pull-right">Save</a>
         </div>
       </div>
-      <hr />
-      <div class="row">
-        <div class="col-sm-2 col-sm-offset-5">
-          <i class="center-block fa fa-question-circle-o fa-3x" aria-hidden="true"></i>
-        </div>
-      </div>
-      <div class="col-sm-5"></div>
-      <div class="row">
-        <div class="col-sm-12">
-          <ul class="list-group">
-            <li class="list-group-item list-group-item-success">
-              <p style="text-align: left;"><strong>Allow all</strong> - Everyone who asks for the data from you will receive it automatically.</p>
-            </li>
-            <li class="list-group-item list-group-item-warning">
-              <p style="text-align: left;"><strong>Allow trusted</strong> - Everyone on your list of trusted companies will receive the data automatically. You manage each case from non-trusted companies manually.</p>
-            </li>
-            <li class="list-group-item list-group-item-danger">
-              <p style="text-align: left;"><strong>Always ask</strong> - You manage each request of the data manually, no one receives it automatically.</p>
-            </li>
-          </ul>
-        </div>
-      </div>
   	</div>
 
 
     <div class="col-sm-3 col-sm-offset-1 permissionSettingsCol">
-      <h2>Trusted</h2>
-      <hr />
-      <table class="table table-striped table-sm table-responsive ">
-        <tbody>
-          <tr ng-repeat="actor in vm.trustedList">
-            <td><p class="tableText" style="text-align: left; font-weight: bold;">{{actor}}</p></td>
-            <td>
-                <a class="btn"><i class="fa fa-trash"></i></a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <hr />
+      <h2>Trusted companies</h2>
+      <div ng-if="vm.trustedList.length">
+        <table class="table table-striped table-sm table-responsive ">
+          <tbody>
+            <tr ng-repeat="actor in vm.trustedList">
+              <td><p class="tableText" style="text-align: left; font-weight: bold;">{{actor}}</p></td>
+              <td>
+                  <a class="btn" ng-click="vm.removeTrusted($index)"><i class="fa fa-trash"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div ng-if="!vm.trustedList.length">
+        <p>No trusted companies</p>
+      </div>
+        <hr />
+      <h4>Add company to trusted list</h4>
       <input id="search-actor" class="awesomplete"/>
-
-
-      <a class="btn btn-block btn-warning" ng-click="vm.addToTrusted()">Add</a>
-
+      <a class="btn btn-warning" ng-click="vm.addToTrusted()">Add</a>
     </div>
-
-
-    <div class="col-sm-1"></div>
   </div>
 </div>

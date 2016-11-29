@@ -7,12 +7,20 @@ export default class UserPermissionSettingsController {
   trustedList = [];
   actors = [];
   infoTypes = [];
+  awesomplete;
+  showHelp = false;
   /*@ngInject*/
   constructor($http) {
 
     this.$http = $http;
     this.getInfoTypes();
     this.getActors();
+
+    this.awesomplete = new Awesomplete('#search-actor', {
+      minChars: 2,
+      maxItems: 10,
+      autoFirst: true
+    });
 
     $('#allow-all-toggle' ).click(function() {
       $('.allow-all input').each(function() {
@@ -50,12 +58,31 @@ export default class UserPermissionSettingsController {
         response.data.forEach(function(item) {
           that.actors.push(item.name);
         });
-        awesomeplete.list = that.actors;
-        console.log(awesomeplete.list);
+        this.awesomplete._list = that.actors;
+        console.log('awsomplete',this.awesomplete);
       });
   }
 
   addToTrusted() {
-    console.log($("#search-actor").text());
+    var actorToAdd = $("#search-actor")[0].value;
+    if(!_.includes(this.trustedList, actorToAdd)) {
+      this.trustedList.push(actorToAdd);
+    }
+    else {
+      alert("Company already added to trusted list");
+    }
+  }
+
+  removeTrusted(index) {
+    this.trustedList.splice(index, 1);
+  }
+
+  toggleHelp() {
+      if(this.showHelp) {
+      this.showHelp = false;
+    }
+    else {
+      this.showHelp = true;
+    }
   }
 }

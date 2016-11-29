@@ -11,6 +11,7 @@
     </div>
     <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse navbar-middle collapse" id="navbar-main">
       <ul class="nav navbar-nav">
+        <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="userPendingRequests">Pending requests <span id="numOfPendingRequests" class="badge">0</span></a></li>
         <li ng-show="$ctrl.isLoggedIn()" ng-repeat="item in $ctrl.menu" ui-sref-active="active">
             <a ui-sref="{{item.state}}">{{item.title}}</a>
         </li>
