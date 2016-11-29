@@ -75,21 +75,21 @@ export class CustomerRequestComponent {
   }
 
   pendingcompanyrequest(){
-    if(this.requestdata.companypending==true){
+    if(this.requestdata.companypending==true || this.requestdata.pending==true){
       return true;
     }else{
       return false;
     }
   }
   approvedcompanyrequest(){
-    if(this.requestdata.companyallow==true && this.requestdata.companypending==false){
+    if(this.requestdata.companyallow==true && this.requestdata.companypending==false && this.requestdata.pending==false){
       return true;
     }else{
       return false;
     }
   }
   deniedcompanyrequest(){
-    if((this.requestdata.companyallow==false && this.requestdata.companypending==false) || (this.requestdata.allow == false && this.requestdata.pending ==false)){
+    if(((this.requestdata.companyallow==false && this.requestdata.companypending==false) || (this.requestdata.allow == false)) && this.requestdata.pending==false){
       return true;
     }else{
       return false;
