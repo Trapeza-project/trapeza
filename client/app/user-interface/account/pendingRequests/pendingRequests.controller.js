@@ -1,15 +1,27 @@
 'use strict';
+import Chart from 'chart.js';
 
 export default class UserPendingRequestsController {
+
 
   personid = '197001011234';
   pendingRequests = [];
   singleShowInfo = {};
   toggleCompanyInfo = false;
   /*@ngInject*/
-  constructor($http) {
+  constructor($http, $scope, socket) {
     this.$http = $http;
+    this.socket = socket;
+
+
+    $scope.$on('$destroy', function() {
+      socket.unsyncUpdates('pendingRequests');
+    });
+  }
+
+  $onInit() {
     this.getPendingRequests();
+    console.log(Chart);
   }
 
   getPendingRequests() {
@@ -17,16 +29,14 @@ export default class UserPendingRequestsController {
       .then(response => {
         console.log(response.data.history);
         this.pendingRequests = response.data.history;
+        //this.socket.syncUpdates('request', this.pendingRequests);
+        $("#numOfPendingRequests")[0].innerText = this.pendingRequests.length;
       });
   }
 
   getSingleRequestInfo(index) {
-    console.log(index);
-
     this.singleShowInfo = this.pendingRequests[index];
-    console.log(this.singleShowInfo);
     this.toggleInfo();
-
   }
 
   toggleInfo() {

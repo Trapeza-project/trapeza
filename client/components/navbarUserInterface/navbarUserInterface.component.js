@@ -4,10 +4,10 @@
 import angular from 'angular';
 
 export class NavbarComponent {
+
+  personid = '197001011234';
+
   menu = [{
-    title: 'Pending Requests',
-    state: 'userPendingRequests'
-  }, {
     title: 'History',
     state: 'userHistory'
   },{
@@ -17,12 +17,21 @@ export class NavbarComponent {
 
   isCollapsed = true;
 
-  constructor(Auth) {
+  constructor(Auth, $http) {
     'ngInject';
 
     this.isLoggedIn = Auth.isLoggedInSync;
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
+
+    $http.get('/api/requests/personpending/' + this.personid)
+      .then(response => {
+        console.log(response.data.history);
+        this.pendingRequests = response.data.history;
+        //this.socket.syncUpdates('request', this.pendingRequests);
+        $("#numOfPendingRequests")[0].innerText = this.pendingRequests.length;
+      });
+
   }
 
 }

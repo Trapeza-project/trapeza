@@ -21,25 +21,42 @@
   </div>
   <div id="company-info" ng-if="vm.toggleCompanyInfo">
     <div class="row">
-      <div class="col-sm-12 text-right">
-        <a href="#" ng-click="vm.toggleInfo()" class="btn btn-primary text-right">X</a>
+      <div class="col-sm-8">
+        <h1> <span class="rating">A</span> {{vm.singleShowInfo.actor.name}}</h1>
+      </div>
+      <div class="col-sm-3 text-right" style="padding-top:1.5em;">
+        <a href="#" ng-click="vm.toggleInfo()" class="btn btn-default btn-lg">Back</a>
       </div>
     </div>
     <div class="row">
-      <h1>{{vm.singleShowInfo.actor.name}}</h1>
-    </div>
-    <div class="row">
-      <a href="#">Info about {{vm.singleShowInfo.actor.name}}</a>
+        <a ui-sref="userCompanyInfo">Show more info about {{vm.singleShowInfo.actor.name}}</a>
     </div>
     <div class="row">
       <p><input type="checkbox"> Add to trusted</p>
     </div>
     <div class="row">
-      <div class="col-sm-1 col-sm-2">
-        <button class="btn btn-success">Allow</button>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Data requested</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{vm.singleShowInfo.timestamp}}</td>
+            <td><span ng-repeat="info in vm.singleShowInfo.info" class="label label-info" style="margin: 2px;">{{info}}</span></td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-sm-1 col-sm-offset-4">
+        <button class="btn btn-success btn-lg">Allow</button>
       </div>
-      <div class="col-sm-2">
-        <button class="btn btn-danger">Deny</button>
+      <div class="col-sm-1 col-sm-offset-1">
+        <button class="btn btn-danger btn-lg">Deny</button>
       </div>
     </div>
   </div>
