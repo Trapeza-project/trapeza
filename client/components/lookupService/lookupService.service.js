@@ -2,16 +2,37 @@
 const angular = require('angular');
 
 /*@ngInject*/
-export function lookupService($http, Auth) {
+export function lookupService($http, Auth, $cookieStore) {
   // AngularJS will instantiate a singleton by calling "new" on this function
+  
   var vm = this;
-  vm.currentRequestID;
+  vm.currentRequestID = 0;
   this.Auth = Auth;
   vm.actorid = 0;
   vm.accessor = 1;
   vm.id=0;
   vm.modules = [];
   this.$http = $http;
+  
+  var accessor = $cookieStore.get("accessor");
+  if(accessor != undefined){
+	  vm.accessor = accessor;
+  }
+  
+  var modules = $cookieStore.get("modules");
+  if(modules != undefined){
+	  vm.modules = modules;
+  }
+  
+  var actorid = $cookieStore.get("actorid");
+  if(actorid != undefined){
+	  vm.actorid = actorid;
+  }
+  
+  var requestid = $cookieStore.get("requestid");
+  if(requestid != undefined){
+	  vm.currentRequestID = requestid;
+  }
 
   this.$http({
     url: '/api/moduleSettings/'+vm.accessor,
@@ -19,6 +40,7 @@ export function lookupService($http, Auth) {
   }).then(response => {
     if(response.status==200){
       vm.modules = response.data;
+	  $cookieStore.put("modules",vm.modules);
       vm.notifyObservers();
     }
   });
@@ -52,7 +74,11 @@ export function lookupService($http, Auth) {
   }
 
   vm.getAccessor = function(){
-    vm.accessor = Auth.getCurrentUserSync().accessid;
+	var accessor = Auth.getCurrentUserSync().accessid;
+	if(accessor != undefined){
+		vm.accessor = accessor;
+		$cookieStore.put("accessor", vm.accessor);
+	}
     return vm.accessor;
   }
 
@@ -65,8 +91,8 @@ export function lookupService($http, Auth) {
     this.$http.post('/api/moduleSettings', module)
       .then(response => {
         if(response.status==200){
-          console.log(response);
           vm.modules.push(response.data);
+		  $cookieStore.put("modules",vm.modules);
           newLookups(vm.modules);
         }
       });
@@ -81,6 +107,7 @@ export function lookupService($http, Auth) {
         for(var i = 0; i < vm.modules.length; i++){
           if (vm.modules[i].id==module.id) {
             vm.modules.splice(i, 1);
+			$cookieStore.put("modules",vm.modules);
             break;
           }
         }
@@ -96,10 +123,10 @@ export function lookupService($http, Auth) {
       data: module
     }).then(response => {
       if(response.status==200){
-        console.log(response);
         for(var i = 0; i < vm.modules.length; i++){
           if(module.id==vm.modules[i].id){
             vm.modules[i]=module;
+			$cookieStore.put("modules",vm.modules);
             break;
           }
         }
@@ -136,6 +163,7 @@ export function lookupService($http, Auth) {
 
   vm.setCurrentRequestID = function(requestid){
     vm.currentRequestID = requestid;
+	$cookieStore.put("requestid",vm.currentRequestID);
   }
 
   vm.getHistory = function(pid){
@@ -148,6 +176,7 @@ export function lookupService($http, Auth) {
   }
   vm.setActiveActorID = function(actorid){
     vm.actorid = actorid;
+	$cookieStore.put("actorid",vm.actorid);
   }
 
   vm.getActor = function(id){
@@ -179,6 +208,24 @@ export function lookupService($http, Auth) {
     datatypes.push(endEducationalCat);
     datatypes.push(endAllCat);
     return datatypes;
+  }
+  
+  vm.getRequestLog = function(callback){
+	  var requestlog = $cookieStore.get("requestlog");
+	  if(requestlog != undefined){
+		  callback(requestlog);
+	  }
+	 var accessid = vm.accessor;
+	this.$http({
+      url: '/api/requests/accessor/'+accessid,
+      method: "GET",
+      params: {accessor: accessid}
+    }).then(response => {
+      if(response.status==200){
+			$cookieStore.put("requestlog", response.data);
+			callback(response.data);
+      }
+    });
   }
 }
 
