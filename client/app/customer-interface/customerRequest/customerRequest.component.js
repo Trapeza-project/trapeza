@@ -97,7 +97,7 @@ export class CustomerRequestComponent {
   }
 
   displayButton(){
-    if(this.isAdmin() && this.requestdata.companypending==true && !this.requestdata.UCHandle && this.requestdata.allow==true){
+    if(this.requestdata.companypending==true && !this.requestdata.UCHandle && this.requestdata.allow==true){
       return true;
     }else{
       return false;
