@@ -9,10 +9,11 @@ export default class UserPendingRequestsController {
   singleShowInfo = {};
   toggleCompanyInfo = false;
   /*@ngInject*/
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket, lookupService, $state) {
     this.$http = $http;
     this.socket = socket;
-
+    this.lookupService = lookupService;
+    this.$state = $state;
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('pendingRequests');
@@ -46,5 +47,10 @@ export default class UserPendingRequestsController {
     else {
       this.toggleCompanyInfo = true;
     }
+  }
+
+  showCompanyInfo() {
+    this.lookupService.setActiveActorID(this.singleShowInfo.actor.id);
+    this.$state.go("userCompanyInfo");
   }
 }

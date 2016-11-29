@@ -8,10 +8,12 @@ import routes from './userCompanyInfo.routes';
 import Chart from 'chart.js';
 
 export class UserCompanyInfoComponent {
-  /*@ngInject*/
-  constructor() {
-    this.message = 'Hello';
+  companyInfo = {};
 
+  /*@ngInject*/
+  constructor(lookupService, $http) {
+    this.$http = $http;
+    this.actorid = lookupService.getActiveActorID();
     Chart.pluginService.register({
       afterUpdate: function (chart) {
         if (chart.config.options.elements.center) {
@@ -83,12 +85,12 @@ export class UserCompanyInfoComponent {
         datasets: [{
           data: [300, 50],
           backgroundColor: [
-            "#FF6384",
-            "#36A2EB"
+            "#cedb9c",
+            "#e7969c"
           ],
           hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB"
+            "#b5cf6b",
+            "#d6616b"
           ]
         }]
       },
@@ -101,7 +103,7 @@ export class UserCompanyInfoComponent {
             // the longest text that could appear in the center
             maxText: '100%',
             text: '300 / 350',
-            fontColor: '#36A2EB',
+            fontColor: '#ec971f',
             fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
             fontStyle: 'normal',
             // fontSize: 12,
@@ -117,6 +119,16 @@ export class UserCompanyInfoComponent {
 
     var ctx = document.getElementById("myChart").getContext("2d");
     var myChart = new Chart(ctx, config);
+
+    this.getCompanyInfo();
+  }
+
+  getCompanyInfo() {
+    this.$http.get('/api/actors/' + this.actorid)
+      .then(response => {
+        console.log(response.data);
+        this.companyInfo = response.data;
+      });
   }
 }
 
