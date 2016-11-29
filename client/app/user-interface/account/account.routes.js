@@ -34,10 +34,10 @@ export default function routes($stateProvider) {
       controllerAs: 'vm',
       authenticate: true
     })
-    .state('userPendingRequests', {
-      url: '/user/pendingRequests',
-      template: require('./pendingRequests/pendingRequests.html'),
-      controller: 'UserPendingRequestsController',
+    .state('userRequests', {
+      url: '/user/requests',
+      template: require('./requests/requests.html'),
+      controller: 'UserRequestsController',
       controllerAs: 'vm',
       authenticate: true
     })
@@ -45,13 +45,6 @@ export default function routes($stateProvider) {
       url: '/user/permissionSettings',
       template: require('./permissionSettings/permissionSettings.html'),
       controller: 'UserPermissionSettingsController',
-      controllerAs: 'vm',
-      authenticate: true
-    })
-    .state('userHistory', {
-      url: '/user/history',
-      template: require('./history/history.html'),
-      controller: 'UserHistoryController',
       controllerAs: 'vm',
       authenticate: true
     });
