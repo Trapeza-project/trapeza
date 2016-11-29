@@ -9,7 +9,7 @@
       <form class="form" name="form">
         <div id="quick">
           <div class="quickLookup" ng-repeat="module in customerLookupCtrl.modules">
-            <div ng-if="!customerLookupCtrl.isActiveModule(module)" class="quickLookupModule" ng-click="customerLookupCtrl.toggleModule(module)">
+            <div class="quickLookupModule" ng-click="customerLookupCtrl.toggleModule(module)">
               <div class="weak-border-bottom">
                 <h3 class="text-orange">{{module.name}}</h3>
                 <p class="text-color">{{module.description}}</p>
@@ -36,6 +36,7 @@
           <button ng-disabled="customerLookupCtrl.buttonDisable()" class="btn btn-warning btn-lg btn-login" ng-click="customerLookupCtrl.submitLookup()">
             Request
           </button>
+          <!-- customerLookupCtrl.isActiveModule(module) -->
         </div>
       </form>
     </div>
