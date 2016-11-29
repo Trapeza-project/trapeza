@@ -11,19 +11,19 @@
     </div>
     <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
-        <li ng-repeat="item in $ctrl.menu" ui-sref-active="active">
+        <li ng-show="$ctrl.isLoggedIn()" ng-repeat="item in $ctrl.menu" ui-sref-active="active">
             <a ui-sref="{{item.state}}">{{item.title}}</a>
         </li>
-        <li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a ui-sref="customerAdmin">Admin</a></li>
+        <!--<li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a ui-sref="customerAdmin">Admin</a></li>-->
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="customerSignup">Sign up</a></li>
         <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="customerLogin">Login</a></li>
-        <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p> </li>
+        <!-- <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p> </li>-->
         <li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a ui-sref="customerLookupSettings">Settings <span class="glyphicon glyphicon-cog"></span></a></li>
         <!--<li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="customerSettings"><span class="glyphicon glyphicon-cog"></span></a></li>-->
-        <li ng-show="$ctrl.isLoggedIn()"><a ui-sref="customerLogout">Logout</a></li>
+        <li ng-show="$ctrl.isLoggedIn()"><a ui-sref="customerLogout">Logout[{{ $ctrl.getCurrentUser().name }}]</a></li>
       </ul>
     </div>
   </div>

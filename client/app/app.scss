@@ -163,6 +163,7 @@ body {
 @import 'customer-interface/admin/admin';
 @import 'customer-interface/customerActivity/customerActivity';
 @import 'customer-interface/customerActor/customerActor';
+@import 'customer-interface/customerCompanyInfo/customerCompanyInfo';
 @import 'customer-interface/customerLookup/customerLookup';
 @import 'customer-interface/customerLookupSettings/customerLookupSettings';
 @import 'customer-interface/customerMain/customerMain';
@@ -184,4 +185,5 @@ body {
 @import '../components/isteven-multi-select/isteven-multi-select';
 @import '../components/modal/modal';
 @import '../components/navbar/navbar';
+@import '../components/navbarCustomerInterface/navbarCustomerInterface';
 /* endinject */

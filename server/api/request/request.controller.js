@@ -449,10 +449,12 @@ export function latestuserrequest(req, res) {
 						id:dataValues.accessid
 					}
 				}).then(function(actor){
-					var tempActor = {};
-					tempActor.id=actor.dataValues.id;
-					tempActor.name=actor.dataValues.name;
-					data.actor = tempActor;
+					if(actor != actor.dataValues){
+						var tempActor = {};
+						tempActor.id=actor.dataValues.id;
+						tempActor.name=actor.dataValues.name;
+						data.actor = tempActor;
+					}
 				}));
 
 			return Sequelize.Promise.all(promises).then(function(){

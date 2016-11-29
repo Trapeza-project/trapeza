@@ -54,7 +54,7 @@ import customerInterfaceRequest from './customer-interface/customerRequest/custo
 import customerInterfaceActor from './customer-interface/customerActor/customerActor.component';
 import customerInterfaceAdmin from './customer-interface/admin';
 import customerInterfaceAccount from './customer-interface/account';
-import customerInterfaceCompanyInfo from './customerCompanyInfo/customerCompanyInfo.component';
+import customerInterfaceCompanyInfo from './customer-interface/customerCompanyInfo/customerCompanyInfo.component';
 
 import customerLookupService from '../components/lookupService/lookupService.service';
 import customerModalService from '../components/modalService/modalService.service';

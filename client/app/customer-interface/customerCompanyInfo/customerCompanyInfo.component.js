@@ -6,7 +6,6 @@ const uiRouter = require('angular-ui-router');
 import routes from './customerCompanyInfo.routes';
 
 export class CustomerCompanyInfoComponent {
-  /*@ngInject*/
   companyInfo = {};
 
   /*@ngInject*/
@@ -74,7 +73,7 @@ export class CustomerCompanyInfoComponent {
       }
     });
 
-    var config = {
+    this.config = {
       type: 'doughnut',
       data: {
         labels: [
@@ -101,7 +100,7 @@ export class CustomerCompanyInfoComponent {
           center: {
             // the longest text that could appear in the center
             maxText: '100%',
-            text: '300 / 350',
+            text: '85 / 100',
             fontColor: '#ec971f',
             fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
             fontStyle: 'normal',
@@ -114,11 +113,6 @@ export class CustomerCompanyInfoComponent {
         }
       }
     };
-
-
-    var ctx = document.getElementById("myChart").getContext("2d");
-    var myChart = new Chart(ctx, config);
-
     this.getCompanyInfo();
   }
 
@@ -127,6 +121,9 @@ export class CustomerCompanyInfoComponent {
       .then(response => {
         console.log(response.data);
         this.companyInfo = response.data;
+        this.config.options.elements.text = this.companyInfo.score * 100 + ' %';
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myChart = new Chart(ctx, this.config);
       });
   }
 }
