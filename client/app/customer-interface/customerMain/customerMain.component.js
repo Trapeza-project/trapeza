@@ -33,7 +33,6 @@ export class CustomerMainComponent {
 
   login(form) {
     this.submitted = true;
-
     if(form.$valid) {
       this.Auth.login({
           email: this.user.email,
@@ -41,7 +40,7 @@ export class CustomerMainComponent {
         })
         .then(() => {
           // Logged in, redirect to home
-          this.$state.go('main');
+          this.$state.go('customerMain');
         })
         .catch(err => {
           this.errors.login = err.message;

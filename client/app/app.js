@@ -1,5 +1,6 @@
 'use strict';
 
+import jquery from 'jquery';
 import angular from 'angular';
 import ngAnimate from 'angular-animate';
 import ngCookies from 'angular-cookies';
@@ -10,6 +11,7 @@ import 'angular-socket-io';
 
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
+
 // import ngMessages from 'angular-messages';
 // import ngValidationMatch from 'angular-validation-match';
 
@@ -30,7 +32,7 @@ import footerUserInterface from '../components/footerUserInferface/footerUserInt
 import userInterfaceAdmin from './user-interface/admin';
 import userInterfaceStart from './user-interface/userStartPage/userStartPage.component';
 import userInterfaceAccount from './user-interface/account';
-
+import userCompanyInfo from './user-interface/userCompanyInfo/userCompanyInfo.component';
 // Admin interface
 import adminInterfaceDashboard from './admin-interface/adminDashboard/adminDashboard.component';
 import adminInterfaceUserSearch from './admin-interface/adminUserSearch/adminUserSearch.component';
@@ -62,6 +64,7 @@ angular.module('trapezaApp', [ngCookies, ngResource, ngSanitize, ngMaterial, 'bt
   userInterfaceAccount,
   userInterfaceAdmin,
   userInterfaceStart,
+  userCompanyInfo,
   adminInterfaceDashboard,
   adminInterfaceUserSearch,
   adminInterfaceAdmin,
@@ -93,6 +96,8 @@ angular.module('trapezaApp', [ngCookies, ngResource, ngSanitize, ngMaterial, 'bt
   .run(function($rootScope, $location, Auth) {
     'ngInject';
     // Redirect to login if route requires auth and you're not logged in
+
+    window.$ = window.jQuery = jquery;
 
     $rootScope.userInterface = false;
     $rootScope.customerInterface = false;

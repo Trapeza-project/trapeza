@@ -81,12 +81,12 @@ export function show(req, res) {
       id: req.params.id
     }
   }).then(function(actor){
-	  console.log(actor);
 	  var dataValues = actor.dataValues;
 	  data.name = dataValues.name;
 	  data.basicinfo = dataValues.basicinfo;
 	  data.description = dataValues.description;
-	  data.branch = JSON.parse(dataValues.branch)
+	  data.branch = JSON.parse(dataValues.branch);
+	  data.score = dataValues.score;
 	  res.json(data);
 	 });
 }

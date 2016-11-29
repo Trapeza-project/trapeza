@@ -11,14 +11,12 @@ export class CustomerRequestComponent {
   history = [];
   requesthtml="";
   /*@ngInject*/
-  constructor($timeout, $scope, $http, $location, lookupService, modalService, Auth) {
+  constructor($timeout, $state, $scope, $http, $location, lookupService, modalService, Auth) {
     'ngInject';
-
-    function temp(){
-      return true;
-    }
-    this.isAdmin = temp;
-    //this.isAdmin = Auth.isAdminSync;
+	
+	this.$state = $state;
+	
+	this.isAdmin = Auth.isAdminSync;
     this.$http = $http;
     this.$location = $location;
     this.lookupService = lookupService;
@@ -160,7 +158,7 @@ export class CustomerRequestComponent {
 
   openActor = function(id){
     this.lookupService.setActiveActorID(id);
-    this.$location.url('/actor');
+    this.$state.go('userCompanyInfo');
   }
 }
 

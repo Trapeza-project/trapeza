@@ -3,136 +3,18 @@
 
 
     <div class="col-sm-6 col-sm-offset-1 permissionSettingsCol">
-      <h1>Permission settings</h1>
-      <hr />
-      <table class="table table-responsive table-bordered">
-        <thead>
-          <th></th>
-          <td class="allow-all">
-            <label><h3>Allow all</h3></label><br />
-            <div class="btn-group" data-toggle="buttons">
-              <label class="btn">
-                <input type="radio" name="all_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
-              </label>
-            </div>
-          </td>
-          <td class="allow-trusted">
-            <label><h3>Allow trusted</h3></label><br />
-            <div class="btn-group" data-toggle="buttons">
-              <label class="btn">
-                <input type="radio" name="all_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
-              </label>
-            </div>
-          </td>
-          <td class="always-ask">
-            <label><h3>Always ask</h3></label><br />
-            <div class="btn-group" data-toggle="buttons">
-              <label class="btn">
-                <input type="radio" name="all_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
-              </label>
-            </div>
-          </td>
-        </thead>
-        <tbody>
-          <!--<tr>
-            <div class="switch-field btn-group btn-group-justified">
-              <div class="switch-title"><h4>Financial data</h4></div>
-              <input type="radio" id="switch_1_left" class="switch_left" name="switch_1" value="yes" checked/>
-              <label class="switch_left_label" for="switch_1_left">Allow all</label>
-              <input type="radio" id="switch_1_center" class="switch_center" name="switch_1" value="maybe" />
-              <label class="switch_center_label" for="switch_1_center">Allow trusted</label>
-              <input type="radio" id="switch_1_right" class="switch_right" name="switch_1" value="no" />
-              <label class="switch_right_label" for="switch_1_right">Always ask</label>
-            </div>
-          </tr>-->
-          <tr>
-            <th><label>Financial data</label></th>
-            <td class="allow-all">
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn">
-                  <input type="radio" name="financial_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
-                </label>
-              </div>
-            </td>
-            <td class="allow-trusted">
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn">
-                  <input type="radio" name="financial_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
-                </label>
-              </div>
-            </td>
-            <td class="always-ask">
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn">
-                  <input type="radio" name="financial_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
-                </label>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th><label>Criminal record</label></th>
-            <td class="allow-all">
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn">
-                  <input type="radio" name="criminal_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
-                </label>
-              </div>
-            </td>
-            <td class="allow-trusted">
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn">
-                  <input type="radio" name="criminal_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
-                </label>
-              </div>
-            </td>
-            <td class="always-ask">
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn">
-                  <input type="radio" name="criminal_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
-                </label>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th><label>Medical record</label></th>
-            <td class="allow-all">
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn">
-                  <input type="radio" name="medical_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
-                </label>
-              </div>
-            </td>
-            <td class="allow-trusted">
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn">
-                  <input type="radio" name="medical_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
-                </label>
-              </div>
-            </td>
-            <td class="always-ask">
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn">
-                  <input type="radio" name="medical_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
-                </label>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
       <div class="row">
-        <div class="col-sm-12">
-          <a class="btn btn-warning btn-lg pull-right">Save</a>
+        <div class="col-sm-8">
+          <h1>Permission settings </h1>
+        </div>
+        <div class="col-sm-4 text-right">
+          <i class="fa fa-question-circle-o fa-2x" aria-hidden="true" ng-click="vm.toggleHelp()"></i>
         </div>
       </div>
-      <hr />
-      <div class="row">
-        <div class="col-sm-2 col-sm-offset-5">
-          <i class="center-block fa fa-question-circle-o fa-3x" aria-hidden="true"></i>
-        </div>
-      </div>
-      <div class="col-sm-5"></div>
-      <div class="row">
-        <div class="col-sm-12">
+
+      <div class="row" ng-show="vm.showHelp">
+        <div class="col-sm-12 text-right">
           <ul class="list-group">
             <li class="list-group-item list-group-item-success">
               <p style="text-align: left;"><strong>Allow all</strong> - Everyone who asks for the data from you will receive it automatically.</p>
@@ -146,45 +28,91 @@
           </ul>
         </div>
       </div>
-  	</div>
-
-
-    <div class="col-sm-3 col-sm-offset-1 permissionSettingsCol">
-      <h2>Trusted</h2>
       <hr />
-      <table class="table table-striped table-sm table-responsive ">
+      <table class="table table-responsive table-bordered">
+        <thead>
+          <th></th>
+          <td class="allow-all">
+            <label><h3>Allow all</h3></label><br />
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn">
+                <input id="allow-all-toggle" type="radio" name="all_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+              </label>
+            </div>
+          </td>
+          <td class="allow-trusted">
+            <label><h3>Allow trusted</h3></label><br />
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn">
+                <input id="allow-trusted-toggle" type="radio" name="all_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+              </label>
+            </div>
+          </td>
+          <td class="always-ask">
+            <label><h3>Always ask</h3></label><br />
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn">
+                <input id="always-ask-toggle" type="radio" name="all_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+              </label>
+            </div>
+          </td>
+        </thead>
         <tbody>
-          <tr>
-            <td><p class="tableText" style="text-align: left; font-weight: bold;">Media Markt</p></td>
-            <td>
-                <a class="btn"><i class="fa fa-trash"></i></a>
+          <tr ng-repeat="info in vm.infoTypes">
+            <th><label>{{info.category}}</label></th>
+            <td class="allow-all">
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn">
+                  <input type="radio" name="{{info.category}}"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+                </label>
+              </div>
             </td>
-          </tr>
-          <tr>
-            <td><p class="tableText" style="text-align: left; font-weight: bold;">Elgiganten</p></td>
-            <td>
-                <a class="btn"><i class="fa fa-trash"></i></a>
+            <td class="allow-trusted">
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn">
+                  <input type="radio" name="{{info.category}}"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+                </label>
+              </div>
             </td>
-          </tr>
-          <tr>
-            <td><p class="tableText" style="text-align: left; font-weight: bold;">CDON</p></td>
-            <td>
-                <a class="btn"><i class="fa fa-trash"></i></a>
+            <td class="always-ask">
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn">
+                  <input type="radio" name="{{info.category}}"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
+                </label>
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
-      <hr />
-      <div id="trustSearch" class="input-group stylish-input-group">
-        <input type="text" class="form-control"  placeholder="Search" >
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-search"></span>
-        </span>
+      <div class="row">
+        <div class="col-sm-12">
+          <a class="btn btn-warning btn-lg pull-right">Save</a>
+        </div>
       </div>
-      <a class="btn btn-block btn-warning">Add</a>
+  	</div>
+
+
+    <div class="col-sm-3 col-sm-offset-1 permissionSettingsCol">
+      <h2>Trusted companies</h2>
+      <div ng-if="vm.trustedList.length">
+        <table class="table table-striped table-sm table-responsive ">
+          <tbody>
+            <tr ng-repeat="actor in vm.trustedList">
+              <td><p class="tableText" style="text-align: left; font-weight: bold;">{{actor}}</p></td>
+              <td>
+                  <a class="btn" ng-click="vm.removeTrusted($index)"><i class="fa fa-trash"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div ng-if="!vm.trustedList.length">
+        <p>No trusted companies</p>
+      </div>
+        <hr />
+      <h4>Add company to trusted list</h4>
+      <input id="search-actor" class="awesomplete"/>
+      <a class="btn btn-warning" ng-click="vm.addToTrusted()">Add</a>
     </div>
-
-
-    <div class="col-sm-1"></div>
   </div>
 </div>

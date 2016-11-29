@@ -16,9 +16,12 @@ export class CustomerActorComponent {
         method: "GET"
   }).then(response => {
       if(response.status==200){;
+		console.log(response.data);
         this.actor = response.data;
       }
     });
+  }
+  $onInit() {
   }
 }
 
