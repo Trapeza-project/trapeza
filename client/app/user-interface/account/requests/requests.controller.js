@@ -1,7 +1,7 @@
 'use strict';
 import Chart from 'chart.js';
 
-export default class UserPendingRequestsController {
+export default class UserRequestsController {
 
 
   personid = '197001011234';
@@ -22,6 +22,7 @@ export default class UserPendingRequestsController {
 
   $onInit() {
     this.getPendingRequests();
+    this.getAllRequests();
     console.log(Chart);
   }
 
@@ -31,7 +32,7 @@ export default class UserPendingRequestsController {
         console.log(response.data.history);
         this.pendingRequests = response.data.history;
         //this.socket.syncUpdates('request', this.pendingRequests);
-        $("#numOfPendingRequests")[0].innerText = this.pendingRequests.length;
+        $("#numOfRequests")[0].innerText = this.pendingRequests.length;
       });
   }
 
@@ -52,5 +53,13 @@ export default class UserPendingRequestsController {
   showCompanyInfo() {
     this.lookupService.setActiveActorID(this.singleShowInfo.actor.id);
     this.$state.go("userCompanyInfo");
+  }
+
+  getAllRequests() {
+    this.$http.get('/api/requests/person/' + this.personid)
+      .then(response => {
+        console.log('history',response.data.history);
+        this.historyRequests = response.data.history;
+      });
   }
 }
