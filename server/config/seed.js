@@ -247,14 +247,14 @@ Actor.sync()
       basicinfo: "A retail store.",
       description: "Media Markt is a German chain of stores selling consumer electronics with numerous branches throughout Europe and Asia. It is Europe's largest retailer of consumer electronics, and the second largest in the world after American retailer Best Buy.",
       branch: '["Retail","Electronics"]',
-      score:0.59
+      score:0.79
     }, {
       id:1,
       name: "Trapeza Creators",
       basicinfo: "We are creating this service.",
       description: "We created it",
       branch: '["Web Development","Database"]',
-      score:1
+      score:0.95
     }])
     .then(() => {
       console.log('finished populating actors');

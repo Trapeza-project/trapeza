@@ -1,12 +1,12 @@
 <div class="container-fluid">
-  <h1 style="text-align:center;">Lookup cards</h1>
+  <h1 style="text-align:center;">Lookup Cards</h1>
   <hr />
   <div class="row">
     <div class="col-sm-8 col-sm-offset-1">
       <div class="col-sm-3" ng-repeat="lookup in customerLookupSettingsCtrl.lookups">
         <div class="lookupmodule">
           <div class="row">
-            <a ng-click="customerLookupSettingsCtrl.deleteModule(lookup)" class="btn pull-right">
+            <a ng-if="lookup.customized" ng-click="customerLookupSettingsCtrl.deleteModule(lookup)" class="btn pull-right">
               <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
             </a>
           </div>
@@ -17,15 +17,21 @@
           <div class="row">
             <p class="text-color">{{lookup.description}}</p>
           </div>
-          <div class="row weak-border-top weak-border-bottom">
-            <p class="text-orange" ng-repeat="info in lookup.info"><strong>{{info.name}}</strong></p>
+          <div class="row weak-border-top weak-border-bottom" ng-model="showMore" ng-init="showMore=false">
+			<div ng-if="!showMore">
+				<p class="text-orange" ng-repeat="info in customerLookupSettingsCtrl.getSub(lookup.info)"><strong>{{info.name}}</strong></p>
+				<a class="pointercursor" ng-click="$parent.showMore = true" ng-show="lookup.info.length > 5" >More</a>
+			</div>
+			<div ng-if="showMore">
+				<p class="text-orange" ng-repeat="info in lookup.info"><strong>{{info.name}}</strong></p>
+				<a class="pointercursor" ng-click="$parent.showMore = false">Less</a>
+			</div>
           </div>
           <div class="row">
             <div class="checkbox col-sm-10 col-sm-offset-1">
               <label style="font-size: 1em">
                   <input type="checkbox" ng-model="lookup.UCHandle" ng-change="customerLookupSettingsCtrl.changeStatus(lookup)">
-                  <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                  UC validates data
+                  <span class="cr"><i class="cr-icon fa fa-check"></i></span><p>UC validates data</p>
               </label>
             </div>
             <div class="col-sm-1"></div>
@@ -41,7 +47,7 @@
     <div class="col-sm-2 settingsbox">
       <form class="form" name="editform">
         <div class="row">
-          <h2 class="text-orange">Add new card</h2>
+          <h2 class="text-orange">Add New Card</h2>
           <hr />
         </div>
         <div class="row">
@@ -84,7 +90,7 @@
           </div>
         </div>
         <button class="row btn btn-warning btn-md btn-block" ng-click="customerLookupSettingsCtrl.addModule()" style="margin-top: 1em; margin-bottom: 15px;">
-          Add card
+          Add Card
         </button>
       </form>
     </div>
