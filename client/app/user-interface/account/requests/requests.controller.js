@@ -23,7 +23,10 @@ export default class UserRequestsController {
   $onInit() {
     this.getPendingRequests();
     this.getAllRequests();
-    console.log(Chart);
+    var requestCtrl = this;
+    this.socket.socket.on("lookup", function(data) {
+      requestCtrl.getPendingRequests();
+    });
   }
 
   getPendingRequests() {
@@ -73,9 +76,12 @@ export default class UserRequestsController {
       }
     }).then(response => {
       console.log(response.data);
+      this.getPendingRequests();
+      this.getAllRequests();
+      this.toggleInfo();
+      this.socket.socket.emit("answered:lookup", response.data);
     }, error => {
 
     });
-    this.toggleInfo();
   }
 }

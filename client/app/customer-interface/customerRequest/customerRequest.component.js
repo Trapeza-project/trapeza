@@ -11,17 +11,29 @@ export class CustomerRequestComponent {
   history = [];
   requesthtml="";
   /*@ngInject*/
-  constructor($timeout, $state, $scope, $http, $location, lookupService, modalService, Auth) {
+  constructor($timeout, $state, $scope, $http, $location, lookupService, modalService, Auth, socket) {
     'ngInject';
-	
+
 	this.$state = $state;
-	
+  this.socket = socket;
 	this.isAdmin = Auth.isAdminSync;
     this.$http = $http;
     this.$location = $location;
     this.lookupService = lookupService;
     this.modalService = modalService;
     this.requestid = lookupService.getCurrentRequestID();
+
+  }
+  $onInit() {
+    this.getData();
+    var requestCtrl = this;
+    this.socket.socket.on("answered", function(data) {
+      console.log("ANSWERED", data);
+      requestCtrl.getData();
+    });
+  }
+
+  getData() {
     this.$http({
       url: '/api/requests/'+this.requestid,
       method: "GET"
@@ -49,9 +61,6 @@ export class CustomerRequestComponent {
       }
     });
   }
-  $onInit() {
-  }
-
   pendingrequest(){
     if(this.requestdata.pending==true){
       return true;
