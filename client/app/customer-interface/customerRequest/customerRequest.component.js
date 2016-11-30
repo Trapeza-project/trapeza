@@ -91,7 +91,7 @@ export class CustomerRequestComponent {
     }
   }
   approvedcompanyrequest(){
-    if(this.requestdata.companyallow==true && this.requestdata.companypending==false && this.requestdata.pending==false){
+    if(this.requestdata.companyallow==true && this.requestdata.companypending==false && this.requestdata.pending==false && this.requestdata.allow){
       return true;
     }else{
       return false;

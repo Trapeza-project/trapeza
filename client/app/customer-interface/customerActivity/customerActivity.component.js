@@ -61,7 +61,7 @@ export class CustomerActivityComponent {
     }
   }
   approvedcompanyrequest(request){
-    if(request.companyallow==true && request.companypending==false && request.pending==false){
+    if(request.companyallow==true && request.companypending==false && request.pending==false && request.allow==true){
       return true;
     }else{
       return false;

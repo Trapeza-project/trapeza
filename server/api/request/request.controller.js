@@ -88,7 +88,16 @@ export function getpreviousrequests(req, res) {
 			var dataValues = request.dataValues;
 			var data = dataValues;
 			var date = new Date(dataValues.timestamp);
-			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
+			var year = date.getFullYear();
+			var month = (date.getMonth()+1);
+			if(month < 10){
+				month = "0"+month;
+			}
+			var day = date.getDate();
+			if(day < 10){
+				dat = "0"+day;
+			}
+			data.timestamp = year + '/' + month + '/' + day;
 			var tempids = [];
 			var promises = [];
 			var infoids = JSON.parse(dataValues.infoids);
@@ -149,7 +158,16 @@ export function getpendingrequests(req, res) {
 			var dataValues = request.dataValues;
 			var data = dataValues;
 			var date = new Date(dataValues.timestamp);
-			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
+			var year = date.getFullYear();
+			var month = (date.getMonth()+1);
+			if(month < 10){
+				month = "0"+month;
+			}
+			var day = date.getDate();
+			if(day < 10){
+				dat = "0"+day;
+			}
+			data.timestamp = year + '/' + month + '/' + day;
 
 			var tempids = [];
 			var promises = [];
@@ -202,7 +220,17 @@ export function getallrequests(req, res) {
 			var dataValues = request.dataValues;
 			var data = dataValues;
 			var date = new Date(dataValues.timestamp);
-			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
+			
+			var year = date.getFullYear();
+			var month = (date.getMonth()+1);
+			if(month < 10){
+				month = "0"+month;
+			}
+			var day = date.getDate();
+			if(day < 10){
+				dat = "0"+day;
+			}
+			data.timestamp = year + '/' + month + '/' + day;
 
 			var tempids = [];
 			var promises = [];
@@ -256,7 +284,16 @@ export function getallpersonrequests(req, res) {
 			var dataValues = request.dataValues;
 			var data = dataValues;
 			var date = new Date(dataValues.timestamp);
-			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
+			var year = date.getFullYear();
+			var month = (date.getMonth()+1);
+			if(month < 10){
+				month = "0"+month;
+			}
+			var day = date.getDate();
+			if(day < 10){
+				dat = "0"+day;
+			}
+			data.timestamp = year + '/' + month + '/' + day;
 
 			var tempids = [];
 			var promises = [];
@@ -315,7 +352,32 @@ return 	RequestLog.findAll({
 		tempRequest.pending = dataValues.pending;
 		tempRequest.personid = dataValues.personid;
 		var date = new Date(dataValues.timestamp);
-		tempRequest.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate() + " " + date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+		
+		
+		var year = date.getFullYear();
+		var month = (date.getMonth()+1);
+		if(month < 10){
+			month = "0"+month;
+		}
+		var day = date.getDate();
+		if(day < 10){
+			dat = "0"+day;
+		}
+		var hour = date.getHours();
+		if(hour < 10){
+			hour = "0"+hour;
+		}
+		var minute = date.getMinutes();
+		if(minute < 10){
+			minute = "0"+minute;
+		}
+		var second = date.getSeconds();
+		if(second < 10){
+			second = "0"+second
+		}
+		
+		tempRequest.timestamp = year + '/' + month + '/' + day + ' '+hour+':'+minute+':'+second;		
+
 
 	  var infoids = JSON.parse(dataValues.infoids);
 	  var tempids = [];
@@ -398,7 +460,32 @@ export function show(req, res) {
 				basic.name = dat.dataValues.firstname + " " + dat.dataValues.lastname;
 				basic.personid=dat.dataValues.personid;
 				var date = new Date(dataValues.timestamp);
-				basic.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate() + " " + date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+				
+				
+				var year = date.getFullYear();
+				var month = (date.getMonth()+1);
+				if(month < 10){
+					month = "0"+month;
+				}
+				var day = date.getDate();
+				if(day < 10){
+					dat = "0"+day;
+				}
+				var hour = date.getHours();
+				if(hour < 10){
+					hour = "0"+hour;
+				}
+				var minute = date.getMinutes();
+				if(minute < 10){
+					minute = "0"+minute;
+				}
+				var second = date.getSeconds();
+				if(second < 10){
+					second = "0"+second
+				}
+				
+				basic.timestamp = year + '/' + month + '/' + day + ' '+hour+':'+minute+':'+second;	
+				
 				basic.purpose = dataValues.purpose;
 				basic.allow = dataValues.allow;
 				basic.companyallow = dataValues.companyallow;
@@ -424,7 +511,17 @@ export function latestuserrequest(req, res) {
 			var dataValues = request.dataValues;
 			var data = {};
 			var date = new Date(dataValues.timestamp);
-			data.timestamp = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate();
+			
+			var year = date.getFullYear();
+			var month = (date.getMonth()+1);
+			if(month < 10){
+				month = "0"+month;
+			}
+			var day = date.getDate();
+			if(day < 10){
+				dat = "0"+day;
+			}
+			data.timestamp = year + '/' + month + '/' + day;			
 			data.access = dataValues.allow;
 
 			var tempids = [];
