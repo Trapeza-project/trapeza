@@ -5,14 +5,13 @@ import angular from 'angular';
 
 export class NavbarComponent {
   menu = [{
-    title: 'Home',
-    state: 'customerMain'
-  }, {
     title: 'Lookup',
-    state: 'customerLookup'
+    state: 'customerLookup',
+	name: 'glyphicon glyphicon-search'
   }, {
-    title: 'Activity',
-    state: 'customerActivity'
+    title: 'Events',
+    state: 'customerActivity',
+	name: 'glyphicon glyphicon-inbox'
   }];
 
   isCollapsed = true;

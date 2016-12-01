@@ -7,23 +7,26 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/" class="navbar-brand">trapeza</a>
+      <a href="/" class="navbar-left image-customer-navbar"><img src="assets/images/UC.png" alt="UC" style="margin: 0.7em; height: 45px;"></a>
     </div>
     <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
+        <li ui-sref-active="active">
+            <a class="navbar-text" ui-sref="customerMain"><span class="glyphicon glyphicon-home"></span> Home</a>
+        </li>
         <li ng-show="$ctrl.isLoggedIn()" ng-repeat="item in $ctrl.menu" ui-sref-active="active">
-            <a ui-sref="{{item.state}}">{{item.title}}</a>
+            <a class="navbar-text" ui-sref="{{item.state}}"><span ng-class="item.name"></span> {{item.title}}</a>
         </li>
         <!--<li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a ui-sref="customerAdmin">Admin</a></li>-->
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="customerSignup">Sign up</a></li>
-        <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="customerLogin">Login</a></li>
+        <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a class="navbar-text" ui-sref="customerSignup">Sign up</a></li>
+        <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a class="navbar-text" ui-sref="customerLogin">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
         <!-- <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p> </li>-->
-        <li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a ui-sref="customerLookupSettings">Settings <span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a class="navbar-text" ui-sref="customerLookupSettings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
         <!--<li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="customerSettings"><span class="glyphicon glyphicon-cog"></span></a></li>-->
-        <li ng-show="$ctrl.isLoggedIn()"><a ui-sref="customerLogout">Logout[{{ $ctrl.getCurrentUser().name }}]</a></li>
+        <li ng-show="$ctrl.isLoggedIn()"><a class="navbar-text" ui-sref="customerLogout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout[{{ $ctrl.getCurrentUser().name }}]</a></li>
       </ul>
     </div>
   </div>
