@@ -59,6 +59,10 @@
                         <td>{{adminUserSearchCtrl.basicInfo.firstname}} {{adminUserSearchCtrl.basicInfo.lastname}}</td>
                       </tr>
                       <tr>
+                        <td>Birthdate</td>
+                        <td>{{adminUserSearchCtrl.basicInfo.birthdate}}</td>
+                      </tr>
+                      <tr>
                         <td>Adress</td>
                         <td>{{adminUserSearchCtrl.basicInfo.address}}</td>
                       </tr>
@@ -138,7 +142,39 @@
                       <tbody>
                       <tr>
                         <td>Income</td>
-                        <td>{{adminUserSearchCtrl.financialInfo.income}}</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.income}} SEK/month</td>
+                      </tr>
+                      <tr>
+                        <td>Allowance</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.allowance}} SEK/year</td>
+                      </tr>
+                      <tr>
+                        <td>Taxable Income</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.taxableIncome}} SEK/month</td>
+                      </tr>
+                      <tr>
+                        <td>Interest Income</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.interestIncome}} SEK/year</td>
+                      </tr>
+                      <tr>
+                        <td>Pension Contribution</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.pensionContribution}} SEK/year</td>
+                      </tr>
+                      <tr>
+                        <td>Benefits</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.benefits}} SEK/year</td>
+                      </tr>
+                      <tr>
+                        <td>Occupational</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.occupational}} SEK/year</td>
+                      </tr>
+                      <tr>
+                       <td>Business</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.business}} SEK/year</td>
+                      </tr>
+                      <tr>
+                       <td>Property Tax</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.propertytax}} SEK/year</td>
                       </tr>
                       </tbody>
                     </table>
@@ -157,6 +193,14 @@
                       <tr>
                         <td>Degree</td>
                         <td>{{adminUserSearchCtrl.educationalInfo.degree}}</td>
+                      </tr>
+                      <tr>
+                        <td>School</td>
+                        <td>{{adminUserSearchCtrl.educationalInfo.school}}</td>
+                      </tr>
+                      <tr>
+                        <td>School Reputation</td>
+                        <td>{{adminUserSearchCtrl.educationalInfo.schoolrep}}/5</td>
                       </tr>
                       </tbody>
                     </table>
