@@ -3,11 +3,9 @@ const angular = require('angular');
 
 const uiRouter = require('angular-ui-router');
 
-import routes from './userCompanyInfo.routes';
+import routes from './customerCompanyInfo.routes';
 
-import Chart from 'chart.js';
-
-export class UserCompanyInfoComponent {
+export class CustomerCompanyInfoComponent {
   companyInfo = {};
 
   /*@ngInject*/
@@ -130,11 +128,11 @@ export class UserCompanyInfoComponent {
   }
 }
 
-export default angular.module('trapezaApp.userCompanyInfo', [uiRouter])
+export default angular.module('trapezaApp.customerCompanyInfo', [uiRouter])
   .config(routes)
-  .component('userCompanyInfo', {
-    template: require('./userCompanyInfo.html'),
-    controller: UserCompanyInfoComponent,
-    controllerAs: 'userCompanyInfoCtrl'
+  .component('customerCompanyInfo', {
+    template: require('./customerCompanyInfo.html'),
+    controller: CustomerCompanyInfoComponent,
+    controllerAs: 'customerCompanyInfoCtrl'
   })
   .name;

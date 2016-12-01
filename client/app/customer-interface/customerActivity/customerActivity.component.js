@@ -17,24 +17,19 @@ export class CustomerActivityComponent {
     this.lookupService = lookupService;
     var accessid = lookupService.getAccessor();
     this.$http = $http;
-    this.$http({
-      url: '/api/requests/accessor/'+accessid,
-      method: "GET",
-      params: {accessor: accessid}
-    }).then(response => {
-      if(response.status==200){
-        console.log(response.data);
-        this.requests = response.data;
+	var vm = this;
+	var callback = function(data){
+        vm.requests = data;
         //this.requests = [{name:"Kalle Karlsson", info:["Income","Address"], timestamp:"01/01/2016", access:"pending", companystatus:"pending"},{name:"Stina Andersson", info:["Income","Address"], timestamp:"01/01/2016", access:"approved", companystatus:"approved"}, {name:"Eva Svensson", info:["Income","Address"], timestamp:"01/01/2016", access:"denied", companystatus:"approved"},{name:"Eva Andersson", info:["Income","Address"], timestamp:"01/01/2016", access:"approved", companystatus:"denied"},{name:"Eva Andersson", info:["Income","Address"], timestamp:"01/01/2016", access:"approved", companystatus:"pending"}];
-        for(var i = 0; i < this.requests.length; i++){
-          if(this.requests[i].pending == true){
-            this.pending.push(this.requests[i]);
+        for(var i = 0; i < vm.requests.length; i++){
+          if(vm.requests[i].pending == true){
+            vm.pending.push(vm.requests[i]);
           }else{
-            this.answered.push(this.requests[i]);
+            vm.answered.push(vm.requests[i]);
           }
         }
-      }
-    });
+	} 
+	lookupService.getRequestLog(callback);
   }
   pendingrequest(request){
     if(request.pending == true){
@@ -59,21 +54,22 @@ export class CustomerActivityComponent {
   }
 
   pendingcompanyrequest(request){
-    if(request.companypending==true){
+    if(request.companypending==true || request.pending==true){
       return true;
     }else{
       return false;
     }
   }
   approvedcompanyrequest(request){
-    if(request.companyallow==true && request.companypending==false){
+    if(request.companyallow==true && request.companypending==false && request.pending==false && request.allow==true){
       return true;
     }else{
       return false;
     }
   }
+  
   deniedcompanyrequest(request){
-    if((request.companyallow==false && request.companypending==false) || (request.allow == false && request.pending ==false)){
+    if(((request.companyallow==false && request.companypending==false) || (request.allow == false)) && request.pending==false){
       return true;
     }else{
       return false;

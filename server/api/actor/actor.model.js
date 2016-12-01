@@ -11,6 +11,7 @@ export default function(sequelize, DataTypes) {
     basicinfo: DataTypes.STRING,
 	description: DataTypes.STRING,
 	branch: DataTypes.STRING,
-	score: DataTypes.DOUBLE
+	score: DataTypes.DOUBLE,
+	responsible: DataTypes.STRING
   });
 }

@@ -10,11 +10,11 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 /**
  * App-wide Styles
  */
- 
- 
+
+
 body {
 	height:initial;
-} 
+}
 
 .browserupgrade {
   margin: 0.2em 0;
@@ -163,12 +163,13 @@ body {
 @import 'customer-interface/admin/admin';
 @import 'customer-interface/customerActivity/customerActivity';
 @import 'customer-interface/customerActor/customerActor';
+@import 'customer-interface/customerCompanyInfo/customerCompanyInfo';
 @import 'customer-interface/customerLookup/customerLookup';
 @import 'customer-interface/customerLookupSettings/customerLookupSettings';
 @import 'customer-interface/customerMain/customerMain';
 @import 'customer-interface/customerRequest/customerRequest';
-@import 'user-interface/account/pendingRequests/pendingRequests';
 @import 'user-interface/account/permissionSettings/permissionSettings';
+@import 'user-interface/account/requests/requests';
 @import 'user-interface/admin/admin';
 @import 'user-interface/userCompanyInfo/userCompanyInfo';
 @import 'user-interface/userStartPage/userStartPage';
@@ -184,4 +185,5 @@ body {
 @import '../components/isteven-multi-select/isteven-multi-select';
 @import '../components/modal/modal';
 @import '../components/navbar/navbar';
+@import '../components/navbarCustomerInterface/navbarCustomerInterface';
 /* endinject */

@@ -12,10 +12,6 @@
         <col width="50%">
         <col width="50%">
         <tr class="requesttr">
-          <td >
-            <h3>Request Purpose</h3>
-            <p class="inlineblock text-color">{{customerRequestCtrl.requestdata.purpose}}</p>
-          </td>
           <td>
             <h3>Request Time</h3>
             <p class="inlineblock text-color">{{customerRequestCtrl.requestdata.timestamp}}</p>
@@ -31,7 +27,7 @@
             </div>
           </td>
           <td>
-            <h3>Request Approved</h3>
+            <h3>Request Data Judgement</h3>
             <div>
               <span ng-show="customerRequestCtrl.pendingcompanyrequest()" class="glyphicon glyphicon-hourglass"></span>
               <span ng-show="customerRequestCtrl.approvedcompanyrequest()" class="glyphicon glyphicon-ok-circle"></span>
@@ -41,12 +37,12 @@
         </tr>
       </table>
     </div>
-    <div ng-if="customerRequestCtrl.isAdmin()">
+    <div ng-if="!customerRequestCtrl.requestdata.UCHandle">
       <h3>Requested Information</h3>
       <div id="reqinfodata" ng-bind-html="customerRequestCtrl.requesthtml">
       </div>
     </div>
-    <div class="requesttable" ng-if="customerRequestCtrl.isAdmin()">
+    <div class="requesttable" ng-if="!customerRequestCtrl.requestdata.UCHandle">
       <h3>Previous Lookups</h3>
       <table class="requesttable">
         <col width="25%">

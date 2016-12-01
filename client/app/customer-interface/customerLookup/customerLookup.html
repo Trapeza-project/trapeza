@@ -8,24 +8,32 @@
     <div id="paddedlookup">
       <form class="form" name="form">
         <div id="quick">
-          <div class="quickLookup" ng-repeat="module in customerLookupCtrl.modules">
-            <div class="quickLookupModule" ng-click="customerLookupCtrl.toggleModule(module)">
-              <div class="weak-border-bottom">
-                <h3 class="text-orange">{{module.name}}</h3>
-                <p class="text-color">{{module.description}}</p>
-                <p class="text-orange weak-border-top" ng-repeat="info in module.info">{{info.name}}</p>
-              </div>
-            </div>
+          <div class="quickLookup" ng-repeat="module in customerLookupCtrl.modules">			
+			<div ng-if="!customerLookupCtrl.isActiveModule(module)" class="quickLookupModule" ng-click="customerLookupCtrl.toggleModule(module)">
+				<div class="weak-border-bottom">
+					<h3 class="text-orange">{{module.name}}</h3>
+					<p class="text-color">{{module.description}}</p>
+					<p class="text-orange weak-border-top" ng-repeat="info in module.info">{{info.name}}</p>
+				</div>
+			</div>
+			<div ng-if="customerLookupCtrl.isActiveModule(module)" class="quickLookupModule btn-module-active" ng-click="customerLookupCtrl.toggleModule(module)">
+				<div class="weak-border-bottom">
+					<h3 class="text-orange">{{module.name}}</h3>
+					<p class="text-color">{{module.description}}</p>
+					<p class="text-orange weak-border-top" ng-repeat="info in module.info">{{info.name}}</p>
+				</div>
+			</div>
+			
           </div>
         </div>
         <label class="requestlabel">Personal identity number</label>
         <div class="form-group" id="personnumberinput">
           <input type="username" name="personnumber" class="form-control" placeholder='{{customerLookupCtrl.personnumber}}' ng-disabled="(!customerLookupCtrl.isModuleActive())&&customerLookupCtrl.chosenInfo.length==0" ng-model="id" ng-change="customerLookupCtrl.updateID(id)" maxlength="12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
         </div>
-        <div ng-if="!customerLookupCtrl.UCHandling"class="form-group">
+        <!--<div ng-if="!customerLookupCtrl.UCHandling"class="form-group">
           <label class="requestlabel">Purpose</label>
           <input type="text" name="purpose" class="form-control" placeholder='{{customerLookupCtrl.purposestring}}' ng-model="purpose" ng-change="customerLookupCtrl.updatePurpose(purpose)" required>
-        </div>
+        </div>-->
         <div class="paddedmodule">
           <div class="form-group has-error">
             <p class="help-block" ng-show="form.personnumber.$error.personnumber && vm.submitted">

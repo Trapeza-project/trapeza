@@ -1,0 +1,30 @@
+<button class="btn btn-warning btn-lg btn-login requestback" onclick="history.back()">
+  <span class="glyphicon glyphicon-chevron-left"></span>
+  Back
+</button>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <h1 class="weak-border-bottom text-orange"> <span class="rating">A</span> {{customerCompanyInfoCtrl.companyInfo.name}}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+	  <div>
+		<h3>Basic Info</h3>
+		<p class="inlineblock text-color">{{customerCompanyInfoCtrl.companyInfo.basicinfo}}</p>
+		<h3>Branch</h3>
+		<p ng-repeat="branch in customerCompanyInfoCtrl.companyInfo.branch" class="inlineblock infotext text-color">{{branch}}</p>
+		<h3>Description</h3>
+      <div class="text-color">{{customerCompanyInfoCtrl.companyInfo.description}}</div>
+    </div>
+    </div>
+    <div class="col-sm-6">
+      <label for = "myChart" class="text-center">
+        <h4 class="text-orange">Approved requests</h4>
+        <canvas id="myChart"></canvas>
+      </label>
+    </div>
+  </div>
+</div>

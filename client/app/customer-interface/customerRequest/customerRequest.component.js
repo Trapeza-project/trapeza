@@ -11,17 +11,29 @@ export class CustomerRequestComponent {
   history = [];
   requesthtml="";
   /*@ngInject*/
-  constructor($timeout, $state, $scope, $http, $location, lookupService, modalService, Auth) {
+  constructor($timeout, $state, $scope, $http, $location, lookupService, modalService, Auth, socket) {
     'ngInject';
-	
+
 	this.$state = $state;
-	
+  this.socket = socket;
 	this.isAdmin = Auth.isAdminSync;
     this.$http = $http;
     this.$location = $location;
     this.lookupService = lookupService;
     this.modalService = modalService;
     this.requestid = lookupService.getCurrentRequestID();
+
+  }
+  $onInit() {
+    this.getData();
+    var requestCtrl = this;
+    this.socket.socket.on("answered", function(data) {
+      console.log("ANSWERED", data);
+      requestCtrl.getData();
+    });
+  }
+
+  getData() {
     this.$http({
       url: '/api/requests/'+this.requestid,
       method: "GET"
@@ -49,9 +61,6 @@ export class CustomerRequestComponent {
       }
     });
   }
-  $onInit() {
-  }
-
   pendingrequest(){
     if(this.requestdata.pending==true){
       return true;
@@ -75,21 +84,21 @@ export class CustomerRequestComponent {
   }
 
   pendingcompanyrequest(){
-    if(this.requestdata.companypending==true){
+    if(this.requestdata.companypending==true || this.requestdata.pending==true){
       return true;
     }else{
       return false;
     }
   }
   approvedcompanyrequest(){
-    if(this.requestdata.companyallow==true && this.requestdata.companypending==false){
+    if(this.requestdata.companyallow==true && this.requestdata.companypending==false && this.requestdata.pending==false && this.requestdata.allow){
       return true;
     }else{
       return false;
     }
   }
   deniedcompanyrequest(){
-    if((this.requestdata.companyallow==false && this.requestdata.companypending==false) || (this.requestdata.allow == false && this.requestdata.pending ==false)){
+    if(((this.requestdata.companyallow==false && this.requestdata.companypending==false) || (this.requestdata.allow == false)) && this.requestdata.pending==false){
       return true;
     }else{
       return false;
@@ -97,7 +106,7 @@ export class CustomerRequestComponent {
   }
 
   displayButton(){
-    if(this.isAdmin() && this.requestdata.companypending==true && !this.requestdata.UCHandle && this.requestdata.allow==true){
+    if(this.requestdata.companypending==true && !this.requestdata.UCHandle && this.requestdata.allow==true){
       return true;
     }else{
       return false;
@@ -158,7 +167,7 @@ export class CustomerRequestComponent {
 
   openActor = function(id){
     this.lookupService.setActiveActorID(id);
-    this.$state.go('userCompanyInfo');
+    this.$state.go('customerCompanyInfo');
   }
 }
 

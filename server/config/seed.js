@@ -77,7 +77,7 @@ Infotype.sync()
     Infotype.bulkCreate([{
       infoid: 1,
       infoname: 'Income',
-      infotype: 'Economic',
+      infotype: 'Financial',
       price: 10
     }, {
       infoid: 2,
@@ -247,14 +247,16 @@ Actor.sync()
       basicinfo: "A retail store.",
       description: "Media Markt is a German chain of stores selling consumer electronics with numerous branches throughout Europe and Asia. It is Europe's largest retailer of consumer electronics, and the second largest in the world after American retailer Best Buy.",
       branch: '["Retail","Electronics"]',
-      score:0.59
+      score:0.79,
+	  responsible: "Anders Andersson"
     }, {
       id:1,
       name: "Trapeza Creators",
       basicinfo: "We are creating this service.",
       description: "We created it",
       branch: '["Web Development","Database"]',
-      score:1
+      score:0.95,
+	  responsible: "Michelle Cañada"
     }])
     .then(() => {
       console.log('finished populating actors');

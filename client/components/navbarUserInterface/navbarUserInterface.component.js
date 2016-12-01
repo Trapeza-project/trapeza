@@ -8,9 +8,6 @@ export class NavbarComponent {
   personid = '197001011234';
 
   menu = [{
-    title: 'History',
-    state: 'userHistory'
-  },{
     title: 'Permission Settings',
     state: 'userPermissionSettings'
   }];
@@ -29,7 +26,7 @@ export class NavbarComponent {
         console.log(response.data.history);
         this.pendingRequests = response.data.history;
         //this.socket.syncUpdates('request', this.pendingRequests);
-        $("#numOfPendingRequests")[0].innerText = this.pendingRequests.length;
+        $("#numOfRequests")[0].innerText = this.pendingRequests.length;
       });
 
   }

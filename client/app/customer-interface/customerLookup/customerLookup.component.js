@@ -21,9 +21,10 @@ export class CustomerLookupComponent {
   price = 0;
 
   /*@ngInject*/
-  constructor($http, $scope, $location, lookupService, Auth) {
+  constructor($http, $scope, $location, lookupService, Auth, socket) {
     this.lookupService = lookupService;
     this.isAdmin = Auth.isAdminSync();
+    this.socket = socket;
     //this.isAdmin = Auth.isAdminSync;
     this.$http = $http;
     this.$location = $location;
@@ -72,6 +73,7 @@ export class CustomerLookupComponent {
         if(response.status==200){
           console.log(response);
           this.lookupService.setCurrentRequestID(response.data.requestid);
+          this.socket.socket.emit("new:lookup", response.data);
           this.$location.url('/customer/request');
         }
       });

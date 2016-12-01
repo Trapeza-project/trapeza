@@ -33,6 +33,7 @@ import userInterfaceAdmin from './user-interface/admin';
 import userInterfaceStart from './user-interface/userStartPage/userStartPage.component';
 import userInterfaceAccount from './user-interface/account';
 import userCompanyInfo from './user-interface/userCompanyInfo/userCompanyInfo.component';
+
 // Admin interface
 import adminInterfaceDashboard from './admin-interface/adminDashboard/adminDashboard.component';
 import adminInterfaceUserSearch from './admin-interface/adminUserSearch/adminUserSearch.component';
@@ -53,6 +54,7 @@ import customerInterfaceRequest from './customer-interface/customerRequest/custo
 import customerInterfaceActor from './customer-interface/customerActor/customerActor.component';
 import customerInterfaceAdmin from './customer-interface/admin';
 import customerInterfaceAccount from './customer-interface/account';
+import customerInterfaceCompanyInfo from './customer-interface/customerCompanyInfo/customerCompanyInfo.component';
 
 import customerLookupService from '../components/lookupService/lookupService.service';
 import customerModalService from '../components/modalService/modalService.service';
@@ -80,6 +82,7 @@ angular.module('trapezaApp', [ngCookies, ngResource, ngSanitize, ngMaterial, 'bt
   customerLookupService,
   customerModalService,
   customerMultiSelect,
+  customerInterfaceCompanyInfo,
   navbarUserInterface,
   navbarAdminInterface,
   headerAdminInterface,

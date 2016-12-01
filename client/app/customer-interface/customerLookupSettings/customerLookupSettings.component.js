@@ -36,8 +36,9 @@ export class CustomerLookupSettingsComponent {
 
 
   /*@ngInject*/
-  constructor($http, $location, lookupService, Auth) {
+  constructor($http, $location, lookupService, Auth, modalService) {
 
+	this.modalService = modalService;
     this.Auth = Auth;
     this.$http = $http;
     this.lookupService = lookupService;
@@ -154,6 +155,16 @@ export class CustomerLookupSettingsComponent {
     }
     return price;
   }
+  
+  getSub(info, alternative){
+	  var array = [];
+	  var alternatives = Math.min(info.length, alternative);
+	  
+	  for(var i = 0; i < alternatives; i++){
+		  array.push(info[i]);
+	  }
+	  return array;
+  }
 
   addModule(){
     var module = {};
@@ -210,18 +221,27 @@ export class CustomerLookupSettingsComponent {
     this.editDatatypes = JSON.parse(JSON.stringify(this.originaltypes));
   }
   deleteModule(module){
+	  
+   var modalOptions = {
+      closeButtonText: 'Cancel',
+      actionButtonText: 'Remove Card',
+      headerText: 'Remove Card',
+      bodyText: 'Are you sure you want to remove the card?'
+    };
     var vm = this;
-    var newLookups = function(newlookups){
+	var newLookups = function(newlookups){
       vm.lookups = newlookups;
     }
-    this.lookupService.removeModule(module, newLookups);
-    this.editingChosendata = [];
-    //this.editingChosenData = [];
-    this.editingname = "";
-    this.editingdescription = "";
-    this.editingprice = 0;
-    this.editingModule = {};
-    this.editDatatypes = JSON.parse(JSON.stringify(this.originaltypes));
+    this.modalService.showModal({}, modalOptions)
+      .then(function (result) {
+			vm.lookupService.removeModule(module, newLookups);
+			vm.editingChosendata = [];
+			vm.editingname = "";
+			vm.editingdescription = "";
+			vm.editingprice = 0;
+			vm.editingModule = {};
+			vm.editDatatypes = JSON.parse(JSON.stringify(vm.originaltypes));
+      });
   }
 }
 

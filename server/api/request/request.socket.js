@@ -10,14 +10,21 @@ import RequestEvents from './request.events';
 var events = ['save', 'remove'];
 
 export function register(socket) {
+  socket.on("new:lookup", function(data) {
+    socket.broadcast.emit("lookup", data);
+  });
+
+  socket.on("answered:lookup", function(data) {
+    socket.broadcast.emit("answered", data);
+  })
   // Bind model events to socket events
-  for(var i = 0, eventsLength = events.length; i < eventsLength; i++) {
+  /*for(var i = 0, eventsLength = events.length; i < eventsLength; i++) {
     var event = events[i];
     var listener = createListener(`request:${event}`, socket);
 
     RequestEvents.on(event, listener);
     socket.on('disconnect', removeListener(event, listener));
-  }
+  }*/
 }
 
 

@@ -1,6 +1,6 @@
-<div class="container bottom-margin">
+<div class="container" id="activitycontainer">
   <div class="weak-border-bottom topdiv">
-    <h1 class="text-orange">Activities</h1>
+    <h1 class="text-orange">Events</h1>
   </div>
   <div ng-cloak class="activity">
     <md-content>
@@ -23,7 +23,7 @@
                   Access
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Approved
+                  Data Judgement
                 </td>
               </tr>
               <tr ng-repeat="request in customerActivityCtrl.requests" class="requesttr" ng-click="customerActivityCtrl.viewRequest(request.requestid)">

@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <h1 style="text-align:center;">Lookup cards</h1>
+  <h1 style="text-align:center;">Lookup Cards</h1>
   <hr />
   <div class="row">
     <div class="col-sm-8 col-sm-offset-1">
-      <div class="col-sm-3" ng-repeat="lookup in customerLookupSettingsCtrl.lookups">
+      <div class="col-sm-4" ng-repeat="lookup in customerLookupSettingsCtrl.lookups">
         <div class="lookupmodule">
           <div class="row">
             <a ng-click="customerLookupSettingsCtrl.deleteModule(lookup)" class="btn pull-right">
@@ -17,15 +17,25 @@
           <div class="row">
             <p class="text-color">{{lookup.description}}</p>
           </div>
-          <div class="row weak-border-top weak-border-bottom">
-            <p class="text-orange" ng-repeat="info in lookup.info"><strong>{{info.name}}</strong></p>
+          <div class="row weak-border-top weak-border-bottom" ng-model="showMore" ng-init="showMore=false">
+			<p ng-if="lookup.info.length==0" class="text-color">No Request Data</p>
+			<div ng-if="lookup.info.length>0">
+				<div ng-if="!showMore">
+					<p class="text-orange" ng-repeat="info in customerLookupSettingsCtrl.getSub(lookup.info,5)">{{info.name}}</p>
+					<a class="pointercursor" ng-click="$parent.showMore = true" ng-show="lookup.info.length > 5" ><strong>More</strong></a>
+				</div>
+				<div ng-if="showMore">
+					<p class="text-orange" ng-repeat="info in lookup.info">{{info.name}}</p>
+					<a class="pointercursor" ng-click="$parent.showMore = false"><strong>Less</strong></a>
+				</div>
+			</div>
           </div>
           <div class="row">
-            <div class="checkbox col-sm-10 col-sm-offset-1">
-              <label style="font-size: 1em">
+            <div class="checkbox">
+              <label style="font-size: 1em; width:60%; text-align:center">
                   <input type="checkbox" ng-model="lookup.UCHandle" ng-change="customerLookupSettingsCtrl.changeStatus(lookup)">
                   <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                  UC validates data
+				  <p class="text-color">UC Judges Data</p>
               </label>
             </div>
             <div class="col-sm-1"></div>
@@ -41,7 +51,7 @@
     <div class="col-sm-2 settingsbox">
       <form class="form" name="editform">
         <div class="row">
-          <h2 class="text-orange">Add new card</h2>
+          <h2 class="text-orange">Add New Card</h2>
           <hr />
         </div>
         <div class="row">
@@ -53,22 +63,9 @@
           <textarea class="form-control" ng-model="customerLookupSettingsCtrl.description" placeholder="{{customerLookupSettingsCtrl.descriptionplaceholder}}" style="max-width:100%; max-height: 15em;">
           </textarea>
         </div>
-        <div class="row">
-          <h4 class="text-orange">Chosen Data</h4>
-        </div>
-        <div class="row">
-          <p class="text-color" ng-if="customerLookupSettingsCtrl.emptyData()">None</p>
-          <p class="text-color" ng-repeat="data in customerLookupSettingsCtrl.chosendata">{{data.name}}</p>
-        </div>
-        <div class="row weak-border-top">
-          <h4 class="text-orange">Calculated Price</h4>
-        </div>
-        <div class="row">
-          <p class="text-color">{{customerLookupSettingsCtrl.calculatePrice(customerLookupSettingsCtrl.chosendata)}} SEK</p>
-        </div>
         <div class="form-group weak-border-top">
           <div class="row">
-            <h4 class="text-orange">Data to request</h4>
+            <h4 class="text-orange">Data to Request</h4>
           </div>
           <div class="row dataselect">
             <isteven-multi-select
@@ -83,8 +80,14 @@
               </select>-->
           </div>
         </div>
+        <div class="row weak-border-top">
+          <h4 class="text-orange">Calculated Price</h4>
+        </div>
+        <div class="row">
+          <p class="text-color">{{customerLookupSettingsCtrl.calculatePrice(customerLookupSettingsCtrl.chosendata)}} SEK</p>
+        </div>
         <button class="row btn btn-warning btn-md btn-block" ng-click="customerLookupSettingsCtrl.addModule()" style="margin-top: 1em; margin-bottom: 15px;">
-          Add card
+          Add Card
         </button>
       </form>
     </div>
