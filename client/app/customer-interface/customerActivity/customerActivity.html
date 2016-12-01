@@ -20,16 +20,16 @@
                   Timestamp
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Access
+                  Access Granted
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Data Judgement
+                  Deal Approved
                 </td>
               </tr>
               <tr ng-repeat="request in customerActivityCtrl.requests" class="requesttr" ng-click="customerActivityCtrl.viewRequest(request.requestid)">
                 <td class="requesttd">
                   <p class="fontbold">{{request.name}}</p>
-                  <p ng-repeat="data in request.info" class="inlineblock infotext text-color">{{data}}</p>
+				  <span ng-repeat="data in request.info" class="label label-info" style="margin: 2px;">{{data}}</span>
                 </td>
                 <td class="horizontal-center requesttd text-color">
                   <p>{{request.timestamp}}</p>
@@ -63,16 +63,16 @@
                   Timestamp
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Access
+                  Access Granted
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Approved
+                  Deal Approved
                 </td>
               </tr>
               <tr ng-repeat="request in customerActivityCtrl.pending" class="requesttr" ng-click="customerActivityCtrl.viewRequest(request.requestid)">
                 <td class="requesttd">
                   <p class="fontbold">{{request.name}}</p>
-                  <p ng-repeat="data in request.info" class="inlineblock infotext text-color">{{data}}</p>
+                  <span ng-repeat="data in request.info" class="label label-info" style="margin: 2px;">{{data}}</span>
                 </td>
                 <td class="horizontal-center requesttd">
                   <p class="text-color">{{request.timestamp}}</p>
@@ -106,16 +106,16 @@
                   Timestamp
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Access
+                  Access Granted
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
-                  Approved
+                  Deal Approved
                 </td>
               </tr>
               <tr ng-repeat="request in customerActivityCtrl.answered" class="requesttr" ng-click="customerActivityCtrl.viewRequest(request.requestid)">
                 <td class="requesttd">
                   <p class="fontbold">{{request.name}}</p>
-                  <p ng-repeat="data in request.info" class="inlineblock infotext text-color">{{data}}</p>
+                  <span ng-repeat="data in request.info" class="label label-info" style="margin: 2px;">{{data}}</span>
                 </td>
                 <td class="horizontal-center requesttd">
                   <p class="text-color">{{request.timestamp}}</p>

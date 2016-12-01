@@ -19,7 +19,7 @@
         </tr>
         <tr class="requesttr">
           <td>
-            <h3>Request Access</h3>
+            <h3>Access Granted</h3>
             <div>
               <span ng-show="customerRequestCtrl.pendingrequest()" class="glyphicon glyphicon-hourglass"></span>
               <span ng-show="customerRequestCtrl.approvedrequest()" class="glyphicon glyphicon-ok-circle"></span>
@@ -27,7 +27,7 @@
             </div>
           </td>
           <td>
-            <h3>Request Data Judgement</h3>
+            <h3>Deal Approved</h3>
             <div>
               <span ng-show="customerRequestCtrl.pendingcompanyrequest()" class="glyphicon glyphicon-hourglass"></span>
               <span ng-show="customerRequestCtrl.approvedcompanyrequest()" class="glyphicon glyphicon-ok-circle"></span>
@@ -39,8 +39,9 @@
     </div>
     <div ng-if="!customerRequestCtrl.requestdata.UCHandle">
       <h3>Requested Information</h3>
-      <div id="reqinfodata" ng-bind-html="customerRequestCtrl.requesthtml">
+      <div ng-if="customerRequestCtrl.requestdata.allow" id="reqinfodata" ng-bind-html="customerRequestCtrl.requesthtml">
       </div>
+      <p ng-if="!customerRequestCtrl.requestdata.allow" class="text-color">Access not granted</p>
     </div>
     <div class="requesttable" ng-if="!customerRequestCtrl.requestdata.UCHandle">
       <h3>Previous Lookups</h3>
