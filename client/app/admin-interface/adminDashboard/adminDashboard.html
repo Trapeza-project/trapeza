@@ -118,7 +118,7 @@
                                 <tbody>
 
                                 <tr ng-repeat="data in adminDashboardCtrl.latestUpdates" >
-                                    <td>{{data.personid}}</td>
+                                    <td ng-click="adminDashboardCtrl.openPerson(data.personid)"><a>{{data.personid}}</a></td>
                                     <td><a ng-href="{{data.validation}}">{{data.provider}}</a></td>
                                     <td>{{data.timestamp | date:'dd/mm/yyyy'}}</td>
                                     <td>{{data.selfupload}}</td>

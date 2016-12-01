@@ -15,10 +15,15 @@ export class AdminUserSearchComponent {
   checkupHistory = [];
   noResult = false;
   /*@ngInject*/
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket, lookupService) {
+	this.lookupService = lookupService;
     this.$http = $http;
     this.socket = socket;
-
+	this.searchText = lookupService.getActivePerson();
+	if(this.searchText != ""){
+		this.search();
+	}
+	this.lookupService.setActivePerson("");
   }
 
   validate(evt) {
@@ -36,7 +41,6 @@ export class AdminUserSearchComponent {
 
   }
   search() {
-    console.log('search', this.searchText);
     if(this.searchText.length < 12) {
       this.showResult = false;
       return;

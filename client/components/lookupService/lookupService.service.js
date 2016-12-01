@@ -12,6 +12,7 @@ export function lookupService($http, Auth, $cookieStore) {
   vm.accessor = 1;
   vm.id=0;
   vm.modules = [];
+  vm.activeperson = "";
   this.$http = $http;
   
   var accessor = $cookieStore.get("accessor");
@@ -71,6 +72,16 @@ export function lookupService($http, Auth, $cookieStore) {
 
   vm.nextID = function(){
     return vm.id++;
+  }
+  
+  vm.setActivePerson = function(id){
+	  if(vm.id != undefined){
+		  vm.activeperson = id;
+	  }
+  }
+  
+  vm.getActivePerson = function(){
+	  return vm.activeperson;
   }
 
   vm.getAccessor = function(){

@@ -15,8 +15,10 @@ export class AdminDashboardComponent {
     latestUpdates = null;
 
     /*@ngInject*/
-    constructor($http) {
+    constructor($http, $state, lookupService) {
+		this.lookupService = lookupService;
         this.$http = $http;
+		this.$state = $state;
 
         this.getLatestCheckups();
         this.getLatestUpdates();
@@ -40,6 +42,11 @@ export class AdminDashboardComponent {
           this.latestUpdates = response.data;
         });
     }
+	
+	openPerson(id){
+		this.lookupService.setActivePerson(id);
+		this.$state.go('adminUserSearch');
+	}
 
 }
 
