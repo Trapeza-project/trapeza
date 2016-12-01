@@ -1,52 +1,56 @@
 
 <div class="container" id="lookupcontainer">
-  <div>
     <div class="topdiv">
-      <h1 class="no-margin text-orange inlineblock">Lookup</h1>
-      <img id="searchuserlogo" class="no-margin" src="/../../assets/images/searchuserorange.png" alt="searchuser">
+        <img id="searchuserlogo" class="no-margin" src="/../../assets/images/searchuserorange.png" alt="searchuser">
+        <h1 class="no-margin text-orange inlineblock">Lookup</h1>
     </div>
+
     <div id="paddedlookup">
       <form class="form" name="form">
-        <div id="quick">
-          <div class="quickLookup" ng-repeat="module in customerLookupCtrl.modules">			
-			<div ng-if="!customerLookupCtrl.isActiveModule(module)" class="quickLookupModule" ng-click="customerLookupCtrl.toggleModule(module)">
-				<div class="weak-border-bottom">
-					<h3 class="text-orange">{{module.name}}</h3>
-					<p class="text-color">{{module.description}}</p>
-					<p class="text-orange weak-border-top" ng-repeat="info in module.info">{{info.name}}</p>
-				</div>
-			</div>
-			<div ng-if="customerLookupCtrl.isActiveModule(module)" class="quickLookupModule btn-module-active" ng-click="customerLookupCtrl.toggleModule(module)">
-				<div class="weak-border-bottom">
-					<h3 class="text-orange">{{module.name}}</h3>
-					<p class="text-color">{{module.description}}</p>
-					<p class="text-orange weak-border-top" ng-repeat="info in module.info">{{info.name}}</p>
-				</div>
-			</div>
-			
+          <div id="quick">
+              <div class="quickLookup card" ng-repeat="module in customerLookupCtrl.modules">
+                  <div class="card-block">
+                      <div ng-if="!customerLookupCtrl.isActiveModule(module)" class="quickLookupModule" ng-click="customerLookupCtrl.toggleModule(module)">
+                          <div class="weak-border-bottom">
+                              <h3 class="text-orange">{{module.name}}</h3>
+                              <p class="text-color">{{module.description}}</p>
+                              <p class="text-orange weak-border-top" ng-repeat="info in module.info">{{info.name}}</p>
+                          </div>
+                      </div>
+                      <div ng-if="customerLookupCtrl.isActiveModule(module)" class="quickLookupModule btn-module-active" ng-click="customerLookupCtrl.toggleModule(module)">
+                          <div class="weak-border-bottom">
+                              <h3 class="text-orange">{{module.name}}</h3>
+                              <p class="text-color">{{module.description}}</p>
+                              <p class="text-orange weak-border-top" ng-repeat="info in module.info">{{info.name}}</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <section>
+                      <label class="requestlabel"><h3>Personal identity number</h3></label>
+                      <div class="form-group" id="personnumberinput">
+                          <input type="username" name="personnumber" class="form-control" placeholder='{{customerLookupCtrl.personnumber}}' ng-disabled="(!customerLookupCtrl.isModuleActive())&&customerLookupCtrl.chosenInfo.length==0" ng-model="id" ng-change="customerLookupCtrl.updateID(id)" maxlength="12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
+                      </div>
+                      <!--<div ng-if="!customerLookupCtrl.UCHandling"class="form-group">
+                        <label class="requestlabel">Purpose</label>
+                        <input type="text" name="purpose" class="form-control" placeholder='{{customerLookupCtrl.purposestring}}' ng-model="purpose" ng-change="customerLookupCtrl.updatePurpose(purpose)" required>
+                      </div>-->
+                      <div class="paddedmodule">
+                          <div class="form-group has-error">
+                              <p class="help-block" ng-show="form.personnumber.$error.personnumber && vm.submitted">
+                                  Please enter the personal identity number.
+                              </p>
+                              <p class="help-block">{{ vm.errors.other }}</p>
+                          </div>
+                          <button ng-disabled="customerLookupCtrl.buttonDisable()" class="btn btn-warning btn-lg btn-login" ng-click="customerLookupCtrl.submitLookup()">
+                              Request
+                          </button>
+                          <!-- customerLookupCtrl.isActiveModule(module) -->
+                      </div>
+              </section>
           </div>
-        </div>
-        <label class="requestlabel">Personal identity number</label>
-        <div class="form-group" id="personnumberinput">
-          <input type="username" name="personnumber" class="form-control" placeholder='{{customerLookupCtrl.personnumber}}' ng-disabled="(!customerLookupCtrl.isModuleActive())&&customerLookupCtrl.chosenInfo.length==0" ng-model="id" ng-change="customerLookupCtrl.updateID(id)" maxlength="12" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
-        </div>
-        <!--<div ng-if="!customerLookupCtrl.UCHandling"class="form-group">
-          <label class="requestlabel">Purpose</label>
-          <input type="text" name="purpose" class="form-control" placeholder='{{customerLookupCtrl.purposestring}}' ng-model="purpose" ng-change="customerLookupCtrl.updatePurpose(purpose)" required>
-        </div>-->
-        <div class="paddedmodule">
-          <div class="form-group has-error">
-            <p class="help-block" ng-show="form.personnumber.$error.personnumber && vm.submitted">
-              Please enter the personal identity number.
-            </p>
-            <p class="help-block">{{ vm.errors.other }}</p>
-          </div>
-          <button ng-disabled="customerLookupCtrl.buttonDisable()" class="btn btn-warning btn-lg btn-login" ng-click="customerLookupCtrl.submitLookup()">
-            Request
-          </button>
-          <!-- customerLookupCtrl.isActiveModule(module) -->
-        </div>
       </form>
     </div>
-  </div>
+
 </div>

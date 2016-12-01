@@ -1,58 +1,55 @@
-<div class="container-fluid">
-  <h1 style="text-align:center;">Lookup Cards</h1>
-  <hr />
-  <article>
-    <div class="row">
-      <div class="col-sm-12">
-          <div ng-repeat="lookup in customerLookupSettingsCtrl.lookups" class="col-sm-4">
-            <div class="lookupmodule card ">
-              <div class="card-header">
-                <h3 class="text-orange card-title">{{lookup.name}}</h3>
+<div class="container">
+  <div class="topdiv">
+    <h1 style="text-align:center;">Lookup Cards</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+        <div ng-repeat="lookup in customerLookupSettingsCtrl.lookups" class="col-sm-4">
+          <div class="lookupmodule card">
+            <div class="card-header">
+              <h3 class="text-orange card-title">{{lookup.name}}</h3>
+            </div>
+            <div class="card-block">
+              <div class="row">
+                <p class="text-color card-text">{{lookup.description}}</p>
               </div>
-              <div class="card-block">
-                <div class="row">
-                  <p class="text-color card-text">{{lookup.description}}</p>
-                </div>
-                <div class="row weak-border-top weak-border-bottom" ng-model="showMore" ng-init="showMore=false">
-                  <p ng-if="lookup.info.length==0" class="text-color">No Request Data</p>
-                  <div ng-if="lookup.info.length>0">
-                    <div ng-if="!showMore">
-                      <p class="text-orange" ng-repeat="info in customerLookupSettingsCtrl.getSub(lookup.info,5)">{{info.name}}</p>
-                      <a class="pointercursor" ng-click="$parent.showMore = true" ng-show="lookup.info.length > 5" ><strong>More</strong></a>
-                    </div>
-                    <div ng-if="showMore">
-                      <p class="text-orange" ng-repeat="info in lookup.info">{{info.name}}</p>
-                      <a class="pointercursor" ng-click="$parent.showMore = false"><strong>Less</strong></a>
-                    </div>
+              <div class="row weak-border-top weak-border-bottom" ng-model="showMore" ng-init="showMore=false">
+                <p ng-if="lookup.info.length==0" class="text-color">No Request Data</p>
+                <div ng-if="lookup.info.length>0">
+                  <div ng-if="!showMore">
+                    <p class="text-orange" ng-repeat="info in customerLookupSettingsCtrl.getSub(lookup.info,5)">{{info.name}}</p>
+                    <a class="pointercursor" ng-click="$parent.showMore = true" ng-show="lookup.info.length > 5" ><strong>More</strong></a>
+                  </div>
+                  <div ng-if="showMore">
+                    <p class="text-orange" ng-repeat="info in lookup.info">{{info.name}}</p>
+                    <a class="pointercursor" ng-click="$parent.showMore = false"><strong>Less</strong></a>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="checkbox">
-                    <label style="font-size: 1em; width:60%; text-align:center">
-                      <input type="checkbox" ng-model="lookup.UCHandle" ng-change="customerLookupSettingsCtrl.changeStatus(lookup)">
-                      <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                      <p class="text-color">UC Judges Data</p>
-                    </label>
-                  </div>
-                  <div class="col-sm-1"></div>
-                </div>
-                <div class="row pricebox">
-                  <h4 class="inlineblock text-orange"><strong>{{customerLookupSettingsCtrl.getPrice(lookup)}} SEK</strong></h4>
-                  <h4 class="inlineblock text-color font-light"> per request</h4>
-                </div>
-                <div class="row">
-                  <a ng-click="customerLookupSettingsCtrl.deleteModule(lookup)" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-trash"></span> Delete card
-                  </a>
-                </div>
-                <h2></h2>
               </div>
+              <div class="row">
+                <div class="checkbox">
+                  <label style="font-size: 1em; width:60%; text-align:center">
+                    <input type="checkbox" ng-model="lookup.UCHandle" ng-change="customerLookupSettingsCtrl.changeStatus(lookup)">
+                    <p class="text-color"><span class="cr"><i class="cr-icon fa fa-check"></i></span>UC Judges Data</p>
+                  </label>
+                </div>
+                <div class="col-sm-1"></div>
+              </div>
+              <div class="row pricebox">
+                <h4 class="inlineblock text-orange"><strong>{{customerLookupSettingsCtrl.getPrice(lookup)}} SEK</strong></h4>
+                <h4 class="inlineblock text-color font-light"> per request</h4>
+              </div>
+              <div class="row">
+                <a ng-click="customerLookupSettingsCtrl.deleteModule(lookup)" class="btn btn-danger">
+                  <span class="glyphicon glyphicon-trash"></span> Delete card
+                </a>
+              </div>
+              <h2></h2>
             </div>
           </div>
-      </div>
+        </div>
     </div>
-  </article>
-
+  </div>
   <section>
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3 settingsbox card card-block">
