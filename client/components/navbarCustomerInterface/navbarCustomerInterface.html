@@ -17,6 +17,7 @@
         <li ng-show="$ctrl.isLoggedIn()" ng-repeat="item in $ctrl.menu" ui-sref-active="active">
             <a class="navbar-text" ui-sref="{{item.state}}"><span ng-class="item.name"></span> {{item.title}}</a>
         </li>
+        <li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a class="navbar-text" ui-sref="customerLookupSettings"><span class="glyphicon glyphicon-wrench"></span> Customize </a></li>
         <!--<li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a ui-sref="customerAdmin">Admin</a></li>-->
       </ul>
 
@@ -24,7 +25,6 @@
         <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a class="navbar-text" ui-sref="customerSignup">Sign up</a></li>
         <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a class="navbar-text" ui-sref="customerLogin">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
         <!-- <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p> </li>-->
-        <li ng-show="$ctrl.isAdmin()" ui-sref-active="active"><a class="navbar-text" ui-sref="customerLookupSettings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
         <!--<li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="customerSettings"><span class="glyphicon glyphicon-cog"></span></a></li>-->
         <li ng-show="$ctrl.isLoggedIn()"><a class="navbar-text" ui-sref="customerLogout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout[{{ $ctrl.getCurrentUser().name }}]</a></li>
       </ul>

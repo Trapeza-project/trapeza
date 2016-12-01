@@ -43,25 +43,25 @@ ModuleSettings.sync()
   ModuleSettings.bulkCreate([{
     moduleid:1,
     creatorid:0,
-    modulename:"Small",
+    modulename:"Quick Lookup",
     description:"Includes the basic information to the lookup.",
-    infoids:'[1]',
+    infoids:'[1,2]',
     active: true,
     UCHandle: true
   }, {
     moduleid:2,
     creatorid:0,
-    modulename:"Medium",
+    modulename:"Business Lookup",
     description:"Includes the basic and personal information to the lookup.",
-    infoids:'[1,2]',
+    infoids:'[1,2,6]',
     active: true,
     UCHandle: true
   }, {
     moduleid:3,
     creatorid:0,
-    modulename:"Large",
+    modulename:"Premium Lookup",
     description:"Includes detailed information to the lookup.",
-    infoids:'[1,2,3]',
+    infoids:'[1,2,6,13]',
     active: true,
     UCHandle: true
   }])
