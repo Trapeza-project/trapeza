@@ -23,7 +23,7 @@
 </div>
 <div class="container bg-white">
   <div class="row" ng-if="!vm.toggleCompanyInfo">
-    <h1>History</h1>
+    <h1>Events</h1>
     <div id="trustSearch" class="input-group stylish-input-group">
       <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
       <span class="input-group-addon">
@@ -43,8 +43,13 @@
         <td>{{request.timestamp | date:'short'}}</td>
         <td>{{request.actor.name}}</td>
         <td>{{request.requestid}}</td>
-        <td>{{request.allow}}</td>
-        <td></td>
+        <td>
+          <span class="label label-success" ng-if="request.allow">Yes <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
+          <span class="label label-danger" ng-if="!request.allow">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
+        </td>
+        <td>
+          <span ng-repeat="info in request.info" class="label label-info" style="margin: 2px;">{{info}}</span>
+        </td>
       </tr>
       </tbody>
     </table>

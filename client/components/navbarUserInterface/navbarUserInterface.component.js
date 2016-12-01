@@ -9,7 +9,8 @@ export class NavbarComponent {
 
   menu = [{
     title: 'Permission Settings',
-    state: 'userPermissionSettings'
+    state: 'userPermissionSettings',
+    name: 'glyphicon glyphicon-cog'
   }];
 
   isCollapsed = true;

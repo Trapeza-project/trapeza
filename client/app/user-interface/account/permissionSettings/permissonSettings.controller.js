@@ -22,7 +22,7 @@ export default class UserPermissionSettingsController {
       autoFirst: true
     });
 
-    $('#allow-all-toggle' ).click(function() {
+    $('#allow-all-toggle' ).on("click", function() {
       $('.allow-all input').each(function() {
         $(this)[0].checked = true;
       });
@@ -39,7 +39,22 @@ export default class UserPermissionSettingsController {
         $(this)[0].checked = true;
       });
     });
+    $('#allow-uc-toggle' ).click(function() {
+      $('.allow-uc input').each(function() {
+        if($(this)[0].checked) {
+          $(this)[0].checked = false;
+        }
+        else {
+          $(this)[0].checked = true;
+        }
+      });
+    });
+    $(document).ready(function(){
+      $("#allow-uc-toggle").trigger("click");
+      $("#allow-all-toggle").trigger("click");
+    });
   }
+
 
   getInfoTypes() {
     this.$http.get('/api/infotypes/usertypes')

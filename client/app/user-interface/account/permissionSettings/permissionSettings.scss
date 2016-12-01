@@ -12,7 +12,6 @@
 }
 
 .permissionSettingsContainer {
-    text-align: center;
     padding-bottom: 5em;
     padding-top: 2em;
 }
@@ -24,23 +23,41 @@
     border-radius: 10px;
 }
 
-th {
-  padding-top: 15px !important;
-  font-size: 20px;
-  color: #515151;
+@media screen and (min-width: 769px) {
+  td.category {
+    padding-top: 15px !important;
+    font-size: 20px;
+    color: #515151;
+  }
+}
+@media screen and (max-width: 768px) {
+  h3 {
+    font-size: 16px;
+  }
+  h4 {
+    font-size: 12px;
+  }
+  i.fa.fa-2x {
+    font-size: 1em !important;
+  }
+}
+  th.permission-header {
+    vertical-align: top !important;
+  }
+
+label input[type="checkbox"] ~ i.fa.fa-square-o{
+  color: #7c7c7c;    display: inline;
+}
+label input[type="checkbox"] ~ i.fa.fa-check-square-o{
+  display: none;
+}
+label input[type="checkbox"]:checked ~ i.fa.fa-square-o{
+  display: none;
+}
+label input[type="checkbox"]:checked ~ i.fa.fa-check-square-o{
+  color: #ec971f;    display: inline;
 }
 
-.allow-all {
-  background-color: #dff0d8;
-}
-
-.allow-trusted {
-  background-color: #fcf8e3;
-}
-
-.always-ask {
-  background-color: #f2dede;
-}
 
 label input[type="radio"] ~ i.fa.fa-circle-o{
   color: #7c7c7c;    display: inline;

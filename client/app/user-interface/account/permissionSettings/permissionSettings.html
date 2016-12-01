@@ -16,50 +16,66 @@
       <div class="row" ng-show="vm.showHelp">
         <div class="col-sm-12 text-right">
           <ul class="list-group">
-            <li class="list-group-item list-group-item-success">
+            <li class="list-group-item">
               <p style="text-align: left;"><strong>Allow all</strong> - Everyone who asks for the data from you will receive it automatically.</p>
             </li>
-            <li class="list-group-item list-group-item-warning">
+            <li class="list-group-item">
               <p style="text-align: left;"><strong>Allow trusted</strong> - Everyone on your list of trusted companies will receive the data automatically. You manage each case from non-trusted companies manually.</p>
             </li>
-            <li class="list-group-item list-group-item-danger">
+            <li class="list-group-item">
               <p style="text-align: left;"><strong>Always ask</strong> - You manage each request of the data manually, no one receives it automatically.</p>
             </li>
           </ul>
         </div>
       </div>
       <hr />
-      <table class="table table-responsive table-bordered">
+      <div id="searchSettings" class="input-group stylish-input-group">
+        <input type="text" class="form-control" placeholder="Search for permission settings..." ng-model="searchSettings">
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-search"></span>
+        </span>
+      </div>
+      <table class="table table-responsive table-striped">
         <thead>
-          <th></th>
-          <td>
-            <label><h3>Allow all</h3></label><br />
+          <th class="permission-header"><h3>Allow UC</h3>
+            <label for="allow-uc-toggle" class="btn">
+              <input id="allow-uc-toggle" type="checkbox" hidden><i class="fa fa-square-o fa-2x"></i><i class="fa fa-check-square-o fa-2x"></i>
+            </label>
+          </th>
+          <th class="permission-header"><h3>Data type</h3></th>
+          <th class="permission-header">
+            <label for="allow-all-toggle"><h3>Allow all</h3></label><br />
             <div class="btn-group" data-toggle="buttons">
               <label class="btn">
                 <input id="allow-all-toggle" type="radio" name="all_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
               </label>
             </div>
-          </td>
-          <td >
-            <label><h3>Allow trusted</h3></label><br />
+          </th>
+          <th class="permission-header">
+            <label for="allow-trusted-toggle"><h3>Allow trusted</h3></label><br />
             <div class="btn-group" data-toggle="buttons">
               <label class="btn">
                 <input id="allow-trusted-toggle" type="radio" name="all_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
               </label>
             </div>
-          </td>
-          <td>
-            <label><h3>Always ask</h3></label><br />
+          </th>
+          <th class="permission-header">
+            <label for="always-ask-toggle"><h3>Always ask</h3></label><br />
             <div class="btn-group" data-toggle="buttons">
               <label class="btn">
                 <input id="always-ask-toggle" type="radio" name="all_data"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i>
               </label>
             </div>
-          </td>
+          </th>
         </thead>
         <tbody>
-          <tr ng-repeat="info in vm.infoTypes">
-            <th><label>{{info.category}}</label></th>
+          <tr ng-repeat="info in vm.infoTypes | filter:searchSettings">
+            <td class="allow-uc">
+              <label class="btn">
+                <input type="checkbox" hidden><i class="fa fa-square-o fa-2x"></i><i class="fa fa-check-square-o fa-2x"></i>
+              </label>
+            </td>
+            <td class="category">{{info.category}}</td>
             <td class="allow-all">
               <div class="btn-group" data-toggle="buttons">
                 <label class="btn">
@@ -93,26 +109,33 @@
 
 
     <div class="col-sm-3 col-sm-offset-1 permissionSettingsCol">
+      <h4>Add company to trusted list</h4>
+      <input id="search-actor" class="awesomplete" placeholder="Company name"/>
+      <a class="btn btn-warning" ng-click="vm.addToTrusted()">Add</a>
+      <hr />
       <h2>Trusted companies</h2>
+      <div id="searchTrusted" class="input-group stylish-input-group">
+        <input type="text" class="form-control" placeholder="Search for trusted companies..." ng-model="searchTrusted">
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-search"></span>
+        </span>
+      </div>
       <div ng-if="vm.trustedList.length">
         <table class="table table-striped table-sm table-responsive ">
           <tbody>
-            <tr ng-repeat="actor in vm.trustedList">
-              <td><p class="tableText" style="text-align: left; font-weight: bold;">{{actor}}</p></td>
-              <td>
-                  <a class="btn" ng-click="vm.removeTrusted($index)"><i class="fa fa-trash"></i></a>
-              </td>
-            </tr>
+          <tr ng-repeat="actor in vm.trustedList | filter:searchTrusted">
+            <td><p class="tableText" style="text-align: left; font-weight: bold;">{{actor}}</p></td>
+            <td>
+              <a class="btn" ng-click="vm.removeTrusted($index)"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
           </tbody>
         </table>
       </div>
       <div ng-if="!vm.trustedList.length">
         <p>No trusted companies</p>
       </div>
-        <hr />
-      <h4>Add company to trusted list</h4>
-      <input id="search-actor" class="awesomplete"/>
-      <a class="btn btn-warning" ng-click="vm.addToTrusted()">Add</a>
+
     </div>
   </div>
 </div>
