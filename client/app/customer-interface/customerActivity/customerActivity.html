@@ -8,13 +8,17 @@
         <md-tab label="all">
           <md-content class="md-padding">
             <table class="requesttable">
-              <col width="50%">
-              <col width="20%">
-              <col width="15%">
-              <col width="15%">
+              <col width="32%">
+			  <col width="17%">
+              <col width="17%">
+              <col width="17%">
+              <col width="17%">
               <tr class="requesttr">
                 <td class="tableheadline requesttd">
                   Info
+                </td>
+                <td class="tableheadline requesttd">
+                  Reference Number
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
                   Timestamp
@@ -30,6 +34,9 @@
                 <td class="requesttd">
                   <p class="fontbold">{{request.name}}</p>
 				  <span ng-repeat="data in request.info" class="label label-info" style="margin: 2px;">{{data}}</span>
+                </td>
+                <td class="horizontal-center requesttd text-color">
+                  <p>{{request.requestid}}</p>
                 </td>
                 <td class="horizontal-center requesttd text-color">
                   <p>{{request.timestamp}}</p>
@@ -51,13 +58,17 @@
         <md-tab label="pending">
           <md-content class="md-padding">
             <table class="requesttable">
-              <col width="50%">
-              <col width="20%">
-              <col width="15%">
-              <col width="15%">
+              <col width="32%">
+			  <col width="17%">
+              <col width="17%">
+              <col width="17%">
+              <col width="17%">
               <tr class="requesttr">
                 <td class="tableheadline requesttd">
                   Info
+                </td>
+                <td class="tableheadline requesttd">
+                  Reference Number
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
                   Timestamp
@@ -73,6 +84,9 @@
                 <td class="requesttd">
                   <p class="fontbold">{{request.name}}</p>
                   <span ng-repeat="data in request.info" class="label label-info" style="margin: 2px;">{{data}}</span>
+                </td>
+                <td class="horizontal-center requesttd text-color">
+                  <p>{{request.requestid}}</p>
                 </td>
                 <td class="horizontal-center requesttd">
                   <p class="text-color">{{request.timestamp}}</p>
@@ -94,13 +108,17 @@
         <md-tab label="answered">
           <md-content class="md-padding">
             <table class="requesttable">
-              <col width="50%">
-              <col width="20%">
-              <col width="15%">
-              <col width="15%">
+              <col width="32%">
+			  <col width="17%">
+              <col width="17%">
+              <col width="17%">
+              <col width="17%">
               <tr class="requesttr">
                 <td class="tableheadline requesttd">
                   Info
+                </td>
+                <td class="tableheadline requesttd">
+                  Reference Number
                 </td>
                 <td class="tableheadline horizontal-center requesttd">
                   Timestamp
@@ -116,6 +134,9 @@
                 <td class="requesttd">
                   <p class="fontbold">{{request.name}}</p>
                   <span ng-repeat="data in request.info" class="label label-info" style="margin: 2px;">{{data}}</span>
+                </td>
+                <td class="horizontal-center requesttd text-color">
+                  <p>{{request.requestid}}</p>
                 </td>
                 <td class="horizontal-center requesttd">
                   <p class="text-color">{{request.timestamp}}</p>

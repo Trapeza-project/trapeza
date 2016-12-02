@@ -343,15 +343,8 @@ return 	RequestLog.findAll({
     },
 	order: '"timestamp" DESC'
   }).mapSeries(function(request){
-		var dataValues = request.dataValues;
-		var tempRequest = {};
-		tempRequest.requestid = dataValues.requestid;
-		tempRequest.allow = dataValues.allow;
-		tempRequest.companyallow = dataValues.companyallow;
-		tempRequest.companypending = dataValues.companypending;
-		tempRequest.pending = dataValues.pending;
-		tempRequest.personid = dataValues.personid;
-		var date = new Date(dataValues.timestamp);
+		var tempRequest = request.dataValues;
+		var date = new Date(tempRequest.timestamp);
 
 
 		var year = date.getFullYear();
@@ -379,7 +372,7 @@ return 	RequestLog.findAll({
 		tempRequest.timestamp = year + '/' + month + '/' + day + ' '+hour+':'+minute+':'+second;
 
 
-	  var infoids = JSON.parse(dataValues.infoids);
+	  var infoids = JSON.parse(tempRequest.infoids);
 	  var tempids = [];
 	  var promises = [];
 	  promises.push(BasicData.find({
