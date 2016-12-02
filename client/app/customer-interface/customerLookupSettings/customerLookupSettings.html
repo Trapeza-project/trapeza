@@ -1,96 +1,104 @@
-<div class="container-fluid">
-  <h1 style="text-align:center;">Lookup Cards</h1>
-  <hr />
+<div class="container">
+  <div class="topdiv">
+    <h1 style="text-align:center;">Lookup Cards</h1>
+  </div>
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-1">
-      <div class="col-sm-4" ng-repeat="lookup in customerLookupSettingsCtrl.lookups">
-        <div class="lookupmodule">
-          <div class="row">
-            <a ng-click="customerLookupSettingsCtrl.deleteModule(lookup)" class="btn pull-right">
-              <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
-            </a>
+    <div class="col-sm-12">
+        <div ng-repeat="lookup in customerLookupSettingsCtrl.lookups" class="col-sm-4">
+          <div class="lookupmodule card">
+            <div class="card-header">
+              <h3 class="text-orange card-title">{{lookup.name}}</h3>
+            </div>
+            <div class="card-block">
+              <div class="row">
+                <p class="text-color card-text">{{lookup.description}}</p>
+              </div>
+              <div class="row weak-border-top weak-border-bottom" ng-model="showMore" ng-init="showMore=false">
+                <p ng-if="lookup.info.length==0" class="text-color">No Request Data</p>
+                <div ng-if="lookup.info.length>0">
+                  <div ng-if="!showMore">
+                    <p class="text-orange" ng-repeat="info in customerLookupSettingsCtrl.getSub(lookup.info,5)">{{info.name}}</p>
+                    <a class="pointercursor" ng-click="$parent.showMore = true" ng-show="lookup.info.length > 5" ><strong>More</strong></a>
+                  </div>
+                  <div ng-if="showMore">
+                    <p class="text-orange" ng-repeat="info in lookup.info">{{info.name}}</p>
+                    <a class="pointercursor" ng-click="$parent.showMore = false"><strong>Less</strong></a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">	
+				<div class="checkbox">
+				  <label style="font-size: 1em; width:60%; text-align:center">
+					  <input type="checkbox" ng-model="lookup.UCHandle" ng-change="customerLookupSettingsCtrl.changeStatus(lookup)">
+					  <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+					  <p class="text-color">UC Helps Judging the Data</p>
+				  </label>
+				</div>
+				<div class="col-sm-1"></div>						
+              </div>
+              <div class="row pricebox">
+                <h4 class="inlineblock text-orange"><strong>{{customerLookupSettingsCtrl.getPrice(lookup)}} SEK</strong></h4>
+                <h4 class="inlineblock text-color font-light"> per request</h4>
+              </div>
+              <div class="row">
+                <a ng-click="customerLookupSettingsCtrl.deleteModule(lookup)" class="btn btn-danger">
+                  <span class="glyphicon glyphicon-trash"></span> Delete card
+                </a>
+              </div>
+              <h2></h2>
+            </div>
           </div>
+        </div>
+    </div>
+  </div>
+  <section>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3 settingsbox card card-block">
+        <form class="form" name="editform">
           <div class="row">
-            <h3 class="text-orange">{{lookup.name}}</h3>
+            <h2 class="text-orange">Add New Card</h2>
             <hr />
           </div>
           <div class="row">
-            <p class="text-color">{{lookup.description}}</p>
-          </div>
-          <div class="row weak-border-top weak-border-bottom" ng-model="showMore" ng-init="showMore=false">
-			<p ng-if="lookup.info.length==0" class="text-color">No Request Data</p>
-			<div ng-if="lookup.info.length>0">
-				<div ng-if="!showMore">
-					<p class="text-orange" ng-repeat="info in customerLookupSettingsCtrl.getSub(lookup.info,5)">{{info.name}}</p>
-					<a class="pointercursor" ng-click="$parent.showMore = true" ng-show="lookup.info.length > 5" ><strong>More</strong></a>
-				</div>
-				<div ng-if="showMore">
-					<p class="text-orange" ng-repeat="info in lookup.info">{{info.name}}</p>
-					<a class="pointercursor" ng-click="$parent.showMore = false"><strong>Less</strong></a>
-				</div>
-			</div>
+            <div class="form-group">
+              <input type="text" name="editingname" class="form-control" placeholder='Name' placeholder='{{customerLookupSettingsCtrl.modulename}}' ng-model="customerLookupSettingsCtrl.name" required>
+            </div>
           </div>
           <div class="row">
-            <div class="checkbox">
-              <label style="font-size: 1em; width:60%; text-align:center">
-                  <input type="checkbox" ng-model="lookup.UCHandle" ng-change="customerLookupSettingsCtrl.changeStatus(lookup)">
-                  <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-				  <p class="text-color">UC Helps Judging the Data</p>
-              </label>
-            </div>
-            <div class="col-sm-1"></div>
-          </div>
-          <div class="row pricebox">
-            <p class="inlineblock text-orange"><strong>{{customerLookupSettingsCtrl.getPrice(lookup)}} SEK</strong></p>
-            <p class="inlineblock text-color font-light"> per request</p>
-          </div>
-        </div>
-        <div class="col-sm-1"></div>
-      </div>
-    </div>
-    <div class="col-sm-2 settingsbox">
-      <form class="form" name="editform">
-        <div class="row">
-          <h2 class="text-orange">Add New Card</h2>
-          <hr />
-        </div>
-        <div class="row">
-          <div class="form-group">
-            <input type="text" name="editingname" class="form-control" placeholder='Name' placeholder='{{customerLookupSettingsCtrl.modulename}}' ng-model="customerLookupSettingsCtrl.name" required>
-          </div>
-        </div>
-        <div class="row">
+
           <textarea class="form-control" ng-model="customerLookupSettingsCtrl.description" placeholder="{{customerLookupSettingsCtrl.descriptionplaceholder}}" style="max-width:100%; max-height: 15em;">
           </textarea>
-        </div>
-        <div class="form-group weak-border-top">
+          </div>
+          <div class="form-group weak-border-top">
+            <div class="row">
+              <h4 class="text-orange">Data to Request</h4>
+            </div>
+            <div class="row dataselect">
+              <isteven-multi-select
+                      input-model="customerLookupSettingsCtrl.datatypes"
+                      output-model="customerLookupSettingsCtrl.chosendata"
+                      button-label="name"
+                      item-label="name"
+                      tick-property="ticked"
+                      group-property="msGroup">
+              </isteven-multi-select>
+              <!--<select chosen multiple class='form-control' data-placeholder-text-multiple="'Choose required data'" ng-model="chosenData" ng-options="data.name for data in customerLookupSettingsCtrl.datatypes" ng-change="customerLookupSettingsCtrl.updateData(chosenData)" >
+                </select>-->
+            </div>
+          </div>
+          <div class="row weak-border-top">
+            <h4 class="text-orange">Calculated Price</h4>
+          </div>
           <div class="row">
-            <h4 class="text-orange">Data to Request</h4>
+            <p class="text-color">{{customerLookupSettingsCtrl.calculatePrice(customerLookupSettingsCtrl.chosendata)}} SEK</p>
           </div>
-          <div class="row dataselect">
-            <isteven-multi-select
-              input-model="customerLookupSettingsCtrl.datatypes"
-              output-model="customerLookupSettingsCtrl.chosendata"
-              button-label="name"
-              item-label="name"
-              tick-property="ticked"
-              group-property="msGroup">
-            </isteven-multi-select>
-            <!--<select chosen multiple class='form-control' data-placeholder-text-multiple="'Choose required data'" ng-model="chosenData" ng-options="data.name for data in customerLookupSettingsCtrl.datatypes" ng-change="customerLookupSettingsCtrl.updateData(chosenData)" >
-              </select>-->
-          </div>
-        </div>
-        <div class="row weak-border-top">
-          <h4 class="text-orange">Calculated Price</h4>
-        </div>
-        <div class="row">
-          <p class="text-color">{{customerLookupSettingsCtrl.calculatePrice(customerLookupSettingsCtrl.chosendata)}} SEK</p>
-        </div>
-        <button class="row btn btn-warning btn-md btn-block" ng-click="customerLookupSettingsCtrl.addModule()" style="margin-top: 1em; margin-bottom: 15px;">
-          Add Card
-        </button>
-      </form>
+          <button class="row btn btn-warning btn-md btn-block" ng-click="customerLookupSettingsCtrl.addModule()" style="margin-top: 1em; margin-bottom: 15px;">
+            Add Card
+          </button>
+        </form>
+      </div>
+      <div class="col-sm-1"></div>
     </div>
-    <div class="col-sm-1"></div>
-  </div>
+  </section>
+
 </div>

@@ -1,11 +1,12 @@
+
 .absolutelookup-btn-div{
   position:fixed;
-  left:85%;
+  left:90%;
   top:80%;
 }
 
 #activitycontainer{
-	background-color:rgb(245,245,245);
+
 	margin-bottom:50px;
 }
 
@@ -28,9 +29,9 @@
   background:linear-gradient(to bottom, #ffc477 5%, #fb9e25 100%);
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc477', endColorstr='#fb9e25',GradientType=0);
   background-color:#ffc477;
-  -moz-border-radius:10px;
-  -webkit-border-radius:10px;
-  border-radius:10px;
+  //-moz-border-radius:10px;
+  //-webkit-border-radius:10px;
+  //border-radius:10px;
   border:1px solid #eeb44f;
   display:inline-block;
   cursor:pointer;
