@@ -121,7 +121,8 @@
                                     <td ng-click="adminDashboardCtrl.openPerson(data.personid)"><a>{{data.personid}}</a></td>
                                     <td><a ng-href="{{data.validation}}">{{data.provider}}</a></td>
                                     <td>{{data.timestamp | date:'dd/mm/yyyy'}}</td>
-                                    <td>{{data.selfupload}}</td>
+                                    <td>                                      <span class="label label-success" ng-if="data.selfupload">Yes <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
+                                      <span class="label label-danger" ng-if="!data.selfupload">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -159,7 +160,7 @@
                                     <td>Data</td>
                                 </tr>
                                 <tr ng-repeat="data in adminDashboardCtrl.latestCheckups" >
-                                    <td>{{data.personid}}</td>
+                                    <td ng-click="adminDashboardCtrl.openPerson(data.personid)"><a>{{data.personid}}</a></td>
                                     <td>{{data.actor.name}}</td>
                                     <td>{{data.timestamp}}</td>
                                     <td>
@@ -170,7 +171,7 @@
                                       <span class="label label-success" ng-if="item.companyallow">Yes <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
                                       <span class="label label-danger" ng-if="!item.companyallow">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
                                     </td>
-                                    <td><span ng-repeat="info in data.info" class="label label-info" style="margin: 2px;">{{info}}</span></td>
+                                    <td><p ng-repeat="info in data.info"><span class="label label-info" style="margin: 2px;">{{info}}</span></p></td>
                                 </tr>
                                 </tbody>
                             </table>
