@@ -8,7 +8,7 @@
     <div id="paddedlookup">
       <form class="form" name="form">
           <div id="quick">
-              <div class="quickLookup card" ng-repeat="module in customerLookupCtrl.modules">
+              <div class="quickLookup card lookup-card" ng-repeat="module in customerLookupCtrl.modules">
                   <div class="card-block">
                       <div ng-if="!customerLookupCtrl.isActiveModule(module)" class="quickLookupModule" ng-click="customerLookupCtrl.toggleModule(module)">
                           <div class="weak-border-bottom">
