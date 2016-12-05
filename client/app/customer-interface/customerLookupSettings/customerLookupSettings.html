@@ -69,7 +69,7 @@
           <textarea class="form-control" ng-model="customerLookupSettingsCtrl.description" placeholder="{{customerLookupSettingsCtrl.descriptionplaceholder}}" style="max-width:100%; max-height: 15em;">
           </textarea>
           </div>
-          <div class="form-group weak-border-top">
+		  <div class="form-group weak-border-top">
             <div class="row">
               <h4 class="text-orange">Data to Request</h4>
             </div>
@@ -86,6 +86,16 @@
                 </select>-->
             </div>
           </div>
+		  <div class="row">	
+			<div class="checkbox">
+			  <label style="font-size: 1em; width:60%; text-align:center">
+				  <input type="checkbox" ng-model="customerLookupSettingsCtrl.UCHandle">
+				  <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+				  <p class="text-color">UC Helps Judging the Data</p>
+			  </label>
+			</div>
+			<div class="col-sm-1"></div>						
+		  </div>
           <div class="row weak-border-top">
             <h4 class="text-orange">Calculated Price</h4>
           </div>

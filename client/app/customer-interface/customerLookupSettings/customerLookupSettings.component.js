@@ -22,6 +22,7 @@ export class CustomerLookupSettingsComponent {
   editingdescription="";
   editingprice=0;
   editingChosendata=[];
+  UCHandle=true;
 
   user = {
     oldPassword: '',
@@ -150,6 +151,9 @@ export class CustomerLookupSettingsComponent {
 
   calculatePrice(data){
     var price = 0;
+	if(this.UCHandle){
+		price += 7;
+	}
     for(var i = 0; i < data.length;i++){
       price = price + data[i].price;
     }
@@ -173,7 +177,7 @@ export class CustomerLookupSettingsComponent {
     module.price = this.price;
     module.customized = true;
     module.active = true;
-    module.UCHandle = true;
+    module.UCHandle = this.UCHandle;
     module.info=[];
     for(var i = 0; i < this.chosendata.length; i++){
       module.info.push(this.chosendata[i]);
@@ -184,6 +188,7 @@ export class CustomerLookupSettingsComponent {
     }
     this.lookupService.addModule(module, newLookups);
     this.chosendata = [];
+	this.UCHandle = true;
     this.name = "";
     this.description = "";
     this.price = 0;
