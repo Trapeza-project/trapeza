@@ -1,4 +1,4 @@
-<div class="container eventPageContainer">
+<div class="container">
   <div class="row" ng-if="!vm.toggleCompanyInfo" style="padding-top: 2em;">
     <div class="col-sm-12 requestsContainer">
       <div class="row">
@@ -32,7 +32,7 @@
     </div>
   </div>
 </div>
-<div class="container eventPageContainer">
+<div class="container bg-white">
   <div class="row" ng-if="!vm.toggleCompanyInfo">
     <div class="col-sm-12 requestsContainer">
       <div class="row">
@@ -78,11 +78,11 @@
   </div>
   <div id="company-info" ng-if="vm.toggleCompanyInfo">
     <div class="row">
+        <a href="#" ng-click="vm.toggleInfo()" class="btn btn-default btn-lg">Back</a>
+    </div>
+    <div class="row">
       <div class="col-sm-8">
         <h1> <span class="rating">A</span> {{vm.singleShowInfo.actor.name}}</h1>
-      </div>
-      <div class="col-sm-3 text-right" style="padding-top:1.5em;">
-        <a href="#" ng-click="vm.toggleInfo()" class="btn btn-default btn-lg">Back</a>
       </div>
     </div>
     <div class="row">
@@ -109,10 +109,10 @@
       </table>
     </div>
     <div class="row">
-      <div class="col-sm-1 col-sm-offset-4">
+      <div class="col-sm-2 col-sm-offset-4" style="display: inline-block;">
         <button class="btn btn-success btn-lg" ng-click="vm.handleRequest(vm.singleShowInfo.requestid, true)">Allow</button>
       </div>
-      <div class="col-sm-1 col-sm-offset-1">
+      <div class="col-sm-2 col-sm-offset-1" style="display: inline-block;">
         <button class="btn btn-danger btn-lg" ng-click="vm.handleRequest(vm.singleShowInfo.requestid, false)">Deny</button>
       </div>
     </div>
