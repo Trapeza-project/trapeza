@@ -12,12 +12,14 @@
   <div class="row">
     <div class="col-sm-5">
 	  <div>
-		<h3>Basic Info</h3>
-		<p class="inlineblock text-color">{{customerCompanyInfoCtrl.companyInfo.basicinfo}}</p>
-		<h3>Branch</h3>
-		<p ng-repeat="branch in customerCompanyInfoCtrl.companyInfo.branch" class="inlineblock infotext text-color">{{branch}}</p>
-		<h3>Description</h3>
-      <div class="text-color">{{customerCompanyInfoCtrl.companyInfo.description}}</div>
+      <h3>Organization number</h3>
+      <p class="inlineblock text-color">{{customerCompanyInfoCtrl.companyInfo.basicinfo}}</p>
+      <h3>Description</h3>
+        <div class="text-color">{{customerCompanyInfoCtrl.companyInfo.description}}</div>
+      <h3>Industry</h3>
+      <p ng-repeat="branch in customerCompanyInfoCtrl.companyInfo.branch" class="inlineblock infotext text-color">{{branch}}</p>
+      <h3>Responsible person</h3>
+      <div class="text-color">{{customerCompanyInfoCtrl.companyInfo.responsible}}</div>
     </div>
     </div>
     <div class="col-sm-6">
