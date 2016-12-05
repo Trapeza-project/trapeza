@@ -1,0 +1,42 @@
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+  <ul class="sidebar">
+    <li class="sidebar-main">
+      <a ng-click="toggleSidebar()">
+        UC Admin
+        <span class="menu-icon fa fa-bars"></span>
+      </a>
+    </li>
+    <li class="sidebar-title"><span>NAVIGATION</span></li>
+    <li ui-sref-active="active" class="sidebar-list">
+      <a ui-sref="{{menu[0].state}}">{{menu[0].title}} <span class="menu-icon fa fa-tachometer"></span></a>
+    </li>
+    <li ui-sref-active="active" class="sidebar-list">
+      <a ui-sref="{{menu[1].state}}">{{menu[1].title}} <span class="menu-icon fa fa-search"></span></a>
+    </li>
+    <!--<li ui-sref-active="active" class="sidebar-list">-->
+    <!--<a href="" ui-sref="{{item.state}}"> Dashboard <span class="menu-icon fa fa-tachometer"></span></a>-->
+    <!--</li>-->
+    <!--<li ui-sref-active="active" class="sidebar-list">-->
+    <!--<a href="" ui-sref="{{item.state}}"> Tables <span class="menu-icon fa fa-table"></span></a>-->
+    <!--</li>-->
+  </ul>
+  <div class="sidebar-footer">
+    <div class="col-xs-4">
+      <a href="https://github.com/beeman/bootstrap-admin-angular" target="_blank">
+        Github
+      </a>
+    </div>
+    <div class="col-xs-4">
+      <a href="https://github.com/beeman/bootstrap-admin-angular/blob/master/README.md" target="_blank">
+        About
+      </a>
+    </div>
+    <div class="col-xs-4">
+      <a href="https://github.com/beeman/bootstrap-admin-angular/issues">
+        Support
+      </a>
+    </div>
+  </div>
+</div>
+<!-- End Sidebar -->

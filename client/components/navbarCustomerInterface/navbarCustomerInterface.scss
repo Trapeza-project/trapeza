@@ -1,0 +1,16 @@
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus{
+	border-bottom: 3px solid #ec971f;
+	background-color:inherit !important;
+	color: #ec971f;
+}
+
+
+.navbar-text{
+	font-size: 15px;
+	margin:7px;
+}
+
+.navbar-text:hover{
+	color:#ec971f !important;
+	border-bottom: 1px solid #ec971f;
+}

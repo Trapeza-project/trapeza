@@ -1,0 +1,27 @@
+<div id="mainNav" class="navbar navbar-default navbar-static-top" style="margin-bottom: 0 !important;">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-left"><img src="assets/images/trapeza-logo.png" alt="UC" style="margin: 0.7em; height: 30px;"></a>
+    </div>
+    <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse navbar-middle collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="userRequests">Events <span id="numOfRequests" class="badge">0</span></a></li>
+        <li ng-show="$ctrl.isLoggedIn()" ng-repeat="item in $ctrl.menu" ui-sref-active="active">
+            <a ui-sref="{{item.state}}"> <span ng-class="item.name" aria-hidden="true"></span> {{item.title}}</a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="userLogin">Login <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
+        <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="userSettings"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+        <li ng-show="$ctrl.isLoggedIn()"><a ui-sref="userLogout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout [{{ $ctrl.getCurrentUser().name }}]</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+#homemain{
+  background-position: center 0;
+  background: url(/../assets/images/backgroundblurr.png) no-repeat fixed;
+  display: table;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding:80px;
+}
+
+#mainaction{
+  width:40%;
+}
+
+.logincontainer{
+  background: rgba(30, 30, 30, 0.5);
+  width:100%;
+  padding:10px;
+}
+
+.centralizerow{
+  margin-left:5% !important;
+  margin-right:5% !important;
+}
+
+.paddedrow{
+  padding:10px;
+}
+
+#authdiv{
+  width:100%;
+  text-align:center;
+  padding-bottom:10px;
+}
+
+#forgotpassword{
+  color:rgba(245, 245, 245, 1);
+}
+
+.content-section-a {
+  padding: 50px 0;
+  background-color: #f8f8f8;
+}
+
+.banner{
+  padding: 100px 0;
+  color: #f8f8f8;
+  background: url(/../assets/images/pattern.jpg) center center;
+  background-size: cover;
+}

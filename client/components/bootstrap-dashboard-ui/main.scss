@@ -1,0 +1,57 @@
+@import "variables.scss";
+
+/* Fonts */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+/* Base */
+html {
+  overflow-y: scroll;
+}
+
+body {
+  background: $colorBodyBackground;
+  color: $colorBodyText !important;
+}
+
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.row > div {
+  margin-bottom: 15px;
+}
+
+.alerts-container .alert:last-child {
+  margin-bottom: 0;
+}
+
+#page-wrapper {
+  padding-left: 70px;
+  height: 100%
+}
+
+#sidebar-wrapper {
+  margin-left: -150px;
+  left: -30px;
+  width: 250px;
+  position: fixed;
+  height: 100%;
+  z-index: 999;
+}
+
+#page-wrapper, #sidebar-wrapper {
+  transition: all .4s ease 0s;
+}
+
+.form-group .help-block.form-group-inline-message {
+  padding-top: 5px;
+}
+
+div.input-mask {
+  padding-top: 7px;
+}

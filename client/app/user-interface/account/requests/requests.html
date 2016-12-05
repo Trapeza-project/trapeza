@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="row" ng-if="!vm.toggleCompanyInfo" style="padding-top: 2em;">
+    <div class="col-sm-12 requestsContainer">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1>Pending requests</h1>
+          <hr />
+        </div>
+      </div>
+      <div class="col-sm-4" ng-repeat="request in vm.pendingRequests">
+        <div class="card" ng-click="vm.getSingleRequestInfo($index)">
+          <div class="card-content">
+            <div class="row">
+              <div class="col-sm-6">
+                <h4><b>{{request.actor.name}}</b></h4>
+              </div>
+              <div class="col-sm-6 text-right">
+                <h4>{{request.timestamp | date:'short'}}</h4>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="#">View</a>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-show="vm.pendingRequests.length == 0">
+        <div class="col-sm-12">
+            <h4>No pending requests! :)</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container bg-white">
+  <div class="row" ng-if="!vm.toggleCompanyInfo">
+    <div class="col-sm-12 requestsContainer">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1>Events</h1>
+          <hr />
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div id="trustSearch" class="input-group stylish-input-group">
+          <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-search"></span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <table class="table table-striped table-responsive ">
+          <thead>
+          <th>Date</th>
+          <th>Requester</th>
+          <th>Reference number</th>
+          <th>Allowed</th>
+          <th>Data</th>
+          </thead>
+          <tbody>
+          <tr ng-repeat="request in vm.historyRequests | filter:searchText | filter:{pending:false}">
+            <td>{{request.timestamp | date:'short'}}</td>
+            <td>{{request.actor.name}}</td>
+            <td>{{request.requestid}}</td>
+            <td>
+              <span class="label label-success" ng-if="request.allow">Yes <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
+              <span class="label label-danger" ng-if="!request.allow">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
+            </td>
+            <td>
+              <span ng-repeat="info in request.info" class="label label-info" style="margin: 2px;">{{info}}</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div id="company-info" ng-if="vm.toggleCompanyInfo">
+    <div class="row">
+        <a href="#" ng-click="vm.toggleInfo()" class="btn btn-default btn-lg">Back</a>
+    </div>
+    <div class="row">
+      <div class="col-sm-8">
+        <h1> <span class="rating">A</span> {{vm.singleShowInfo.actor.name}}</h1>
+      </div>
+    </div>
+    <div class="row">
+        <a href="#" ng-click="vm.showCompanyInfo()">Show more info about {{vm.singleShowInfo.actor.name}}</a>
+    </div>
+    <div class="row">
+      <p><input type="checkbox"> Add to trusted</p>
+    </div>
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Data requested</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{vm.singleShowInfo.timestamp}}</td>
+            <td><span ng-repeat="info in vm.singleShowInfo.info" class="label label-info" style="margin: 2px;">{{info}}</span></td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-sm-2 col-sm-offset-4" style="display: inline-block;">
+        <button class="btn btn-success btn-lg" ng-click="vm.handleRequest(vm.singleShowInfo.requestid, true)">Allow</button>
+      </div>
+      <div class="col-sm-2 col-sm-offset-1" style="display: inline-block;">
+        <button class="btn btn-danger btn-lg" ng-click="vm.handleRequest(vm.singleShowInfo.requestid, false)">Deny</button>
+      </div>
+    </div>
+  </div>
+</div>

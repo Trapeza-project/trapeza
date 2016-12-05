@@ -1,0 +1,31 @@
+
+
+<div class="user">
+
+    <div class="item dropdown" uib-dropdown>
+        <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+            <i class="fa fa-bell-o"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+            <li class="dropdown-header">
+                Notifications
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="#">Server Down!</a>
+            </li>
+        </ul>
+    </div>
+
+    <ul>
+        <li ng-show="headerAdminInterface.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="adminLogin">Login</a></li>
+        <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="adminSettings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="$ctrl.isLoggedIn()"><a ui-sref="adminLogout">Logout [{{ $ctrl.getCurrentUser().name }}]</a></li>
+    </ul>
+
+
+</div>

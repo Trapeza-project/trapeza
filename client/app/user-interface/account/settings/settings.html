@@ -1,0 +1,72 @@
+<div class="container settingsContainer">
+  <div class="row settingsBox">
+    <div class="col-sm-12">
+      <h1>Contact information</h1>
+      <hr />
+    </div>
+  </div>
+  <div class="row settingsBox">
+    <div class="col-sm-12">
+      <h1>Notification settings</h1>
+      <hr />
+      <div class="form-group">
+        <div class="checkbox">
+          <label for="checkboxes-0">
+          <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+          Get notifications through SMS
+        </label>
+        </div>
+        <div class="checkbox">
+          <label for="checkboxes-1">
+            <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
+            Get notifications through email
+          </label>
+      	</div>
+      </div>
+    </div>
+  </div>
+  <div class="row settingsBox">
+    <div class="col-sm-12">
+      <h1>Change Password</h1>
+      <hr />
+      <form class="form" name="form" ng-submit="vm.changePassword(form)" novalidate>
+
+        <div class="form-group row">
+          <label class="col-sm-3 control-label" for="password">Current Password</label>
+          <div class="col-sm-6">
+            <input type="password" name="password" class="form-control" ng-model="vm.user.oldPassword"
+                   mongoose-error/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 control-label" for="newPassword">New Password</label>
+          <div class="col-sm-6">
+            <input type="password" name="newPassword" class="form-control" ng-model="vm.user.newPassword"
+                   ng-minlength="3"
+                   required/>
+            <p class="help-block"
+               ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || vm.submitted)">
+              Password must be at least 3 characters.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group row settingsBox">
+          <label class="col-sm-3 control-label" for="confirmPassword">Confirm New Password</label>
+          <div class="col-sm-6">
+            <input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword"
+                   match="vm.user.newPassword"
+                   ng-minlength="3"
+                   required=""/>
+            <p class="help-block"
+               ng-show="form.confirmPassword.$error.match && vm.submitted">
+              Passwords must match.
+            </p>
+          </div>
+        </div>
+        <p class="help-block"> {{ vm.message }} </p>
+      </form>
+    </div>
+  </div>
+  <button class="btn btn-lg btn-warning pull-right" type="submit">Save changes</button>
+</div>

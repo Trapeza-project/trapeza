@@ -1,0 +1,245 @@
+<div id="page-wrapper" class="open" ng-cloak>
+  <!-- Sidebar -->
+  <navbar-admin-interface></navbar-admin-interface>
+ <!--main content-->
+  <div id="content-wrapper">
+    <div class="page-content">
+      <!-- Header Bar -->
+      <div class="row header">
+        <div class="col-xs-12">
+          <header-admin-interface></header-admin-interface>
+          <div class="meta">
+            <div class="title">
+              Trapeza Admin
+            </div>
+            <div class="breadcrumb-links">
+              Home / User search
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end header bar-->
+      <div class="container" style="width:90%;">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="custom-search-input">Search by security number</label>
+            <div id="custom-search-input">
+              <div class="input-group col-md-12">
+                <input id="search-input-field" type="text" class="form-control input-lg" placeholder="YYYYMMDDXXXX" ng-model="adminUserSearchCtrl.searchText" ng-keypress="adminUserSearchCtrl.validate($event)" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info btn-lg" type="button" ng-click="adminUserSearchCtrl.search()">
+                                      <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" ng-if="adminUserSearchCtrl.showResult">
+          <div ng-cloak class="activity">
+            <md-content>
+              <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Overview">
+                  <md-content class="md-padding">
+                    <table class="table table-striped">
+                      <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Data</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>Security number</td>
+                        <td>{{adminUserSearchCtrl.basicInfo.personid}}</td>
+                      </tr>
+                      <tr>
+                        <td>Name</td>
+                        <td>{{adminUserSearchCtrl.basicInfo.firstname}} {{adminUserSearchCtrl.basicInfo.lastname}}</td>
+                      </tr>
+                      <tr>
+                        <td>Birthdate</td>
+                        <td>{{adminUserSearchCtrl.basicInfo.birthdate}}</td>
+                      </tr>
+                      <tr>
+                        <td>Adress</td>
+                        <td>{{adminUserSearchCtrl.basicInfo.address}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </md-content>
+                </md-tab>
+                <md-tab label="Activity">
+                  <md-content class="md-padding">
+                    <table class="table table-striped">
+                      <thead>
+                      <tr>
+                        <th>Time</th>
+                        <th>Provider</th>
+                        <th>Data changed</th>
+                        <th>Uploaded by private person</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="item in adminUserSearchCtrl.latestActivity">
+                        <td>{{item.timestamp | date:'medium' }}</td>
+                        <td>{{item.provider}}</td>
+                        <td><span ng-repeat="data in item.infoids" class="label label-info" style="margin: 2px;">{{data}}</span></td>
+                        <td>
+                          <span class="label label-success" ng-if="item.selfupload">Yes <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></span>
+                          <span class="label label-danger" ng-if="!item.selfupload">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </md-content>
+                </md-tab>
+                <md-tab label="Check up history">
+                  <md-content class="md-padding">
+                    <table class="table table-striped">
+                      <thead>
+                      <tr>
+                        <th>Time</th>
+                        <th>Company name</th>
+                        <th>User allow</th>
+                        <th>Company allows</th>
+                        <th>Purpose</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="item in adminUserSearchCtrl.checkupHistory">
+                        <td>{{item.timestamp | date:'medium' }}</td>
+                        <td>{{item.actor.name}}</td>
+                        <td>
+                          <span class="label label-success" ng-if="item.allow">Yes <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
+                          <span class="label label-danger" ng-if="!item.allow">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
+                        </td>
+                        <td>
+                          <span class="label label-success" ng-if="item.companyallow">Yes <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
+                          <span class="label label-danger" ng-if="!item.companyallow">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
+                        </td>
+                        <td>{{item.purpose}} </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </md-content>
+                </md-tab>
+                <md-tab label="Financial information">
+                  <md-content class="md-padding">
+                    <table class="table table-striped">
+                      <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Data</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>Income</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.income}} SEK/month</td>
+                      </tr>
+                      <tr>
+                        <td>Allowance</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.allowance}} SEK/year</td>
+                      </tr>
+                      <tr>
+                        <td>Taxable Income</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.taxableIncome}} SEK/month</td>
+                      </tr>
+                      <tr>
+                        <td>Interest Income</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.interestIncome}} SEK/year</td>
+                      </tr>
+                      <tr>
+                        <td>Pension Contribution</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.pensionContribution}} SEK/year</td>
+                      </tr>
+                      <tr>
+                        <td>Benefits</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.benefits}} SEK/year</td>
+                      </tr>
+                      <tr>
+                        <td>Occupational</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.occupational}} SEK/year</td>
+                      </tr>
+                      <tr>
+                       <td>Business</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.business}} SEK/year</td>
+                      </tr>
+                      <tr>
+                       <td>Property Tax</td>
+                        <td>{{adminUserSearchCtrl.financialInfo.propertytax}} SEK/year</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </md-content>
+                </md-tab>
+                <md-tab label="Educational information">
+                  <md-content class="md-padding">
+                    <table class="table table-striped">
+                      <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Data</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>Degree</td>
+                        <td>{{adminUserSearchCtrl.educationalInfo.degree}}</td>
+                      </tr>
+                      <tr>
+                        <td>School</td>
+                        <td>{{adminUserSearchCtrl.educationalInfo.school}}</td>
+                      </tr>
+                      <tr>
+                        <td>School Reputation</td>
+                        <td>{{adminUserSearchCtrl.educationalInfo.schoolrep}}/5</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </md-content>
+                </md-tab>
+              </md-tabs>
+            </md-content>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <b>Latest activity</b>
+            </div>
+            <div class="panel-body">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Provider</th>
+                  <th>Data changed</th>
+                  <th>Uploaded by private person</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in adminUserSearchCtrl.latestActivity">
+                  <td>{{item.timestamp | date:'medium' }}</td>
+                  <td>{{item.provider}}</td>
+                  <td><span ng-repeat="data in item.infoids" class="label label-info" style="margin: 2px;">{{data}}</span></td>
+                  <td>
+                    <span class="label label-success" ng-if="item.selfupload">Yes <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></span>
+                    <span class="label label-danger" ng-if="!item.selfupload">No <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></span>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-danger alert-dismissible" role="alert" ng-if="adminUserSearchCtrl.noResult">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong>Ups!</strong> Couldn't find the person you were looking for, try another security number.
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end main content-->
+
+ </div>
