@@ -19,9 +19,15 @@ User.sync()
   .then(() => User.destroy({ where: {} }))
   .then(() => {
     User.bulkCreate([{
+        provider: 'local',
+        name: 'Anna Svensson',
+        email: 'anna.svensson@gmail.com',
+        password: 'test',
+        accessid:1
+    },{
       provider: 'local',
-      name: 'Test User',
-      email: 'test@example.com',
+      name: 'Michael Ericsson',
+      email: 'michael@trapeza.com',
       password: 'test',
 	    accessid:1
     }, {
@@ -149,11 +155,11 @@ BasicData.sync()
   .then(() => BasicData.destroy({ where: {} }))
   .then(() => {
     BasicData.bulkCreate([{
-      personid: 197001011234,
-      firstname: "Kalle",
+      personid: 198601011234,
+      firstname: "Anna",
       lastname: "Svensson",
       address: "Sveavägen 14",
-	  birthdate:"1970-01-01"
+	  birthdate:"1986-01-01"
     }, {
       personid: 222222222222,
       firstname: "Anna",
@@ -176,8 +182,8 @@ FinancialData.sync()
   .then(() => FinancialData.destroy({ where: {} }))
   .then(() => {
     FinancialData.bulkCreate([{
-      personid: 197001011234,
-	    income: 30000,
+      personid: 198601011234,
+	    income: 25000,
 		allowance: 10000,
 		taxableIncome: 10000,
 		interestIncome: 5000,
@@ -218,10 +224,10 @@ EducationalData.sync()
   .then(() => EducationalData.destroy({ where: {} }))
   .then(() => {
     EducationalData.bulkCreate([{
-      personid: 197001011234,
+      personid: 198601011234,
 	    degree: "PhD in Computer Science",
-		school: "KTH",
-		schoolrep: 5
+		  school: "KTH",
+		  schoolrep: 5
     }, {
       personid: 222222222222,
 	    degree: "PhD in Industrial Economics",
@@ -252,11 +258,11 @@ Actor.sync()
     }, {
       id:1,
       name: "Trapeza Creators",
-      basicinfo: "We are creating this service.",
-      description: "We created it",
-      branch: '["Web Development","Database"]',
+      basicinfo: "556837-0000",
+      description: "The company will both wholesale and retail level, buying and selling, import and export of software and hardware for computers, electronics and electronic equipment, photography, video and audio, as well as spare parts and accessories related to installation, repair and maintain such equipment.",
+      branch: '["Retail sale", "Image", "Sound"]',
       score:0.95,
-	  responsible: "Michelle Cañada"
+	    responsible: "Michelle Cañada, michelle@trapeza.com"
     }])
     .then(() => {
       console.log('finished populating actors');
@@ -284,63 +290,63 @@ PreviousRequest.sync()
   .then(() => Datalog.destroy({ where: {} }))
   .then(() => {
     Datalog.bulkCreate([{
-      personid: 197001011234,
+      personid: 198601011234,
       infoids: '["Income"]',
       timestamp: new Date(2016, 11, 15, 10, 10, 10),
       provider: "Skatteverket",
       selfupload: false,
       validation: "http://www.skatteverket.se/"
     }, {
-      personid: 197001011234,
+      personid: 198601011234,
       infoids: '["Name", "Address"]',
       timestamp: new Date(2016, 11, 16, 10, 10, 10),
       provider: "Skatteverket",
       selfupload: false,
       validation: "http://www.skatteverket.se/"
     }, {
-      personid: 197001011234,
+      personid: 198601011234,
       infoids: '["Name", "Address"]',
       timestamp: new Date(2016, 11, 16, 10, 10, 10),
       provider: "Kronofogden",
       selfupload: false,
       validation: "http://www.kronofogden.se/"
     }, {
-      personid: 197001011234,
+      personid: 198601011234,
       infoids: '["Income", "Address"]',
       timestamp: new Date(2016, 11, 16, 10, 10, 10),
       provider: "Kronofogden",
       selfupload: false,
       validation: "http://www.kronofogden.se/"
     }, {
-      personid: 197001011234,
+      personid: 198601011234,
       infoids: '["Degree"]',
       timestamp: new Date(2016, 11, 16, 10, 10, 10),
       provider: "KTH",
       selfupload: false,
       validation: "http://www.kth.se/"
     }, {
-      personid: 197001011234,
+      personid: 198601011234,
       infoids: '["Income", "Address"]',
       timestamp: new Date(2016, 11, 16, 10, 10, 10),
       provider: "SCB",
       selfupload: false,
       validation: "http://www.scb.se/"
     }, {
-      personid: 197001011234,
+      personid: 198601011234,
       infoids: '["Income", "Address"]',
       timestamp: new Date(2016, 11, 16, 10, 10, 10),
       provider: "Handelsbanken",
       selfupload: false,
       validation: "http://www.handelsbanken.se/"
     }, {
-      personid: 197001011234,
+      personid: 198601011234,
       infoids: '["Income", "Address"]',
       timestamp: new Date(2016, 11, 16, 10, 10, 10),
       provider: "UC",
       selfupload: false,
       validation: "http://www.uc.se/"
     }, {
-      personid: 197001011234,
+      personid: 198601011234,
       infoids: '["Income", "Address"]',
       timestamp: new Date(2016, 11, 16, 10, 10, 10),
       provider: "Tingsrätten",
