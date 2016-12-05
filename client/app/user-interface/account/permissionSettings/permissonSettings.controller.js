@@ -9,6 +9,7 @@ export default class UserPermissionSettingsController {
   infoTypes = [];
   awesomplete;
   showHelp = false;
+  radioClickCounter = 0;
   /*@ngInject*/
   constructor($http) {
 
@@ -22,11 +23,26 @@ export default class UserPermissionSettingsController {
       autoFirst: true
     });
 
-    $('#allow-all-toggle' ).on("click", function() {
+    $('#allow-uc-toggle').click(function() {
+      if($(this)[0].checked) {
+        $('#settingsTable input[type=radio]').attr('disabled', false);
+        $('.allow-uc input').each(function() {
+            $(this)[0].checked = true;
+        });
+      } else {
+        $('#settingsTable input[type=radio]').attr('disabled', true);
+        $('.allow-uc input').each(function() {
+            $(this)[0].checked = false;
+        });
+      }
+    });
+
+    $('#allow-all-toggle' ).click(function() {
       $('.allow-all input').each(function() {
         $(this)[0].checked = true;
       });
     });
+
 
     $('#allow-trusted-toggle').click(function() {
       $('.allow-trusted input').each(function() {
@@ -34,27 +50,17 @@ export default class UserPermissionSettingsController {
       });
     });
 
-    $('#always-ask-toggle' ).click(function() {
+    $('#always-ask-toggle').click(function() {
       $('.always-ask input').each(function() {
         $(this)[0].checked = true;
       });
     });
-    $('#allow-uc-toggle' ).click(function() {
-      $('.allow-uc input').each(function() {
-        if($(this)[0].checked) {
-          $(this)[0].checked = false;
-        }
-        else {
-          $(this)[0].checked = true;
-        }
-      });
-    });
+
     $(document).ready(function(){
-      $("#allow-uc-toggle").trigger("click");
-      $("#allow-all-toggle").trigger("click");
+      $('#allow-uc-toggle').trigger('click');
+      $('#allow-all-toggle').trigger('click');
     });
   }
-
 
   getInfoTypes() {
     this.$http.get('/api/infotypes/usertypes')
@@ -79,12 +85,12 @@ export default class UserPermissionSettingsController {
   }
 
   addToTrusted() {
-    var actorToAdd = $("#search-actor")[0].value;
+    var actorToAdd = $('#search-actor')[0].value;
     if(!_.includes(this.trustedList, actorToAdd)) {
       this.trustedList.push(actorToAdd);
     }
     else {
-      alert("Company already added to trusted list");
+      alert('Company already added to trusted list');
     }
   }
 
@@ -93,11 +99,26 @@ export default class UserPermissionSettingsController {
   }
 
   toggleHelp() {
-      if(this.showHelp) {
+    if(this.showHelp) {
       this.showHelp = false;
     }
     else {
       this.showHelp = true;
     }
+  }
+
+  toggleHeaderInputOff() {
+    /*$(document).find('thead input[type=radio]').each(function() {
+      $(this)[0].checked = false;
+    });*/
+  }
+
+  toggleRow(index) {
+    if($('#settingsTable tr').eq(index+1).find('input[type=checkbox]')[0].checked) {
+      $('#settingsTable tr').eq(index+1).find('input[type=radio]').attr('disabled', false);
+    } else {
+      $('#settingsTable tr').eq(index+1).find('input[type=radio]').attr('disabled', true);
+    }
+    $(document).find('#allow-uc-toggle')[0].checked = false;
   }
 }
