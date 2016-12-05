@@ -11,61 +11,67 @@ export default class UserPermissionSettingsController {
   showHelp = false;
   radioClickCounter = 0;
   /*@ngInject*/
-  constructor($http) {
+  constructor($http, $scope, $timeout) {
 
+	this.$timeout = $timeout;
     this.$http = $http;
-    this.getInfoTypes();
-    this.getActors();
+	var callback = function(){
+		$('#allow-uc-toggle').click(function() {
+		  if($(this)[0].checked) {
+			$('#settingsTable input[type=radio]').attr('disabled', false);
+			$('.allow-uc input').each(function() {
+				$(this)[0].checked = true;
+			});
+		  } else {
+			$('#settingsTable input[type=radio]').attr('disabled', true);
+			$('.allow-uc input').each(function() {
+				$(this)[0].checked = false;
+			});
+		  }
+		});
 
+		$('#allow-all-toggle' ).click(function() {
+		  $('.allow-all input').each(function() {
+			$(this)[0].checked = true;
+		  });
+		});
+
+
+		$('#allow-trusted-toggle').click(function() {
+		  $('.allow-trusted input').each(function() {
+			$(this)[0].checked = true;
+		  });
+		});
+
+		$('#always-ask-toggle').click(function() {
+		  $('.always-ask input').each(function() {
+			$(this)[0].checked = true;
+		  });
+		});
+
+		$(document).ready(function(){
+		  $('#allow-uc-toggle').trigger('click');
+		  $('#allow-all-toggle').trigger('click');
+		});
+	}
+    this.getInfoTypes(callback);
+    this.getActors();
+	this.$scope = $scope;
     this.awesomplete = new Awesomplete('#search-actor', {
       minChars: 2,
       maxItems: 10,
       autoFirst: true
     });
-
-    $('#allow-uc-toggle').click(function() {
-      if($(this)[0].checked) {
-        $('#settingsTable input[type=radio]').attr('disabled', false);
-        $('.allow-uc input').each(function() {
-            $(this)[0].checked = true;
-        });
-      } else {
-        $('#settingsTable input[type=radio]').attr('disabled', true);
-        $('.allow-uc input').each(function() {
-            $(this)[0].checked = false;
-        });
-      }
-    });
-
-    $('#allow-all-toggle' ).click(function() {
-      $('.allow-all input').each(function() {
-        $(this)[0].checked = true;
-      });
-    });
-
-
-    $('#allow-trusted-toggle').click(function() {
-      $('.allow-trusted input').each(function() {
-        $(this)[0].checked = true;
-      });
-    });
-
-    $('#always-ask-toggle').click(function() {
-      $('.always-ask input').each(function() {
-        $(this)[0].checked = true;
-      });
-    });
-
-    $(document).ready(function(){
-      $('#allow-uc-toggle').trigger('click');
-      $('#allow-all-toggle').trigger('click');
-    });
   }
 
-  getInfoTypes() {
+  getInfoTypes(func) {
 	  var vm = this;
 	  var callback = function(datatypes){
-			vm.infoTypes = datatypes
+			vm.infoTypes = datatypes;
+			func();
+			vm.$timeout(function() {
+			  vm.$scope.$apply();
+			})
 	  }
     this.$http.get('/api/infotypes/usertypes')
       .then(response => {
