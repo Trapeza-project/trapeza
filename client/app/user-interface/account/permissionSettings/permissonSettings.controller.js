@@ -63,24 +63,31 @@ export default class UserPermissionSettingsController {
   }
 
   getInfoTypes() {
+	  var vm = this;
+	  var callback = function(datatypes){
+			vm.infoTypes = datatypes
+	  }
     this.$http.get('/api/infotypes/usertypes')
       .then(response => {
         console.log(response.data);
-        this.infoTypes = response.data.datatypes;
+        //this.infoTypes = response.data.datatypes;
+		callback(response.data.datatypes);
       });
   }
 
   getActors() {
-    var that = this;
+	  var vm = this;
+	  var callback = function(data){
+        data.forEach(function(item) {
+          vm.actors.push(item.name);
+        });
+        vm.awesomplete._list = vm.actors;
+        console.log('awsomplete',vm.awesomplete);
+	  }
     this.$http.get('/api/actors/')
       .then(response =>
       {
-
-        response.data.forEach(function(item) {
-          that.actors.push(item.name);
-        });
-        this.awesomplete._list = that.actors;
-        console.log('awsomplete',this.awesomplete);
+		callback(response.data);
       });
   }
 
