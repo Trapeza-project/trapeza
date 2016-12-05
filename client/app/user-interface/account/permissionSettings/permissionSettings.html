@@ -69,7 +69,7 @@
             </th>
           </thead>
           <tbody>
-            <tr ng-repeat="info in vm.infoTypes | filter:searchSettings">
+            <tr ng-repeat="info in vm.infoTypes | filter:searchSettings" ng-model="vm.infoTypes">
               <td class="allow-uc">
                 <label class="btn">
                   <input type="checkbox" ng-click="vm.toggleRow($index)" hidden><i class="fa fa-square-o fa-2x"></i><i class="fa fa-check-square-o fa-2x"></i>
